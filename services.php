@@ -146,7 +146,16 @@
     <section id="wifi-section">
         <h2>Interneti</h2>
         <button class="wifi-button">Klikoni këtu për detajet shtesë</button>
-        <div class="message-box">Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë!</div>
+        <div class="message-box">
+        <?php
+                $ora = date("H"); 
+                if ($ora >= 6 && $ora < 23) {
+                    echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
+                } else {
+                    echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
+                }
+            ?>
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>

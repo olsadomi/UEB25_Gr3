@@ -147,13 +147,13 @@
         <h2>Interneti</h2>
         <button class="wifi-button">Klikoni këtu për detajet shtesë</button>
         <div class="message-box">
-            <?php
-            $ora = date("H");
-            if ($ora >= 6 && $ora < 23) {
-                echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
-            } else {
-                echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
-            }
+        <?php
+                $ora = date("H"); 
+                if ($ora >= 6 && $ora < 23) {
+                    echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
+                } else {
+                    echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
+                }
             ?>
         </div>
 
@@ -247,29 +247,27 @@
         <div class="calculator">
             <h3>Kalkulatori për pagesën e parkingut</h3>
 
-            <form method="POST">
-                <div class="input-group">
-                    <label for="entryDate">Data e hyrjes: </label>
-                    <input type="date" id="entryDate" name="entryDate" required>
-                    <label for="entryHour">Ora: </label>
-                    <input type="number" id="entryHour" name="entryHour" min="0" max="23" required>
-                    <label for="entryMin">Min: </label>
-                    <input type="number" id="entryMin" name="entryMin" min="0" max="59" required>
-                </div>
+            <div class="input-group">
+                <label for="entryDate">Data e hyrjes: </label>
+                <input type="date" id="entryDate">
+                <label for="entryHour">Ora: </label>
+                <input type="number" id="entryHour" min="0" max="23" value="10">
+                <label for="entryMin">Min: </label>
+                <input type="number" id="entryMin" min="0" max="59" value="00">
+            </div>
 
-                <div class="input-group">
-                    <label for="exitDate">Data e daljes: </label>
-                    <input type="date" id="exitDate" name="exitDate" required>
-                    <label for="exitHour">Ora: </label>
-                    <input type="number" id="exitHour" name="exitHour" min="0" max="23" required>
-                    <label for="exitMin">Min: </label>
-                    <input type="number" id="exitMin" name="exitMin" min="0" max="59" required>
-                </div>
+            <div class="input-group">
+                <label for="exitDate">Data e daljes: </label>
+                <input type="date" id="exitDate">
+                <label for="exitHour">Ora: </label>
+                <input type="number" id="exitHour" min="0" max="23" value="10">
+                <label for="exitMin">Min: </label>
+                <input type="number" id="exitMin" min="0" max="59" value="00">
+            </div>
 
-                <div class="button-container">
-                    <button onclick="calculateFee()">Kalkulo</button>
-                </div>
-            </form>
+            <div class="button-container">
+                <button onclick="calculateFee()">Kalkulo</button>
+            </div>
 
             <div class="result" id="result"></div>
         </div>

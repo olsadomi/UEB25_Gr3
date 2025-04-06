@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="services_responsive.css">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
+
+    <style>
+        .custom-alert-services {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #fffae6;
+            color: #333;
+            padding: 15px 20px;
+            border: 1px solid #f0c36d;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadein 0.5s;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -15,6 +43,32 @@
     <header id="services-header">
         <h1>Shërbimet</h1>
     </header>
+
+
+    <?php
+    $counter_file = 'counter.txt';
+    $count = file_exists($counter_file) ? (int) file_get_contents($counter_file) : 0;
+    $count++;
+    file_put_contents($counter_file, $count);
+
+    if ($count % 5 == 0) {
+        $message = "Ju jeni vizitori i $count-të! Faleminderit për vizitën!";
+    } else {
+        $message = "Jeni vizitori i $count-të. Mirë se vini!";
+    }
+    ?>
+
+    <div class="custom-alert-services" id="popupMessage">
+        <?php
+        echo $message;
+        ?>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('popupMessage').style.display = 'none';
+        }, 5000);
+    </script>
 
     <section id="what-we-offer-section">
         <h2>Çfarë ofrojmë ne?</h2>
@@ -147,13 +201,13 @@
         <h2>Interneti</h2>
         <button class="wifi-button">Klikoni këtu për detajet shtesë</button>
         <div class="message-box">
-        <?php
-                $ora = date("H"); 
-                if ($ora >= 6 && $ora < 23) {
-                    echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
-                } else {
-                    echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
-                }
+            <?php
+            $ora = date("H");
+            if ($ora >= 6 && $ora < 23) {
+                echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
+            } else {
+                echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
+            }
             ?>
         </div>
 

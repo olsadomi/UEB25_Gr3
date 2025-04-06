@@ -34,6 +34,29 @@
                 transform: translateY(0);
             }
         }
+
+        #service-season {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .seasonal-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .seasonal-message h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0c356a;
+        }
+
+        .seasonal-message p {
+            font-size: 16px;
+            color: #0c356a;
+        }
     </style>
 </head>
 
@@ -69,6 +92,39 @@
             document.getElementById('popupMessage').style.display = 'none';
         }, 5000);
     </script>
+
+    <section id="service-season">
+        <div class="seasonal-message">
+            <h3>Sezoni aktual</h3>
+            <?php
+
+            $month = date('n');
+
+            switch (true) {
+                case ($month >= 3 && $month <= 5):
+                    $season = "Pranverë";
+                    $seasonMessage = "Përfitoni nga oferta speciale për pranverën! Shijoni kohën e ngrohtë me shërbimet tona!";
+                    break;
+                case ($month >= 6 && $month <= 8):
+                    $season = "Verë";
+                    $seasonMessage = "Sezona e verës është këtu! Planifikoni pushimet tuaja me shërbimet tona dhe aktivitetet verore!";
+                    break;
+                case ($month >= 9 && $month <= 11):
+                    $season = "Vjeshtë";
+                    $seasonMessage = "Vjeshta është këtu! Vizitoni një vend unik, të mbuluar me gjethet e rëna!";
+                    break;
+                case ($month == 12 || $month <= 2):
+                default:
+                    $season = "Dimër";
+                    $seasonMessage = "Dimri ka mbërritur! Rezervoni shërbime për festat dhe aventurat e dimrit!";
+                    break;
+            }
+            ?>
+            <p><strong><?php echo $season; ?></strong></p>
+            <p><?php echo $seasonMessage; ?></p>
+        </div>
+    </section>
+
 
     <section id="what-we-offer-section">
         <h2>Çfarë ofrojmë ne?</h2>

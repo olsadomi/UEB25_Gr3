@@ -75,7 +75,7 @@
     file_put_contents($counter_file, $count);
 
     if ($count % 5 == 0) {
-        $message = "Ju jeni vizitori i $count-të! Faleminderit për vizitën!";
+        $message = "RASTI SPECIAL! Ju jeni vizitori i $count-të! Faleminderit për vizitën!";
     } else {
         $message = "Jeni vizitori i $count-të. Mirë se vini!";
     }
@@ -284,7 +284,7 @@
     <section id="car-rentals-section">
         <h2>Rent a Car - Merr makinen me qira</h2>
         <div id="car-rental-container">
-            <div class="car-rental-brand">
+            <!-- <div class="car-rental-brand">
                 <h3><b>Hertz</b></h3>
                 <img src="car-rental-1.jpg">
                 <p><i>Shërbehu në Hertz - me mijëra lokacione në gjithë botën!</i></p>
@@ -301,7 +301,47 @@
                 <img src="car-rental-3.jpg">
                 <p><i>Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!</i></p>
                 <button onclick="showDetails(2)">Detajet</button>
-            </div>
+            </div> -->
+
+            <?php
+            
+            class CarRental {
+                private $brand;
+                private $description;
+                private $image;
+
+                public function __construct($brand, $description, $image){
+                    $this->brand = $brand;
+                    $this->description = $description;
+                    $this->image = $image;
+                }
+
+                public function __destruct() {
+                    echo "<!-- Destruktori -->";
+                }
+
+                public function displayRental($index) {
+                    echo "<div class='car-rental-brand'>
+                        <h3><b>{$this->brand}</b></h3>
+                        <img src = '{$this->image}' alt='{$this->brand} car'>
+                        <p><i>{$this->description}</i></p>
+                        <button onclick='showDetails($index)'>Detajet</button>
+                     </div>";
+                }
+            }
+
+            $carRentals = [
+                new CarRental("Hertz", "Shërbehu në Hertz - me mijëra lokacione në gjithë botën!", "car-rental-1.jpg"),
+                new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "car-rental-2.jpg"),
+                new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "car-rental-3.jpg")
+            ];
+
+            foreach($carRentals as $index=>$rental) {
+                $rental->displayRental($index);
+            }
+            
+
+            ?>
         </div>
 
         <div id="tab">

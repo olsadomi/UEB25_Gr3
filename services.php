@@ -305,7 +305,7 @@
 
             <?php
             
-            class CarRental {
+            class Rentals {
                 private $brand;
                 private $description;
                 private $image;
@@ -316,15 +316,42 @@
                     $this->image = $image;
                 }
 
+                public function getBrand() {
+                    return $this->brand;
+                }
+
+                public function setBrand($brand) {
+                    $this->brand = $brand;
+                }
+
+                public function getDescription() {
+                    return $this->description;
+                }
+
+                public function setDescription($description) {
+                    $this->description = $description;
+                }
+
+                public function getImage() {
+                    return $this->image;
+                }
+
+                public function setImage($image) {
+                    $this->image = $image;
+                }
+
                 public function __destruct() {
                     echo "<!-- Destruktori -->";
                 }
+            }
+
+            class CarRental extends Rentals{
 
                 public function displayRental($index) {
                     echo "<div class='car-rental-brand'>
-                        <h3><b>{$this->brand}</b></h3>
-                        <img src = '{$this->image}' alt='{$this->brand} car'>
-                        <p><i>{$this->description}</i></p>
+                        <h3><b>{$this->getBrand()}</b></h3>
+                        <img src = '{$this->getImage()}' alt='{$this->getBrand()} car'>
+                        <p><i>{$this->getDescription()}</i></p>
                         <button onclick='showDetails($index)'>Detajet</button>
                      </div>";
                 }
@@ -335,6 +362,9 @@
                 new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "car-rental-2.jpg"),
                 new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "car-rental-3.jpg")
             ];
+
+            $carRentals[0]->setBrand("HERTZ");
+            $carRentals[1]->setBrand("EUROPCAR");
 
             foreach($carRentals as $index=>$rental) {
                 $rental->displayRental($index);

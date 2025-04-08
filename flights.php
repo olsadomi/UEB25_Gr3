@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+global $airportName;
+$airportName = "Prishtina International Airport";
+?>
+
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -21,14 +26,30 @@
 
     <header id="flights-header">
         <div class="header">
-            <h2 class="header" id="title1">Fluturimet</h2>
+        <?php
+class Greeting {
+    public function getGreeting() {
+        $hour = date("H");
+        if ($hour < 12) return "Mirëmëngjes!";
+        elseif ($hour < 18) return "Mirëdita!";
+        else return "Mirëmbrëma!";
+    }
+}
+
+$greeter = new Greeting();
+?>
+
+            <div class="greeting">
+            <h2 id="greetingText"><?php echo $greeter->getGreeting(); ?></h2>
+            <h2 id="title1">Fluturimet</h2>
+            </div>
             <h1 class="header" id="title2">Informatat</h1>
             <p class="header" id="tekst">Informacioni i fluturimit në <mark>kohë reale</mark> jepet si tregues dhe është
                 i
                 disponueshëm për fluturimet e sotme dhe të nesërme. Për më shumë informacion, ju lutemi, kontaktoni
                 linjën tuaj ajrore.
             </p>
-            <button id="playbutton">Prishtina Airport</button>
+            <button id="playbutton"><?php echo $airportName; ?></button>
             <audio id="audioPlayer" src="Airport Sound Effect.mp3"></audio>
         </div>
     </header>

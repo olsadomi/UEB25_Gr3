@@ -6,6 +6,7 @@
 }
 
 
+
 html {
     background-color: #f5f5f5;
     font-size: 16px;
@@ -23,7 +24,24 @@ html {
     align-items: center;
 }
 
- 
+
+.greeting {   
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+} 
+
+#greetingText{
+    text-align: right;
+    padding-top: 50px;
+    color: #FBCB0A; 
+    font-size: 4.375rem;
+    font-weight: bolder; 
+    position: relative;     
+}
+
+
+
  #flights-header {
      background: url("Photos/background-flights.jpg");
      background-repeat: no-repeat;

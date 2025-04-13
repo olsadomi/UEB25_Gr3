@@ -7,6 +7,35 @@
     <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="contact_responsive.css">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
+    <style>
+        .message-container {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .message-container.success {
+        color: green;
+    }
+
+    .message-container.error {
+        color: red;
+    }
+
+    .message-container h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .message-container ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .message-container ul li {
+        margin-bottom: 5px;
+    }
+    </style>
 </head>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -19,10 +48,57 @@
         <h1>Kontakti</h1>
     </section>
 
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $lloji = $_POST['lloji'] ?? '';
+        $mesazhi = $_POST['mesazhi'];
+        $contactMethod = $_POST['contact-method'];
+
+        $errors = [];
+
+        if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $name)) {
+            $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
+        }
+
+
+        if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $surname)) {
+            $errors[] = "Mbiemri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
+        }
+
+        if (!preg_match("/^\+?\(?\d{1,9}\)?[-\s]?\(?\d{2,3}\)?[-\s]?\d{3}[-\s]?\d{3,4}$/", $phone)) {
+            $errors[] = "Numri i telefonit nuk është i vlefshëm.";
+        }
+
+        $valid_types = ["sugjerim", "kerkese", "ankese", "tjeter"];
+        if (!in_array($lloji, $valid_types)) {
+            $errors[] = "Zgjedhni një lloj të vlefshëm të mesazhit.";
+        }
+
+        $allowed_methods = ["Email", "Thirrje telefonike", "SMS"];
+        if (!in_array($contactMethod, $allowed_methods)) {
+            $errors[] = "Zgjedhni një mënyrë të vlefshme kontakti.";
+        }
+
+        if (!empty($errors)) {
+            echo "<div class='message-container error'><h3>Gabime gjatë validimit:</h3><ul>";
+            foreach ($errors as $error) {
+                echo "<li>$error</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<div class='message-container success'><h3>Të dhënat janë valide!</h3></div>";
+        }
+    }
+    ?>
+
     <section id="contact-section">
         <div id="form-container">
             <h2>Plotësoni formen</h2>
-            <form id="contact-form">
+            <form id="contact-form" method="POST">
                 <div class="contact-container">
                     <label for="name">Emri:</label>
                     <input type="text" id="name" name="name" minlength="2" maxlength="20" required autocomplete="on"
@@ -37,30 +113,29 @@
                     <button onclick="validateEmail()" style="font-size: 12px;">Verifiko Email</button>
 
                     <label for="phone">Numri i telefonit:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Numri juaj i telefonit..."
-                        pattern="[0-9]{9}">
+                    <input type="tel" id="phone" name="phone" placeholder="Numri juaj i telefonit...">
                 </div>
                 <fieldset>
                     <legend>Zgjedhni llojin e mesazhit</legend>
                     <div class="radio-container">
-                        <input type="radio" name="lloji" id="sugjerim">
+                        <input type="radio" name="lloji" id="sugjerim" value="sugjerim">
                         <label for="sugjerim" class="radio-label">Sugjerim</label>
                     </div>
                     <div class="radio-container">
-                        <input type="radio" name="lloji" id="ankese">
+                        <input type="radio" name="lloji" id="ankese" value="ankese">
                         <label for="ankese" class="radio-label">Ankesë</label>
                     </div>
                     <div class="radio-container">
-                        <input type="radio" name="lloji" id="kerkese">
+                        <input type="radio" name="lloji" id="kerkese" value="kerkese">
                         <label for="kerkese" class="radio-label">Kërkesë</label>
                     </div>
                     <div class="radio-container">
-                        <input type="radio" name="lloji" id="tjeter">
+                        <input type="radio" name="lloji" id="tjeter" value="tjeter">
                         <label for="tjeter" class="radio-label">Tjetër</label>
                     </div>
                 </fieldset>
 
-                <textarea placeholder="Shkruani mesazhin tuaj..." id="mesazhi" rows="3" cols="50"
+                <textarea placeholder="Shkruani mesazhin tuaj..." id="mesazhi" rows="3" cols="50" name="mesazhi"
                     oninput="countchar()"></textarea>
                 <p style="font-size: 12px;">Numri i karaktereve: <output id="charCount"></output></p>
 
@@ -88,7 +163,7 @@
                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        
+
     </section>
 
     <section id="specific-contacts">
@@ -230,7 +305,7 @@
     </section>
 
     <div id="footer-placeholder"></div>
-    
+
 
 </body>
 

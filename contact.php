@@ -9,32 +9,32 @@
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
     <style>
         .message-container {
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-    }
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .message-container.success {
-        color: green;
-    }
+        .message-container.success {
+            color: green;
+        }
 
-    .message-container.error {
-        color: red;
-    }
+        .message-container.error {
+            color: red;
+        }
 
-    .message-container h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
+        .message-container h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
 
-    .message-container ul {
-        list-style-type: none;
-        padding: 0;
-    }
+        .message-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-    .message-container ul li {
-        margin-bottom: 5px;
-    }
+        .message-container ul li {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
@@ -81,6 +81,15 @@
         $allowed_methods = ["Email", "Thirrje telefonike", "SMS"];
         if (!in_array($contactMethod, $allowed_methods)) {
             $errors[] = "Zgjedhni një mënyrë të vlefshme kontakti.";
+        }
+
+        $numberCount = 0;
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $mesazhi = $_POST['mesazhi'] ?? '';
+
+            preg_match_all('/\d/', $mesazhi, $matches);
+            $numberCount = count($matches[0]);
         }
 
         if (!empty($errors)) {
@@ -137,6 +146,11 @@
 
                 <textarea placeholder="Shkruani mesazhin tuaj..." id="mesazhi" rows="3" cols="50" name="mesazhi"
                     oninput="countchar()"></textarea>
+
+                <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+                    <p style="font-size: 12px;">Numra të gjetur në mesazh: <?= $numberCount ?></p>
+                <?php endif; ?>
+                
                 <p style="font-size: 12px;">Numri i karaktereve: <output id="charCount"></output></p>
 
                 <div class="menyra">

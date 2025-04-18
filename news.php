@@ -57,7 +57,7 @@
         <div class="post-box risi">
             <img src="fotot/foto1.webp" alt="" class="post-img">
             <h2 class="kategoria">Risi</h2>
-            <a href="post1-details.html" class="post-titulli">Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)</a>
+            <a href="post1-details.php" class="post-titulli">Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)</a>
             <span class="post-date">2 Jan 2025</span>
             <p class="post-pershkrimi">
                 Në prag të sezonit dimëror, Aeroporti Ndërkombëtar i Prishtinës ka nisur një sërë përmirësimesh
@@ -72,7 +72,7 @@
         <div class="post-box destinacionet">
             <img src="fotot/foto2.jpg" alt="" class="post-img">
             <h2 class="kategoria">Destinacionet</h2>
-            <a href="post2-details.html" class="post-titulli">Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat
+            <a href="post2-details.php" class="post-titulli">Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat
                 Ndërkombëtare</a>
             <span class="post-date">12 Nov 2022</span>
             <p class="post-pershkrimi">
@@ -88,7 +88,7 @@
         <div class="post-box risi">
             <img src="fotot/foto3.webp" alt="" class="post-img">
             <h2 class="kategoria">Risi</h2>
-            <a href="post3-details.html" class="post-titulli">Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit
+            <a href="post3-details.php" class="post-titulli">Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit
                 të Prishtinës</a>
             <span class="post-date">1 Feb 2024</span>
             <p class="post-pershkrimi">
@@ -105,7 +105,7 @@
         <div class="post-box evente">
             <img src="fotot/foto4.jpg" alt="" class="post-img">
             <h2 class="kategoria">Evente</h2>
-            <a href="post4-details.html" class="post-titulli">Aeroporti i Prishtinës Organizoi Panairin e Turizmit -
+            <a href="post4-details.php" class="post-titulli">Aeroporti i Prishtinës Organizoi Panairin e Turizmit -
                 Oportunitete të Rrethit Ndërkombëtar</a>
             <span class="post-date">10 Dec 2024</span>
             <p class="post-pershkrimi">
@@ -134,7 +134,7 @@
         <div class="post-box risi">
             <img src="fotot/foto5.webp" alt="" class="post-img">
             <h2 class="kategoria">Risi</h2>
-            <a href="post5-details.html" class="post-titulli">Shërbimi i Self Check-in tani edhe në Aeroportin
+            <a href="post5-details.php" class="post-titulli">Shërbimi i Self Check-in tani edhe në Aeroportin
                 Ndërkombëtar të Prishtinës "Adem Jashari"</a>
             <span class="post-date">19 Dec 2024</span>
             <p class="post-pershkrimi">
@@ -166,7 +166,7 @@
         <div class="post-box destinacionet">
             <img src="fotot/foto6.jpg" alt="" class="post-img">
             <h2 class="kategoria">Destinacionet</h2>
-            <a href="post6-details.html" class="post-titulli">Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane:
+            <a href="post6-details.php" class="post-titulli">Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane:
                 Lidhje të Reja për Udhëtarët</a>
             <span class="post-date">23 June 2021</span>
             <p class="post-pershkrimi">
@@ -185,7 +185,7 @@
         <div class="post-box evente">
             <img src="fotot/foto7.webp" alt="" class="post-img">
             <h2 class="kategoria">Evenete</h2>
-            <a href="post7-details.html" class="post-titulli">Aeroporti i Prishtinës Pret Forumin e Biznesit 2024:
+            <a href="post7-details.php" class="post-titulli">Aeroporti i Prishtinës Pret Forumin e Biznesit 2024:
                 Mundësi të Reja për Sipërmarrësit</a>
             <span class="post-date">17 Nov 2024</span>
             <p class="post-pershkrimi">

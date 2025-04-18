@@ -61,7 +61,7 @@
                 <div class="post-item">
                     <img src="fotot/foto4.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post4-details.html">
+                        <a href="post4-details.php">
                             <h4>Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar
                             </h4>
                         </a>
@@ -71,7 +71,7 @@
                 <div class="post-item">
                     <img src="fotot/foto5.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post5-details.html">
+                        <a href="post5-details.php">
                             <h4>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"</h4>
                         </a>
                         <p>19 Dec 2024</p>
@@ -80,7 +80,7 @@
                 <div class="post-item">
                     <img src="fotot/foto6.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post6-details.html">
+                        <a href="post6-details.php">
                             <h4>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</h4>
                         </a>
                         <p>15 Jan 2022</p>

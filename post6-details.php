@@ -61,7 +61,7 @@
                 <div class="post-item">
                     <img src="fotot/foto7.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post7-details.html">
+                        <a href="post7-details.php">
                             <h4>Aeroporti i Prishtinës Pret Forumin e Biznesit 2024: Mundësi të Reja për Sipërmarrësit</h4>
                         </a>
                         <p>17 Nov 2024</p>
@@ -70,7 +70,7 @@
                 <div class="post-item">
                     <img src="fotot/foto1.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post1-details.html">
+                        <a href="post1-details.php">
                             <h4>Aeroporti i Prishtinës Përgatitet për Sezonin Dimëror me Investime në Infrastrukturë
                             </h4>
                         </a>
@@ -80,7 +80,7 @@
                 <div class="post-item">
                     <img src="fotot/foto2.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post2-details.html">
+                        <a href="post2-details.php">
                             <h4>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</h4>
                         </a>
                         <p>12 Nov 2022</p>

@@ -60,7 +60,7 @@
                 <div class="post-item">
                     <img src="fotot/foto3.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post3-details.html">
+                        <a href="post3-details.php">
                             <h4>Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës</h4>
                         </a>
                         <p>1 Feb 2024</p>
@@ -69,7 +69,7 @@
                 <div class="post-item">
                     <img src="fotot/foto4.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post4-details.html">
+                        <a href="post4-details.php">
                             <h4>Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar
                             </h4>
                         </a>
@@ -79,7 +79,7 @@
                 <div class="post-item">
                     <img src="fotot/foto5.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post5-details.html">
+                        <a href="post5-details.php">
                             <h4>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"</h4>
                         </a>
                         <p>19 Dec 2024</p>

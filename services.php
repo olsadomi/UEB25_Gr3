@@ -7,6 +7,57 @@
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="services_responsive.css">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
+
+    <style>
+        .custom-alert-services {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #fffae6;
+            color: #333;
+            padding: 15px 20px;
+            border: 1px solid #f0c36d;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadein 0.5s;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #service-season {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .seasonal-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .seasonal-message h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0c356a;
+        }
+
+        .seasonal-message p {
+            font-size: 16px;
+            color: #0c356a;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,6 +66,65 @@
     <header id="services-header">
         <h1>Shërbimet</h1>
     </header>
+
+
+    <?php
+    $counter_file = 'counter.txt';
+    $count = file_exists($counter_file) ? (int) file_get_contents($counter_file) : 0;
+    $count++;
+    file_put_contents($counter_file, $count);
+
+    if ($count % 5 == 0) {
+        $message = "RASTI SPECIAL! Ju jeni vizitori i $count-të! Faleminderit për vizitën!";
+    } else {
+        $message = "Jeni vizitori i $count-të. Mirë se vini!";
+    }
+    ?>
+
+    <div class="custom-alert-services" id="popupMessage">
+        <?php
+        echo $message;
+        ?>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('popupMessage').style.display = 'none';
+        }, 5000);
+    </script>
+
+    <section id="service-season">
+        <div class="seasonal-message">
+            <h3>Sezoni aktual</h3>
+            <?php
+
+            $month = date('n');
+
+            switch (true) {
+                case ($month >= 3 && $month <= 5):
+                    $season = "Pranverë";
+                    $seasonMessage = "Përfitoni nga oferta speciale për pranverën! Shijoni kohën e ngrohtë me shërbimet tona!";
+                    break;
+                case ($month >= 6 && $month <= 8):
+                    $season = "Verë";
+                    $seasonMessage = "Sezona e verës është këtu! Planifikoni pushimet tuaja me shërbimet tona dhe aktivitetet verore!";
+                    break;
+                case ($month >= 9 && $month <= 11):
+                    $season = "Vjeshtë";
+                    $seasonMessage = "Vjeshta është këtu! Vizitoni një vend unik, të mbuluar me gjethet e rëna!";
+                    break;
+                case ($month == 12 || $month <= 2):
+                default:
+                    $season = "Dimër";
+                    $seasonMessage = "Dimri ka mbërritur! Rezervoni shërbime për festat dhe aventurat e dimrit!";
+                    break;
+            }
+            ?>
+            <p><strong><?php echo $season; ?></strong></p>
+            <p><?php echo $seasonMessage; ?></p>
+        </div>
+    </section>
+
 
     <section id="what-we-offer-section">
         <h2>Çfarë ofrojmë ne?</h2>
@@ -147,13 +257,13 @@
         <h2>Interneti</h2>
         <button class="wifi-button">Klikoni këtu për detajet shtesë</button>
         <div class="message-box">
-        <?php
-                $ora = date("H"); 
-                if ($ora >= 6 && $ora < 23) {
-                    echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
-                } else {
-                    echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
-                }
+            <?php
+            $ora = date("H");
+            if ($ora >= 6 && $ora < 23) {
+                echo "Kemi një befasi për ju! Ne ofrojmë FREE WI-FI në çdo hapësirë të aeroportit tonë, gjatë intervalit 06:00 - 23:00!";
+            } else {
+                echo "Na vjen keq! Shërbimi i Wi-Fi nuk është aktiv jashtë orarit 06:00 - 23:00!";
+            }
             ?>
         </div>
 
@@ -174,7 +284,7 @@
     <section id="car-rentals-section">
         <h2>Rent a Car - Merr makinen me qira</h2>
         <div id="car-rental-container">
-            <div class="car-rental-brand">
+            <!-- <div class="car-rental-brand">
                 <h3><b>Hertz</b></h3>
                 <img src="car-rental-1.jpg">
                 <p><i>Shërbehu në Hertz - me mijëra lokacione në gjithë botën!</i></p>
@@ -191,7 +301,77 @@
                 <img src="car-rental-3.jpg">
                 <p><i>Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!</i></p>
                 <button onclick="showDetails(2)">Detajet</button>
-            </div>
+            </div> -->
+
+            <?php
+            
+            class Rentals {
+                private $brand;
+                private $description;
+                private $image;
+
+                public function __construct($brand, $description, $image){
+                    $this->brand = $brand;
+                    $this->description = $description;
+                    $this->image = $image;
+                }
+
+                public function getBrand() {
+                    return $this->brand;
+                }
+
+                public function setBrand($brand) {
+                    $this->brand = $brand;
+                }
+
+                public function getDescription() {
+                    return $this->description;
+                }
+
+                public function setDescription($description) {
+                    $this->description = $description;
+                }
+
+                public function getImage() {
+                    return $this->image;
+                }
+
+                public function setImage($image) {
+                    $this->image = $image;
+                }
+
+                public function __destruct() {
+                    echo "<!-- Destruktori -->";
+                }
+            }
+
+            class CarRental extends Rentals{
+
+                public function displayRental($index) {
+                    echo "<div class='car-rental-brand'>
+                        <h3><b>{$this->getBrand()}</b></h3>
+                        <img src = '{$this->getImage()}' alt='{$this->getBrand()} car'>
+                        <p><i>{$this->getDescription()}</i></p>
+                        <button onclick='showDetails($index)'>Detajet</button>
+                     </div>";
+                }
+            }
+
+            $carRentals = [
+                new CarRental("Hertz", "Shërbehu në Hertz - me mijëra lokacione në gjithë botën!", "car-rental-1.jpg"),
+                new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "car-rental-2.jpg"),
+                new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "car-rental-3.jpg")
+            ];
+
+            $carRentals[0]->setBrand("HERTZ");
+            $carRentals[1]->setBrand("EUROPCAR");
+
+            foreach($carRentals as $index=>$rental) {
+                $rental->displayRental($index);
+            }
+            
+
+            ?>
         </div>
 
         <div id="tab">

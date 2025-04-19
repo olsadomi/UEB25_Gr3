@@ -1,3 +1,33 @@
+<?php
+$GLOBALS['siteName'] = "PIA";
+
+$airlines = [
+    "Austrian Airlines",
+    "Ryanair Airlines",
+    "Swiss Airlines",
+    "Air France Airlines",
+    "Lufthansa Airlines",
+    "British Airways",
+    "Virgin Atlantic Airlines"
+];
+
+$email = "";
+$emailError = "";
+$successMsg = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST["nl-email"]);
+
+    if (!preg_match("/^[^0-9][a-zA-Z0-9\.\-\_]{2,}@[a-zA-Z]{2,}\.[a-z]+$/", $email)) {
+        $emailError = "Please enter a valid email address.";
+    } else {
+        $successMsg = "You have successfully subscribed!";
+    }
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +58,7 @@
         </div>
         <div class="titulli-aboutus">
             <h3>Rreth Nesh</h3>
-            <p>Mirë se vini në <b>PIA</b>, porta juaj drejt udhëtimeve të lehta dhe <em>përvojave të paharrueshme</em>
+            <p>Mirë se vini në <b><?php echo $GLOBALS['siteName']; ?></b>, porta juaj drejt udhëtimeve të lehta dhe <em>përvojave të paharrueshme</em>
             </p>
         </div>
     </div>
@@ -270,10 +300,17 @@
                 ofertat speciale, shërbimet e aeroportit,
                 këshilla udhëtimi dhe shumë më tepër. Qëndro i informuar dhe bëje përvojën tënde në aeroport më të lehtë
                 dhe më të këndshme.</p>
-            <form>
+            <form method="post">
                 <label for="nl-email">Enter your email:</label><br>
-                <input type="email" name="nl-email" placeholder="Enter email..." />
+                <input type="email" name="nl-email" placeholder="Enter email..."
+                    value="<?php echo htmlspecialchars($email); ?>"/>
                 <button class="subscribe-btn" type="submit">Abonohu</button>
+                <br>
+                <?php if (!empty($emailError)): ?>
+                    <span style="color: red;"><?php echo $emailError; ?></span>
+                <?php elseif (!empty($successMsg)): ?>
+                    <span style="color: green;"><?php echo $successMsg; ?></span>
+                <?php endif; ?>
             </form>
         </div>
     </div>

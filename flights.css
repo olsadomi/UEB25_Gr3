@@ -625,3 +625,34 @@ html {
     cursor: pointer;
     background-color: #FBCB0A;
 }
+
+
+.flight-number {
+    position: relative;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
+
+.flight-number::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    background-color: #112D4E;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-radius: 5px;
+    top: -35px;
+    left: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 999;
+}
+
+.flight-number:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}

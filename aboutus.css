@@ -370,23 +370,17 @@
 }
 
 
-
-
-
-
-
 .faq {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding-left: 45px;
     margin: 100px 0px 0px 0px;
-    gap: 70px;
+    gap: 150px;
 }
 
 
 .faq-icon img {
-    width: 600px;
+    width: 450px;
     height: auto;
 }
 

@@ -1,5 +1,5 @@
-# UEB24_Gr14
-Projekti WEB I - Airport Website
+# UEB24-25_Gr3
+Projekti WEB I - Airport Website - HTML, CSS, JavaScript, JQuery
 
 Punuan:
 Olsa Domi
@@ -23,3 +23,7 @@ Konkretisht, secili eshte fokusuar ne pjese te caktuara te webfaqes. Per identif
   - Rrezja --> Rreth Nesh & Footer
   - Bleroni --> Lajme
   - Valmiri --> Fluturime
+----------------------------------------------------------------------------
+# UEB25_Gr3 - VAZHDIMI - PHP
+Projekti WEB II - Airport Website
+

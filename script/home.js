@@ -45,6 +45,7 @@ btnParking.addEventListener("click", function(){
             showQmimi.style.display = "none";
         }else{
             parkingInputs[i].classList.remove("fieldNull")
+            showQmimi.style.display = "block";
         }
     }
 
@@ -113,7 +114,7 @@ const easterDiv = document.querySelector(".easterEgg");
 const easterAudio = document.querySelector("#easterAudio");
 
 easterDiv.addEventListener("click", function(){
-    easterAudio.currentTime = 4;
+    easterAudio.currentTime = 0;
     easterAudio.play();
 })
 

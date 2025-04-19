@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon" href="logo-favicon.png">
-    <title>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</title>
+    <title>Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -15,25 +15,26 @@
     <nav>
         <div id="navbar-placeholder"></div>
     </nav>
-
+    
     <section id="all">
         <div class="post-container">
-            <div class="post2-image"></div>
+            <div class="post6-image"></div>
             <div class="post-content">
                 <div class="date-info">
                     <div>
                         <span>&bull;</span>
-                        <span>November 12, 2022</span>
+                        <span>June 23, 2021</span>
                     </div>
                 </div>
-                <h2>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</h2>
+                <h2>Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët</h2>
                 <p>
-                    Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione 
-                    të reja, duke përfshirë Barcelonën, Stambollin dhe Abu Dhabin. Kjo lëvizje vjen si pjesë e 
-                    bashkëpunimeve të reja me linja ajrore ndërkombëtare, si Turkish Airlines dhe Wizz Air.
-                    Pasagjerët tani do të kenë mundësi të zgjedhin më shumë fluturime direkte, duke ulur kohën 
-                    e pritjes dhe koston e udhëtimeve. Zëdhënësja e aeroportit deklaroi: "Ne jemi të përkushtuar 
-                    që të sjellim më shumë mundësi për qytetarët e Kosovës dhe të rrisim lidhjet tona me botën."
+                    Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" vazhdon të jetë pika kryesore e lidhjes 
+                    ajrore për Kosovën, duke ofruar destinacione të shumta në Evropë dhe më gjerë. Me rritjen e 
+                    kërkesës për udhëtime, aeroporti ka zgjeruar gamën e fluturimeve, duke përfshirë:
+                    <b>Lidhje të reja sezonale:</b> Fluturime për destinacione turistike si Bodrum, Antalya dhe Heraklion. <br>
+                    <b>Rritje të fluturimeve drejt metropoleve evropiane:</b> Përfshirë Vjenën, Zyrihun, dhe Frankfurtin, me frekuencë 
+                    të shtuar për t'iu përshtatur udhëtarëve të biznesit dhe atyre turistikë.
+                    <b>Fluturime të përkohshme:</b> Opsione për qytete si Düsseldorf dhe Stuttgart gjatë sezonit të verës.
                 </p>
             </div>
             <div class="comments-section">
@@ -58,31 +59,31 @@
             <h3>Lajme tjera</h3>
             <div class="post-grid">
                 <div class="post-item">
-                    <img src="fotot/foto3.webp" alt="Post Image">
+                    <img src="fotot/foto7.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post3-details.html">
-                            <h4>Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës</h4>
+                        <a href="post7-details.php">
+                            <h4>Aeroporti i Prishtinës Pret Forumin e Biznesit 2024: Mundësi të Reja për Sipërmarrësit</h4>
                         </a>
-                        <p>1 Feb 2024</p>
+                        <p>17 Nov 2024</p>
                     </div>
                 </div>
                 <div class="post-item">
-                    <img src="fotot/foto4.jpg" alt="Post Image">
+                    <img src="fotot/foto1.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post4-details.html">
-                            <h4>Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar
+                        <a href="post1-details.php">
+                            <h4>Aeroporti i Prishtinës Përgatitet për Sezonin Dimëror me Investime në Infrastrukturë
                             </h4>
                         </a>
-                        <p>10 Dec 2024</p>
+                        <p>7 Dec 2024</p>
                     </div>
                 </div>
                 <div class="post-item">
-                    <img src="fotot/foto5.webp" alt="Post Image">
+                    <img src="fotot/foto2.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post5-details.html">
-                            <h4>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"</h4>
+                        <a href="post2-details.php">
+                            <h4>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</h4>
                         </a>
-                        <p>19 Dec 2024</p>
+                        <p>12 Nov 2022</p>
                     </div>
                 </div>
             </div>

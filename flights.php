@@ -26,6 +26,7 @@ $airportName = "Prishtina International Airport";
 
     <header id="flights-header">
         <div class="header">
+        
         <?php
 class Greeting {
     public function getGreeting() {
@@ -40,8 +41,9 @@ $greeter = new Greeting();
 ?>
 
             <div class="greeting">
-            <h2 id="greetingText"><?php echo $greeter->getGreeting(); ?></h2>
             <h2 id="title1">Fluturimet</h2>
+            <h2 id="greetingText"><?php echo $greeter->getGreeting(); ?></h2>
+          
             </div>
             <h1 class="header" id="title2">Informatat</h1>
             <p class="header" id="tekst">Informacioni i fluturimit në <mark>kohë reale</mark> jepet si tregues dhe është
@@ -672,7 +674,7 @@ $greeter = new Greeting();
 
             <div class="offers-partners-container">
                 <div id="cover-img-content">
-                    <img src="Photos/newsletter-flights.jpeg">
+                    <img src="Photos/Home/newsletter-flights.jpeg">
                 </div>
                 <div id="content-card">
                     <h3>Regjistrohu në buletinin tonë!</h3>

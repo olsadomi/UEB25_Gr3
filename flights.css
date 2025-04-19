@@ -28,22 +28,22 @@ html {
 .greeting {   
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
+   justify-content: space-evenly; 
+   align-items: flex-start;
 } 
 
 #greetingText{
-    text-align: right;
     padding-top: 50px;
     color: #FBCB0A; 
     font-size: 4.375rem;
     font-weight: bolder; 
-    position: relative;     
+    
 }
 
 
 
  #flights-header {
-     background: url("Photos/background-flights.jpg");
+     background: url("Photos/Home/background-flights.jpg");
      background-repeat: no-repeat;
      background-size: cover;
      background-position: center;
@@ -79,16 +79,17 @@ html {
      color: #FBCB0A; 
      font-size: 4.375rem;
      font-weight: bolder; 
-     position: relative;
+     
  }
  
  #title2 {
-     text-align: left;
+     text-align: center;
      font-size: 3.125rem;
      font-weight: bolder;
      position: relative;
      color: #F9F7F7; 
      line-height: 1.25;
+     -webkit-text-stroke: 1px #112D4E;
  }
  
  #title3 {

@@ -328,7 +328,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!-- Swiper JS script -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="about_us.js"></script>
+    <script src="/UEB25_GR3/script/about_us.js"></script>
 
     <?php if (!empty($emailError)): ?>
         <script>

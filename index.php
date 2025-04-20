@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
     <link rel="stylesheet" href="/UEB25_GR3/style/home.css">
-    <!-- <link rel="stylesheet" href="/UEB25_GR3/style/nav.css"> -->
     <title>Prishtina Airport</title>
 
     <!-- ICON LINK -->

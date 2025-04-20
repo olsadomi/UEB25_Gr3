@@ -754,7 +754,7 @@ $greeter = new Greeting();
 
 
 
-    <script src="flights.js"></script>
+    <script src="/UEB25_GR3/script/flights.js"></script>
     <script>
         $(function () {
             $("#navbar-placeholder").load("/UEB25_GR3/nav.php");

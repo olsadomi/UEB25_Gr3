@@ -4,8 +4,6 @@ $(function(){
 });
 
 
-
-
 $(document).ready(function () { 
     $(".view-details-btn").on("click", function (e) {
         e.preventDefault();

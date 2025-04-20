@@ -39,7 +39,7 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="contact.js"></script>
+<script src="/UEB25_GR3/script/contact.js"></script>
 
 <body>
     <div id="navbar-placeholder"></div>

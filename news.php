@@ -211,8 +211,8 @@
     </section>
 
     <!--Lidhja me me JS dhe me navbarin-->
-    <script src="news.js"></script>
     <div id="footer-placeholder"></div>
+    <script src="/UEB25_GR3/script/news.js"></script>
 </body>
 
 </html>

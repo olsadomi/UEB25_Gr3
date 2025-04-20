@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon" href="logo-favicon.png">
-    <title>Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës</title>
+    <title>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -15,26 +15,25 @@
     <nav>
         <div id="navbar-placeholder"></div>
     </nav>
-    
+
     <section id="all">
         <div class="post-container">
-            <div class="post3-image"></div>
+            <div class="post2-image"></div>
             <div class="post-content">
                 <div class="date-info">
                     <div>
                         <span>&bull;</span>
-                        <span>February 1, 2024</span>
+                        <span>November 12, 2022</span>
                     </div>
                 </div>
-                <h2>Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës</h2>
+                <h2>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</h2>
                 <p>
-                    Aeroporti Ndërkombëtar i Prishtinës ka nisur një projekt ambicioz të quajtur "Green Airport", 
-                    i cili synon të reduktojë ndotjen dhe të rrisë përdorimin e burimeve të qëndrueshme. Panelët 
-                    diellorë janë instaluar për të prodhuar energji elektrike, ndërsa sistemet e ndriçimit janë 
-                    zëvendësuar me LED për kursim energjie.Për më tepër, janë krijuar hapësira të reja të gjelbra, 
-                    duke përfshirë një kopsht në zonën e jashtme të aeroportit. Pasagjerët do të kenë mundësinë të 
-                    relaksohen në natyrë para fluturimeve. Ky projekt është një hap i rëndësishëm drejt përmbushjes 
-                    së objektivave për një mjedis më të pastër.
+                    Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione 
+                    të reja, duke përfshirë Barcelonën, Stambollin dhe Abu Dhabin. Kjo lëvizje vjen si pjesë e 
+                    bashkëpunimeve të reja me linja ajrore ndërkombëtare, si Turkish Airlines dhe Wizz Air.
+                    Pasagjerët tani do të kenë mundësi të zgjedhin më shumë fluturime direkte, duke ulur kohën 
+                    e pritjes dhe koston e udhëtimeve. Zëdhënësja e aeroportit deklaroi: "Ne jemi të përkushtuar 
+                    që të sjellim më shumë mundësi për qytetarët e Kosovës dhe të rrisim lidhjet tona me botën."
                 </p>
             </div>
             <div class="comments-section">
@@ -46,7 +45,7 @@
             </div>
             <div class="end-post">
                 <div class="kategoria-post">
-                    Risi
+                    Destinacionet
                 </div>
                 <div class="share-section">
                     <button onclick="sharePost('facebook')">Facebook</button>
@@ -59,9 +58,18 @@
             <h3>Lajme tjera</h3>
             <div class="post-grid">
                 <div class="post-item">
+                    <img src="fotot/foto3.webp" alt="Post Image">
+                    <div class="grid-content">
+                        <a href="post3-details.php">
+                            <h4>Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës</h4>
+                        </a>
+                        <p>1 Feb 2024</p>
+                    </div>
+                </div>
+                <div class="post-item">
                     <img src="fotot/foto4.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post4-details.html">
+                        <a href="post4-details.php">
                             <h4>Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar
                             </h4>
                         </a>
@@ -71,19 +79,10 @@
                 <div class="post-item">
                     <img src="fotot/foto5.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post5-details.html">
+                        <a href="post5-details.php">
                             <h4>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"</h4>
                         </a>
                         <p>19 Dec 2024</p>
-                    </div>
-                </div>
-                <div class="post-item">
-                    <img src="fotot/foto6.jpg" alt="Post Image">
-                    <div class="grid-content">
-                        <a href="post6-details.html">
-                            <h4>Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare</h4>
-                        </a>
-                        <p>15 Jan 2022</p>
                     </div>
                 </div>
             </div>

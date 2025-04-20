@@ -21,7 +21,7 @@ p{
 
 header{
     min-height:52vw;
-    background-image: url("Photos/cover.jpg");
+    background-image: url("../Photos/Home/cover.jpg");
     background-repeat: no-repeat;
     background-position:center center;
     background-size:cover;
@@ -124,7 +124,7 @@ header{
 
 /* ----------- EXPERIENCES -------- */
 .bg-container{
-    background-image: url("Photos/bg-cover4.jpg"), url("Photos/bg-cover5.jpg");
+    background-image: url("../Photos/Home/bg-cover4.jpg"), url("../Photos/Home/bg-cover5.jpg");
     background-repeat:no-repeat, no-repeat;
     background-position:  -10% 40%, bottom right;
     background-size:100vh 95vw, 60vh 55vw;
@@ -169,7 +169,6 @@ header{
 #experience .experience-filter div:hover{
     cursor: pointer;
 }
-
 
 #experience .experience-filter p{
     font-size: 1.3vw;
@@ -534,7 +533,7 @@ table td{
 }
 
 #orientationVideo .orient-photo {
-    background-image: url("Photos/Limak\ Visit\ Kosovo_WEB.jpg");
+    background-image: url("../Photos/Home/Limak\ Visit\ Kosovo_WEB.jpg");
     background-position: -2.5vw center;
     background-repeat: no-repeat;
     background-size: 50vw 35vw;

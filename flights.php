@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+global $airportName;
+$airportName = "Prishtina International Airport";
+?>
+
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -21,14 +26,32 @@
 
     <header id="flights-header">
         <div class="header">
-            <h2 class="header" id="title1">Fluturimet</h2>
+        
+        <?php
+class Greeting {
+    public function getGreeting() {
+        $hour = date("H");
+        if ($hour < 12) return "Mirëmëngjes!";
+        elseif ($hour < 18) return "Mirëdita!";
+        else return "Mirëmbrëma!";
+    }
+}
+
+$greeter = new Greeting();
+?>
+
+            <div class="greeting">
+            <h2 id="title1">Fluturimet</h2>
+            <h2 id="greetingText"><?php echo $greeter->getGreeting(); ?></h2>
+          
+            </div>
             <h1 class="header" id="title2">Informatat</h1>
             <p class="header" id="tekst">Informacioni i fluturimit në <mark>kohë reale</mark> jepet si tregues dhe është
                 i
                 disponueshëm për fluturimet e sotme dhe të nesërme. Për më shumë informacion, ju lutemi, kontaktoni
                 linjën tuaj ajrore.
             </p>
-            <button id="playbutton">Prishtina Airport</button>
+            <button id="playbutton"><?php echo $airportName; ?></button>
             <audio id="audioPlayer" src="Airport Sound Effect.mp3"></audio>
         </div>
     </header>
@@ -95,12 +118,28 @@
                             </li>
                             <li>
 
+<?php
+    $arrivalsfno = ["W4 5026", "W4 5022", "W4 5044", "W4 50443", "OS 849", "W4 5084" , "W9 5006", "FR 8398", "LX 1442" , "EW 9916"];
+    $arrivalsVal = array();
+
+    foreach ($arrivalsfno as $flightno) {
+        $isValid = preg_match('/^[A-Z0-9]{2}\s?[0-9]{3,4}$/', $flightno);
+        $message = $isValid 
+            ? "Numri i fluturimit është valid." 
+            : "Numri i fluturimit nuk është valid.";
+    
+        array_push($arrivalsVal, $message);
+    };
+?>
+
+
+
                                 <ul class="flights-box-arr" data-date="today">
                                     <li>00:05</li>
                                     <li>02/01/2025</li>
                                     <li>Milan Malpensa(IT)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5026</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[0]'>$arrivalsfno[0]</span>"?></li>
                                     <li>Landed</li>
                                     <div id="btnli">
                                         <li><a href="#"
@@ -108,7 +147,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn">
-                                                            <img src="Photos/info-flights.png" alt="Info">
+                                                            <img src="Photos/Home/info-flights.png" alt="Info">
                                                         </button>
                                                     </div>
                                                 </span>
@@ -123,7 +162,7 @@
                                     <li>02/01/2025</li>
                                     <li>Milan Bergamo (IT)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5022</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[1]'>$arrivalsfno[1]</span>"?> 
                                     <li>On-Route</li>
                                     <div id="btnli">
                                         <li>
@@ -132,7 +171,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -146,7 +185,7 @@
                                     <li>02/01/2025</li>
                                     <li>Brindisi(IT)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5044</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[2]'>$arrivalsfno[2]</span>"?></li>
                                     <li>On-Route</li>
                                     <div id="btnli">
                                         <li>
@@ -155,7 +194,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -169,7 +208,7 @@
                                     <li>02/01/2025</li>
                                     <li>Bari(IT)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5044</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[3]'>$arrivalsfno[3]</span>"?></li>
                                     <li>Cancelled</li>
                                     <div id="btnli">
                                         <li>
@@ -178,7 +217,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                         </li>
@@ -192,7 +231,7 @@
                                     <li>02/01/2025</li>
                                     <li>Vienna/Vjene(IT)</li>
                                     <li>AUSTRIAN AIRLINES AG</li>
-                                    <li>OS 849</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[4]'>$arrivalsfno[4]</span>"?></li>
                                     <li>Landed</li>
                                     <div id="btnli">
                                         <li>
@@ -201,7 +240,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -214,7 +253,7 @@
                                     <li>05/01/2025</li>
                                     <li>Genoa(IT)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5084</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[5]'>$arrivalsfno[5]</span>"?></li>
                                     <li>Landed</li>
                                     <div id="btnli">
                                         <li><a href="#"
@@ -222,7 +261,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn">
-                                                            <img src="Photos/info-flights.png" alt="Info">
+                                                            <img src="Photos/Home/info-flights.png" alt="Info">
                                                         </button>
                                                     </div>
                                                 </span>
@@ -236,7 +275,7 @@
                                     <li>05/01/2025</li>
                                     <li>London Luton(GB)</li>
                                     <li>Wizz Air UK</li>
-                                    <li>W9 5006</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[6]'>$arrivalsfno[6]</span>"?></li>
                                     <li>Landed</li>
                                     <div id="btnli">
                                         <li><a href="#"
@@ -244,7 +283,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn">
-                                                            <img src="Photos/info-flights.png" alt="Info">
+                                                            <img src="Photos/Home/info-flights.png" alt="Info">
                                                         </button>
                                                     </div>
                                                 </span>
@@ -258,7 +297,7 @@
                                     <li>05/01/2025</li>
                                     <li>Bologna/Bolonje(IT)</li>
                                     <li>Ryanair</li>
-                                    <li>FR 8398</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[7]'>$arrivalsfno[7]</span>"?></li>
                                     <li>Delayed</li>
                                     <div id="btnli">
                                         <li><a href="#"
@@ -266,7 +305,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn">
-                                                            <img src="Photos/info-flights.png" alt="Info">
+                                                            <img src="Photos/Home/info-flights.png" alt="Info">
                                                         </button>
                                                     </div>
                                                 </span>
@@ -280,7 +319,7 @@
                                     <li>05/01/2025</li>
                                     <li>Zurich(CH)</li>
                                     <li>SWISS International Airlines</li>
-                                    <li>LX 1442</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[8]'>$arrivalsfno[8]</span>"?></li>
                                     <li>On-Route</li>
                                     <div id="btnli">
                                         <li><a href="#"
@@ -288,7 +327,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn">
-                                                            <img src="Photos/info-flights.png" alt="Info">
+                                                            <img src="Photos/Home/info-flights.png" alt="Info">
                                                         </button>
                                                     </div>
                                                 </span>
@@ -302,7 +341,7 @@
                                     <li>05/01/2025</li>
                                     <li>Duseldorf(DE)</li>
                                     <li>EUROWINGS</li>
-                                    <li>EW 9916</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[9]'>$arrivalsfno[9]</span>"?></li>
                                     <li>On-Route</li>
                                     <div id="btnli">
                                         <li><a href="#"
@@ -310,7 +349,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn">
-                                                            <img src="Photos/info-flights.png" alt="Info">
+                                                            <img src="Photos/Home/info-flights.png" alt="Info">
                                                         </button>
                                                     </div>
                                                 </span>
@@ -370,6 +409,7 @@
             <div class="flights-arritjet-container">
                 <div class="constraint">
                     <div class="containerflights">
+
                         <ul id="flights-container1">
                             <li>
                                 <div id="tabletitle">
@@ -388,13 +428,29 @@
                                 </div>
                             </li>
                             <li>
+<?php
+    $departuresfno = ["PC 284", "W9 5006", "OS 850" , "W4 5131", "W4 5101", "W4 5036", "W4 5137", "FR 8418", "W4 5131", "FR 6889"];
 
+    
+    $departuresVal = array();
+
+    foreach ($departuresfno as $flightno) {
+        $isValid = preg_match('/^[A-Z0-9]{2}\s?[0-9]{3,4}$/', $flightno);
+        $message = $isValid 
+            ? "Numri i fluturimit është valid." 
+            : "Numri i fluturimit nuk është valid.";
+    
+        array_push($departuresVal, $message);
+    };
+
+
+?>
                                 <ul class="flights-box-dep" data-date="today">
                                     <li>02:25</li>
                                     <li>20/12/2024</li>
                                     <li>Sabiha Gokcen Intl.</li>
                                     <li>Pegasus Airlines</li>
-                                    <li>PC 284</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[0]'>$departuresfno[0]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -403,7 +459,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -417,7 +473,7 @@
                                     <li>20/12/2024</li>
                                     <li>London Luton (GB)</li>
                                     <li>Wizz Air UK</li>
-                                    <li>W9 5005</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[1]'>$departuresfno[1]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -426,7 +482,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -440,7 +496,7 @@
                                     <li>20/12/2024</li>
                                     <li>Cienna/Vjene (AT)</li>
                                     <li>Austrian Airlines AG</li>
-                                    <li>OS 850</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[2]'>$departuresfno[2]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -449,7 +505,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -463,7 +519,7 @@
                                     <li>20/12/2024</li>
                                     <li>Brussels Charleroi(BE)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5131</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[3]'>$departuresfno[3]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -472,7 +528,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -486,7 +542,7 @@
                                     <li>20/12/2024</li>
                                     <li>Dortmund(DE)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5101</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[4]'>$departuresfno[4]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -495,7 +551,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -508,7 +564,7 @@
                                     <li>05/01/2025</li>
                                     <li>Treviso(IT)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5036</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[5]'>$departuresfno[5]</span>"?></li>
                                     <li>Delayed</li>
                                     <div id="btnli">
                                         <li>
@@ -517,7 +573,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -530,7 +586,7 @@
                                     <li>05/01/2025</li>
                                     <li>Prague (CZ)</li>
                                     <li>Wizz Air Malta</li>
-                                    <li>W4 5137</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[6]'>$departuresfno[6]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -539,7 +595,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -552,7 +608,7 @@
                                     <li>05/01/2025</li>
                                     <li>Stockholm Arlanda(ARN)</li>
                                     <li>Ryanair</li>
-                                    <li>FR 8418</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[7]'>$departuresfno[7]</span>"?></li>
                                     <li>Delayed</li>
                                     <div id="btnli">
                                         <li>
@@ -561,7 +617,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -574,7 +630,7 @@
                                     <li>05/01/2025</li>
                                     <li>Brussels Charleroi(BE)</li>
                                     <li>Wizz Arir Malta</li>
-                                    <li>W4 5131</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[8]'>$departuresfno[8]</span>"?></li>
                                     <li>Departed</li>
                                     <div id="btnli">
                                         <li>
@@ -583,7 +639,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -596,7 +652,7 @@
                                     <li>05/01/2025</li>
                                     <li>Vienna/Vjene(AT)</li>
                                     <li>Ryanair</li>
-                                    <li>FR 6889</li>
+                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[9]'>$departuresfno[9]</span>"?></li>
                                     <li>Gate Closed</li>
                                     <div id="btnli">
                                         <li>
@@ -605,7 +661,7 @@
                                                 <span class="linkdetails">
                                                     <div id="linkbtn">
                                                         <button class="view-details-btn"><img
-                                                                src="Photos/info-flights.png" alt="Info"></button>
+                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
                                                     </div>
                                                 </span>
                                             </a>
@@ -651,7 +707,7 @@
 
             <div class="offers-partners-container">
                 <div id="cover-img-content">
-                    <img src="Photos/newsletter-flights.jpeg">
+                    <img src="Photos/Home/newsletter-flights.jpeg">
                 </div>
                 <div id="content-card">
                     <h3>Regjistrohu në buletinin tonë!</h3>

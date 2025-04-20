@@ -72,21 +72,21 @@
                 <div class="post-item">
                     <img src="fotot/foto2.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post2-details.html"><h4>Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar</h4></a>
+                        <a href="post2-details.php"><h4>Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar</h4></a>
                         <p>10 Dec 2024</p>
                     </div>
                 </div>
                 <div class="post-item">
                     <img src="fotot/foto5.webp" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post5-details.html"><h4>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"</h4></a>
+                        <a href="post5-details.php"><h4>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"</h4></a>
                         <p>19 Dec 2024</p>
                     </div>
                 </div>
                 <div class="post-item">
                     <img src="fotot/foto4.jpg" alt="Post Image">
                     <div class="grid-content">
-                        <a href="post4-details.html"><h4>Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët</h4></a>
+                        <a href="post4-details.php"><h4>Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët</h4></a>
                         <p>23 June 2021</p>
                     </div>
                 </div>

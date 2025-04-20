@@ -12,15 +12,13 @@
     <style>
         .sort-buttons {
             margin: 15px 0;
-            display: flex;
+            display: center;
             gap: 10px;
             flex-wrap: wrap;
-            margin-left: 
+            margin-left: 20px;
         }
         .sort-buttons a {
             padding: 8px 15px;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
             border-radius: 4px;
             text-decoration: none;
             color: #333;
@@ -30,9 +28,8 @@
             background-color: #e0e0e0;
         }
         .sort-buttons a.active {
-            background-color: #0056b3;
+            background-color:rgb(255, 196, 54);;
             color: white;
-            border-color: #0056b3;
         }
     </style>
 </head>
@@ -80,122 +77,165 @@
     </div>
 
     <?php
-    $posts = [
-        [
-            'id' => 1,
-            'title' => 'Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)',
-            'date' => '2025-01-02',
-            'category' => 'risi',
-            'image' => 'fotot/foto1.webp',
-            'description' => 'Në prag të sezonit dimëror, Aeroporti Ndërkombëtar i Prishtinës ka nisur një sërë përmirësimesh...',
-            'link' => 'post1-details.php'
-        ],
-        [
-            'id' => 2,
-            'title' => 'Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare',
-            'date' => '2022-11-12',
-            'category' => 'destinacionet',
-            'image' => 'fotot/foto2.jpg',
-            'description' => 'Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione të reja...',
-            'link' => 'post2-details.php'
-        ],
-        [
-            'id' => 3,
-            'title' => 'Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës',
-            'date' => '2024-02-01',
-            'category' => 'risi',
-            'image' => 'fotot/foto3.webp',
-            'description' => 'Aeroporti Ndërkombëtar i Prishtinës ka nisur një projekt ambicioz të quajtur "Green Airport"...',
-            'link' => 'post3-details.php'
-        ],
-        [
-            'id' => 4,
-            'title' => 'Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar',
-            'date' => '2024-12-10',
-            'category' => 'evente',
-            'image' => 'fotot/foto4.jpg',
-            'description' => 'Aeroporti i Prishtinës ka hapur dyert për një ngjarje të jashtëzakonshme...',
-            'link' => 'post4-details.php'
-        ],
-        [
-            'id' => 5,
-            'title' => 'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"',
-            'date' => '2024-12-19',
-            'category' => 'risi',
-            'image' => 'fotot/foto5.webp',
-            'description' => 'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës...',
-            'link' => 'post5-details.php'
-        ],
-        [
-            'id' => 6,
-            'title' => 'Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët',
-            'date' => '2021-06-23',
-            'category' => 'destinacionet',
-            'image' => 'fotot/foto6.jpg',
-            'description' => 'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" vazhdon të jetë pika kryesore...',
-            'link' => 'post6-details.php'
-        ],
-        [
-            'id' => 7,
-            'title' => 'Aeroporti i Prishtinës Pret Forumin e Biznesit 2024: Mundësi të Reja për Sipërmarrësit',
-            'date' => '2024-11-17',
-            'category' => 'evente',
-            'image' => 'fotot/foto7.webp',
-            'description' => 'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" është nikoqir i një eventi madhor...',
-            'link' => 'post7-details.php'
-        ]
-    ];
+    class Post{
+        private $id;
+        private $title;
+        private $date;
+        private $category;
+        private $image;
+        private $description;
+        private $link;
+
+        public function __construct($id,$title,$date,$category,$image,$description,$link){
+            $this->id = $id;
+            $this->title = $title;
+            $this->date = $date;
+            $this->category = $category;
+            $this->image = $image;
+            $this->description = $description;
+            $this->link = $link;
+        }
+
+        public function getId(){return $this->id;}
+        public function getTitle(){return $this->title;}
+        public function getDate(){return $this->date;}
+        public function getCategory(){return $this->category;}
+        public function getImage(){return $this->image;}
+        public function getDescription(){return $this->description;}
+        public function getLink(){return $this->link;}
+    }
+
+    class PostManager{
+        private $posts = [];
+
+        public function addPost(Post $post){
+            return $this->posts[] = $post;
+        }
+
+        public function sortByTitle($ascending = true){
+            $titles=[];
+            foreach($this->posts as $index => $post){
+                $titles[$index] = $post->getTitle();
+            }
+
+            if($ascending){
+                asort($titles);
+            }
+            else{
+                arsort($titles);
+            }
+
+            $sorted = [];
+            foreach(array_keys($titles) as $index){
+                $sorted[] = $this->posts[$index];
+            }
+            $this->posts = $sorted;
+        }
+
+        public function sortByDate($newestFirst = true){
+            $dates = [];
+            foreach($this->posts as $index => $post){
+                $dates[$index] = strtotime($post->getDate());
+            }
+
+            if($newestFirst){
+                arsort($dates);
+            }
+            else{
+                asort($dates);
+            }
+
+            $sorted = [];
+            foreach(array_keys($dates) as $index){
+                $sorted[] = $this->posts[$index];
+            }
+            $this->posts = $sorted;
+        }
+
+        public function getAllPosts(){
+            return $this->posts;
+        }
+    }
+
+    $postManager = new PostManager();
+    $postManager->addPost(new Post(
+        1,
+        'Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)',
+        '2025-01-02',
+        'risi',
+        'fotot/foto1.webp',
+        'Në prag të sezonit dimëror, Aeroporti Ndërkombëtar i Prishtinës ka nisur një sërë përmirësimesh...',
+        'post1-details.php'));
+    $postManager->addPost(new Post(
+        2,
+        'Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare',
+        '2022-11-12',
+        'destinacionet',
+        'fotot/foto2.jpg',
+        'Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione të reja...',
+        'post2-details.php'));
+    $postManager->addPost(new Post(
+        3,
+        'Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës',
+        '2024-02-01',
+        'risi',
+        'fotot/foto3.webp',
+        'Aeroporti Ndërkombëtar i Prishtinës ka nisur një projekt ambicioz të quajtur "Green Airport"...',
+        'post3-details.php'));
+    $postManager->addPost(new Post(
+        4,
+        'Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar',
+        '2024-12-10',
+        'evente',
+        'fotot/foto4.jpg',
+        'Aeroporti i Prishtinës ka hapur dyert për një ngjarje të jashtëzakonshme...',
+        'post4-details.php'));
+    $postManager->addPost(new Post(
+        5,
+        'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"',
+        '2024-12-19',
+        'risi',
+        'fotot/foto5.webp',
+        'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës...',
+        'post5-details.php'));
+    $postManager->addPost(new Post(
+        6,
+        'Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët',
+        '2021-06-23',
+        'destinacionet',
+        'fotot/foto6.jpg',
+        'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" vazhdon të jetë pika kryesore...',
+        'post6-details.php'));
+    $postManager->addPost(new Post(
+        7,
+        'Aeroporti i Prishtinës Pret Forumin e Biznesit 2024: Mundësi të Reja për Sipërmarrësit',
+        '2024-11-17',
+        'evente',
+        'fotot/foto7.webp',
+        'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" është nikoqir i një eventi madhor...',
+        'post7-details.php'));
 
     $sort_method = $_GET['sort'] ?? 'date_desc';
 
     switch ($sort_method) {
         case 'title_asc':
-            $titles = [];
-            foreach ($posts as $index => $post) {
-                $titles[$index] = $post['title'];
-            }
-            asort(array: $titles);
-            
-            $sorted_posts = [];
-            foreach (array_keys($titles) as $index) {
-                $sorted_posts[] = $posts[$index];
-            }
-            $posts = $sorted_posts;
+            $postManager->sortByTitle(true);
             break;
-            
+
         case 'title_desc':
-            $titles = [];
-            foreach ($posts as $index => $post) {
-                $titles[$index] = $post['title'];
-            }
-            arsort($titles); 
-            
-            $sorted_posts = [];
-            foreach (array_keys($titles) as $index) {
-                $sorted_posts[] = $posts[$index];
-            }
-            $posts = $sorted_posts;
+            $postManager->sortByTitle(false);
             break;
             
         case 'date_asc':
-            $dated_posts = [];
-            foreach ($posts as $post) {
-                $dated_posts[strtotime($post['date'])] = $post;
-            }
-            ksort($dated_posts);
-            $posts = array_values($dated_posts);
+            $postManager->sortByDate(false);
             break;
             
         case 'date_desc':
         default:
-            $dated_posts = [];
-            foreach ($posts as $post) {
-                $dated_posts[strtotime($post['date'])] = $post;
-            }
-            krsort($dated_posts);
-            $posts = array_values($dated_posts);
+            $postManager->sortByDate(true);
             break;
     }
+    $posts = $postManager->getAllPosts();
     ?>
 
     <div class="sort-buttons">
@@ -208,12 +248,12 @@
 
     <section class="postet">
         <?php foreach ($posts as $post): ?>
-            <div class="post-box <?= $post['category'] ?>">
-                <img src="<?= $post['image'] ?>" alt="" class="post-img">
-                <h2 class="kategoria"><?= ucfirst($post['category']) ?></h2>
-                <a href="<?= $post['link'] ?>" class="post-titulli"><?= $post['title'] ?></a>
-                <span class="post-date"><?= date('d M Y', strtotime($post['date'])) ?></span>
-                <p class="post-pershkrimi"><?= $post['description'] ?></p>
+            <div class="post-box <?= $post->getCategory() ?>">
+                <img src="<?= $post->getImage() ?>" alt="" class="post-img">
+                <h2 class="kategoria"><?= ucfirst($post->getCategory()) ?></h2>
+                <a href="<?= $post->getLink() ?>" class="post-titulli"><?= $post->getTitle() ?></a>
+                <span class="post-date"><?= date('d M Y', strtotime($post->getDate())) ?></span>
+                <p class="post-pershkrimi"><?= $post->getDescription() ?></p>
             </div>
         <?php endforeach; ?>
     </section>

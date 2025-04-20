@@ -15,6 +15,6 @@ function changeBg() {
 window.addEventListener("scroll", changeBg);
 
 document.querySelector(".image").addEventListener("click", function () {
-    window.location.href = "index.html";
+    window.location.href = "/UEB25_GR3/index.php";
 });
-document.querySelector(".image").style.cursor = "pointer";
+document.querySelector(".image").style.cursor = "pointer";  

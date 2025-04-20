@@ -31,24 +31,44 @@
             <audio id="easterAudio" src="MOV_0.mp3"></audio>
         </div>
 
+        <?php 
+            class Flashcard{
+                private $path;
+                private $text;
+                private $title;
+
+                function __construct($path, $title, $text){
+                    $this->path = $path;
+                    $this->title = $title;
+                    $this->text = $text;
+                }
+
+                function getPath(){
+                    return $this->path;
+                }
+                function getTitle(){
+                    return $this->title;
+                }
+                function getText(){
+                    return $this->text;
+                }
+            }
+
+            $flashcards = [
+                new Flashcard("/UEB25_GR3/Photos/Home/flash-airplane.png", "Pse ne?", "Ofrimi i shërbimit të shkëlqyer dhe një staf i trajnuar sigurojnë udhëtime të sigurta dhe komode. Zgjedhja jonë do t'ju bëjë të ndiheni të sigurt dhe të kënaqur gjatë çdo udhëtimi."),
+                new Flashcard("/UEB25_GR3/Photos/Home/flash-luggage.png", "Siguria?", "Siguria është prioriteti ynë kryesor. Përdorimi i teknologjive moderne dhe masave të rrepta na mundëson të sigurojmë udhëtime të sigurta dhe pa shqetësime për çdo udhëtar."),
+                new Flashcard("/UEB25_GR3/Photos/Home/flash-location.png", "Destinacionet?", "Ofrimi i fluturimeve për destinacione të ndryshme anembanë botës. Ne lidhim qytete të njohura dhe mundësojmë udhëtime të paharrueshme për çdo udhëtar.")
+            ];
+        ?>
+
         <section class="flash-cards">
-            <div class="flashcard" id="first-flashcard">
-                <img src="/UEB25_GR3/Photos/Home/flash-airplane.png" alt="">
-                <h2>Pse ne?</h2>
-                <p>Ofrimi i shërbimit të shkëlqyer dhe një staf i trajnuar sigurojnë udhëtime të sigurta dhe komode. Zgjedhja jonë do t'ju bëjë të ndiheni të sigurt dhe të kënaqur gjatë çdo udhëtimi.</p>
-            </div>
-    
-            <div class="flashcard" id="second-flashcard">
-                <img src="/UEB25_GR3/Photos/Home/flash-luggage.png" alt="">
-                <h2>Siguria?</h2>
-                <p>Siguria është prioriteti ynë kryesor. Përdorimi i teknologjive moderne dhe masave të rrepta na mundëson të sigurojmë udhëtime të sigurta dhe pa shqetësime për çdo udhëtar.</p>
-            </div>
-    
-            <div class="flashcard" id="third-flashcard">
-                <img src="/UEB25_GR3/Photos/Home/flash-location.png" alt="">
-                <h2>Destinacionet?</h2>
-                <p>Ofrimi i fluturimeve për destinacione të ndryshme anembanë botës. Ne lidhim qytete të njohura dhe mundësojmë udhëtime të paharrueshme për çdo udhëtar.</p>
-            </div>
+            <?php foreach($flashcards as $flashcard): ?>
+                <div class="flashcard" id="first-flashcard">
+                    <img src="<?php echo $flashcard->getPath()?>" alt="">
+                    <h2><?php echo $flashcard->getTitle()?></h2>
+                    <p><?php echo $flashcard->getText() ?></p>
+                </div>
+            <?php endforeach; ?>
         </section>
     </header>
 

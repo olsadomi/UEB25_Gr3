@@ -1,3 +1,33 @@
+<?php
+$GLOBALS['siteName'] = "PIA";
+
+$airlines = [
+    "Austrian Airlines",
+    "Ryanair Airlines",
+    "Swiss Airlines",
+    "Air France Airlines",
+    "Lufthansa Airlines",
+    "British Airways",
+    "Virgin Atlantic Airlines"
+];
+
+$email = "";
+$emailError = "";
+$successMsg = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST["nl-email"]);
+
+    if (!preg_match("/^[^0-9][a-zA-Z0-9\.\-\_]+@[a-zA-Z]+\.[a-z]+$/", $email)) {
+        $emailError = "Please enter a valid email address.";
+    } else {
+        $successMsg = "You have successfully subscribed!";
+    }
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +36,10 @@
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <!-- google fonts link per icon ne swiper -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
     <!-- link per Swiper JS CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="aboutus.css">
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="nav.css">
@@ -28,7 +59,8 @@
         </div>
         <div class="titulli-aboutus">
             <h3>Rreth Nesh</h3>
-            <p>Mirë se vini në <b>PIA</b>, porta juaj drejt udhëtimeve të lehta dhe <em>përvojave të paharrueshme</em>
+            <p>Mirë se vini në <b><?php echo $GLOBALS['siteName']; ?></b>, porta juaj drejt udhëtimeve të lehta dhe
+                <em>përvojave të paharrueshme</em>
             </p>
         </div>
     </div>
@@ -77,27 +109,27 @@
                             ndërkombëtare.</p>
                     </div>
                 </div>
-                
-                    <div class="stats-card flip3D">
-                        <div class="front-x"><img src="card-2-aboutus.png"></div>
-                        <div class="back-x">
-                            <p>Aeroporti ofron fluturime drejt 28 destinacioneve në 14 shtete,
-                                duke lidhur Kosovën me qytetet kryesore të Evropës dhe të Lindjes së Mesme.
-                                Kjo rrjetë fluturimesh i mundëson udhëtarëve një gamë të gjerë mundësish për udhëtime
-                                ndërkombëtare.</p>
-                        </div>
+
+                <div class="stats-card flip3D">
+                    <div class="front-x"><img src="card-2-aboutus.png"></div>
+                    <div class="back-x">
+                        <p>Aeroporti ofron fluturime drejt 28 destinacioneve në 14 shtete,
+                            duke lidhur Kosovën me qytetet kryesore të Evropës dhe të Lindjes së Mesme.
+                            Kjo rrjetë fluturimesh i mundëson udhëtarëve një gamë të gjerë mundësish për udhëtime
+                            ndërkombëtare.</p>
                     </div>
-                    <div class="stats-card flip3D">
-                        <div class="front-x"><img src="card-3-aboutus.png"></div>
-                        <div class="back-x">
-                            <p>Me një terminal modern dhe infrastrukturë të avancuar,
-                                Aeroporti është projektuar për të akomoduar deri në 5 milionë pasagjerë çdo vit.
-                                Ky kapacitet i lartë siguron shërbime efikase dhe rritje të vazhdueshme të fluksit të
-                                udhëtarëve.
-                            </p>
-                        </div>
+                </div>
+                <div class="stats-card flip3D">
+                    <div class="front-x"><img src="card-3-aboutus.png"></div>
+                    <div class="back-x">
+                        <p>Me një terminal modern dhe infrastrukturë të avancuar,
+                            Aeroporti është projektuar për të akomoduar deri në 5 milionë pasagjerë çdo vit.
+                            Ky kapacitet i lartë siguron shërbime efikase dhe rritje të vazhdueshme të fluksit të
+                            udhëtarëve.
+                        </p>
                     </div>
-                
+                </div>
+
             </div>
         </div>
     </div>
@@ -158,7 +190,8 @@
                     </a>
                 </li>
                 <li class="card-item swiper-slide">
-                    <a href="https://www.britishairways.com/travel/home/public/en_us/" class="card-link" target="_blank">
+                    <a href="https://www.britishairways.com/travel/home/public/en_us/" class="card-link"
+                        target="_blank">
                         <img src="british-airways.jpg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">British Airways</p>
                         <h2 class="card-title">Eksperiencë unike udhëtimi me British Airways.</h2>
@@ -195,7 +228,7 @@
 
                     <div class="faq-answer">
                         Mund të gjeni sportelin tuaj për check-in në tabelat e informacionit,
-                         ku do të shfaqet avioni dhe numri i sportelit. 
+                        ku do të shfaqet avioni dhe numri i sportelit.
                         Po ashtu, stafi i aeroportit mund t'ju ndihmojë nëse keni nevojë.
                         <button class="faq-btn-close">&minus;</button>
                     </div>
@@ -206,7 +239,8 @@
                         <button class="faq-btn-open">&plus;</button>
                     </div>
 
-                    <div class="faq-answer">Kufiri i peshës për bagazh ndryshon në varësi të linjës ajrore dhe klasës së biletës. 
+                    <div class="faq-answer">Kufiri i peshës për bagazh ndryshon në varësi të linjës ajrore dhe klasës së
+                        biletës.
                         Kontrolloni me kompaninë tuaj ajrore për detajet specifike mbi peshën e lejuar të bagazhit.
                         <button class="faq-btn-close">&minus;</button>
                     </div>
@@ -219,7 +253,8 @@
                     </div>
 
                     <div class="faq-answer">Lëngjet janë të lejuara në bagazhin e dorës vetëm nëse janë të paketuara
-                         në shishe me kapacitet deri në 100 ml dhe janë vendosur në një qese plastike të pastër dhe të mbyllur.
+                        në shishe me kapacitet deri në 100 ml dhe janë vendosur në një qese plastike të pastër dhe të
+                        mbyllur.
                         <button class="faq-btn-close">&minus;</button>
                     </div>
 
@@ -231,11 +266,12 @@
                         <button class="faq-btn-open">&plus;</button>
                     </div>
 
-                    <div class="faq-answer">Në rast se fluturimi juaj është vonuar, kontaktoni stafin e kompanisë ajrore për të marrë informacion 
+                    <div class="faq-answer">Në rast se fluturimi juaj është vonuar, kontaktoni stafin e kompanisë ajrore
+                        për të marrë informacion
                         rreth mundësive të ndryshme, përfshirë akomodimin dhe mundësitë e kalimit në fluturime të tjera.
                         <button class="faq-btn-close">&minus;</button>
                     </div>
-                
+
                 </div>
 
             </div>
@@ -251,7 +287,7 @@
     <div class="abonohu">
         <div class="abonohu-text">Abonohu në </div>
         <button class="abonohu-btn" onclick="popupFn()">Newsletter</button>
-        
+
     </div>
 
 
@@ -270,10 +306,17 @@
                 ofertat speciale, shërbimet e aeroportit,
                 këshilla udhëtimi dhe shumë më tepër. Qëndro i informuar dhe bëje përvojën tënde në aeroport më të lehtë
                 dhe më të këndshme.</p>
-            <form>
+            <form method="post">
                 <label for="nl-email">Enter your email:</label><br>
-                <input type="email" name="nl-email" placeholder="Enter email..." />
+                <input type="email" name="nl-email" placeholder="Enter email..."
+                    value="<?php echo htmlspecialchars($email); ?>" />
                 <button class="subscribe-btn" type="submit">Abonohu</button>
+                <br>
+                <?php if (!empty($emailError)): ?>
+                    <span style="color: red;"><?php echo $emailError; ?></span>
+                <?php elseif (!empty($successMsg)): ?>
+                    <span style="color: green;"><?php echo $successMsg; ?></span>
+                <?php endif; ?>
             </form>
         </div>
     </div>
@@ -282,10 +325,21 @@
 
     <div id="footer-placeholder"></div>
 
-    
+
     <!-- Swiper JS script -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="about_us.js"></script>
+
+    <?php if (!empty($emailError)): ?>
+        <script>
+            alert("<?php echo $emailError; ?>");
+        </script>
+    <?php elseif (!empty($successMsg)): ?>
+        <script>
+            alert("<?php echo $successMsg; ?>");
+        </script>
+    <?php endif; ?>
+    
 </body>
 
 </html>

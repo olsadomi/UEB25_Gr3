@@ -493,6 +493,7 @@
         <p>Vlerësimi juaj: <span id="rating-value">0</span> yje</p>
     </section>
 
+    <script src="/UEB25_GR3/script/services.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -583,7 +584,7 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="sevices.js"></script>
+  
 
 
 </body>

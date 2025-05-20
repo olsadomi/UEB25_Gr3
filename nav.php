@@ -25,6 +25,6 @@
         </div>
     </nav>
 
-    <script src="/UEB25_GR3/script/nav.js"></script>
+    <script src="/UEB25_GR3/script/nav.js?v=2"></script>
 </body>
 </html>

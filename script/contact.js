@@ -28,15 +28,5 @@ function validateLogin() {
     return true;
 }
 
-function validateEmail() {
-    const emailInput = document.getElementById('email').value;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-    if (emailInput.match(emailRegex)) {
-        alert('Email është i vlefshëm!');
-    } else {
-        alert('Ju lutem vendosni një email të vlefshëm.');
-    }
-}
-
 
   

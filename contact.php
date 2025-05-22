@@ -119,6 +119,9 @@
                     <input type="text" id="surname" name="surname" minlength="2" maxlength="20" required
                         placeholder="Shkruani mbiemrin tuaj..."><br>
 
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Email-adresa juaj..."><br>
+
                     <label for="phone">Numri i telefonit:</label>
                     <input type="tel" id="phone" name="phone" placeholder="Numri juaj i telefonit...">
                 </div>

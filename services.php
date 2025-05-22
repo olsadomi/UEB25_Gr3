@@ -83,17 +83,21 @@
     // ZEVENDESIMI ME PERDORIMIN E SESSIONS
     
     session_start();
-
-    if (!isset($_SESSION['visit_count'])) {
-        $_SESSION['visit_count'] = 0;
+    function visitsCounter()
+    {
+        if (!isset($_SESSION['services_visits'])) {
+            $_SESSION['services_visits'] = 0;
+        }
+        $_SESSION['services_visits']++;
+        return $_SESSION['services_visits'];
     }
 
-    $_SESSION['visit_count']++;
-    $count = $_SESSION['visit_count'];
+    $count = visitsCounter();
+
     if ($count % 5 == 0) {
-        $message = "RASTI SPECIAL! Po e vizitoni këtë faqe për herë të {$_SESSION['visit_count']} përgjatë kohëve të fundit 😄 Faleminderit për vizitën!";
+        $message = "RASTI SPECIAL! Po e vizitoni këtë faqe për herë të $count-të përgjatë kohëve të fundit 😄 Faleminderit për vizitën!";
     } else {
-        $message = "Po e vizitoni këtë faqe për herë të {$_SESSION['visit_count']} gjatë kësaj kohe. Po ju pëlqen vallë? 😄 Mirë se vini!";
+        $message = "Po e vizitoni këtë faqe për herë të $count-të gjatë kësaj kohe. Po ju pëlqen vallë? 😄 Mirë se vini!";
     }
     ?>
 

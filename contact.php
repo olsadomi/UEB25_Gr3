@@ -51,6 +51,7 @@
     </section>
 
     <?php
+    //custom exception
     class CustomValidationException extends Exception
     {
     }

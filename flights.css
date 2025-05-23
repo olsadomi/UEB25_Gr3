@@ -153,8 +153,8 @@ html {
  }
  
  #srchArr,
- #selectdatearr,
- #selectdatedep,
+ #arr_status,
+ #dep_status,
  #srchDep {
     background-color: white;
  }

@@ -286,7 +286,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="abonohu">
         <div class="abonohu-text">Abonohu në </div>
-        <button class="abonohu-btn" onclick="popupFn()">Newsletter</button>
+        <button id="newsletter" class="abonohu-btn" onclick="popupFn()">Newsletter</button>
 
     </div>
 

@@ -1,9 +1,61 @@
 <?php
 global $airportName;
 $airportName = "Prishtina International Airport";
+
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/helpers/flight_helpers.php';
+require_once __DIR__ . '/helpers/cache_helpers.php';
+
+
+initCache();
+
+$arrivals = getFlightsWithCache('arrivals');
+$departures = getFlightsWithCache('departures');
+
+if (empty($arrivals)) {
+    $arrivals = [
+        [
+            'flight_number' => 'N/A',
+            'airline' => 'No flights available',
+            'origin' => 'N/A',
+            'scheduled_time' => '--:--',
+            'status' => 'No data',
+            'terminal' => 'N/A'
+        ],
+        [
+            'flight_number' => 'PR999',
+            'airline' => 'Placeholder Airlines',
+            'origin' => 'Example City',
+            'scheduled_time' => '12:00',
+            'status' => 'On time',
+            'terminal' => 'T1'
+        ]
+    ];
+}
+
+if (empty($departures)) {
+    $departures = [
+        [
+            'flight_number' => 'N/A',
+            'airline' => 'No flights scheduled',
+            'destination' => 'N/A',
+            'scheduled_time' => '--:--',
+            'status' => 'No data',
+            'terminal' => 'N/A'
+        ],
+        [
+            'flight_number' => 'PR888',
+            'airline' => 'Placeholder Airlines',
+            'destination' => 'Sample Destination',
+            'scheduled_time' => '15:30',
+            'status' => 'Delayed',
+            'terminal' => 'T2'
+        ]
+    ];
+}
 ?>
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +67,7 @@ $airportName = "Prishtina International Airport";
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="footer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
 </head>
@@ -26,24 +78,29 @@ $airportName = "Prishtina International Airport";
 
     <header id="flights-header">
         <div class="header">
-        
-        <?php
-class Greeting {
-    public function getGreeting() {
-        $hour = date("H");
-        if ($hour < 12) return "Mirëmëngjes!";
-        elseif ($hour < 18) return "Mirëdita!";
-        else return "Mirëmbrëma!";
-    }
-}
 
-$greeter = new Greeting();
-?>
+            <?php
+            class Greeting
+            {
+                public function getGreeting()
+                {
+                    $hour = date("H");
+                    if ($hour < 12)
+                        return "Mirëmëngjes!";
+                    elseif ($hour < 18)
+                        return "Mirëdita!";
+                    else
+                        return "Mirëmbrëma!";
+                }
+            }
+
+            $greeter = new Greeting();
+            ?>
 
             <div class="greeting">
-            <h2 id="title1">Fluturimet</h2>
-            <h2 id="greetingText"><?php echo $greeter->getGreeting(); ?></h2>
-          
+                <h2 id="title1">Fluturimet</h2>
+                <h2 id="greetingText"><?php echo $greeter->getGreeting(); ?></h2>
+
             </div>
             <h1 class="header" id="title2">Informatat</h1>
             <p class="header" id="tekst">Informacioni i fluturimit në <mark>kohë reale</mark> jepet si tregues dhe është
@@ -79,19 +136,22 @@ $greeter = new Greeting();
                                 </g>
                             </svg>
                         </div>
-                        <h2 id="title3">Arrivals</h2>
+                        <h2 id="title3">Mberritjet</h2>
                     </div>
                 </div>
             </div>
 
             <div class="search" id="box2">
                 <div class="search" id="Date">
-                    <label style="margin-right: 5px;">Dita</label>
-                    <select id="selectdatearr">
-                        <option value="">All</option>
-                        <option value="today">Today</option>
-                        <option value="tomorrow">Tomorrow</option>
-                    </select>
+                    <form method="get">
+                        <select id="arr_status" onchange="filterArrivals()">
+                            <option value="">Të Gjitha</option>
+                            <option value="landed">Të ardhura</option>
+                            <option value="scheduled">Të planifikuara</option>
+                            <option value="other">Të tjera</option>
+                        </select>
+                    </form>
+
                 </div>
                 <div class="search">
                     <label style="margin-right: 5px;">Kerko</label>
@@ -105,261 +165,75 @@ $greeter = new Greeting();
                             <li>
                                 <div id="tabletitle">
                                     <ul>
-                                        <li>Time</li>
-                                        <li>Date</li>
-                                        <li>Origin</li>
+                                        <li>Koha</li>
+                                        <li>Data</li>
+                                        <li>Origjina</li>
                                         <li>Airline</li>
-                                        <li>Flight no.</li>
-                                        <li>Status</li>
+                                        <li>Nr. Fluturimi</li>
+                                        <li>Statusi</li>
                                         <li></li>
-
                                     </ul>
                                 </div>
                             </li>
                             <li>
+                                <?php
+                                usort($arrivals, function ($a, $b) {
+                                    $timeA = strtotime($a['arrival']['estimated'] ?? $a['arrival']['scheduled'] ?? '');
+                                    $timeB = strtotime($b['arrival']['estimated'] ?? $b['arrival']['scheduled'] ?? '');
+                                    if ($timeA === false && $timeB === false)
+                                        return 0;
+                                    if ($timeA === false)
+                                        return 1;
+                                    if ($timeB === false)
+                                        return -1;
 
-<?php
-    $arrivalsfno = ["W4 5026", "W4 5022", "W4 5044", "W4 50443", "OS 849", "W4 5084" , "W9 5006", "FR 8398", "LX 1442" , "EW 9916"];
-    $arrivalsVal = array();
+                                    return $timeA - $timeB;
+                                });
+                                ?>
 
-    foreach ($arrivalsfno as $flightno) {
-        $isValid = preg_match('/^[A-Z0-9]{2}\s?[0-9]{3,4}$/', $flightno);
-        $message = $isValid 
-            ? "Numri i fluturimit është valid." 
-            : "Numri i fluturimit nuk është valid.";
-    
-        array_push($arrivalsVal, $message);
-    };
-?>
+                                <?php
+                                $arrivals = getFlightsWithCache('arrivals');
 
-
-
-                                <ul class="flights-box-arr" data-date="today">
-                                    <li>00:05</li>
-                                    <li>02/01/2025</li>
-                                    <li>Milan Malpensa(IT)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[0]'>$arrivalsfno[0]</span>"?></li>
-                                    <li>Landed</li>
-                                    <div id="btnli">
-                                        <li><a href="#"
-                                                data-details='{"title": "Flight Details: W4 5026", "details": "Departed at 10:00 PM,\nFrom: Terminal 2", "scheduled": "Scheduled arrival time: January 2, 2025 \nAt: 0:05", "countryFrom": "From: Italy , Milan Malpensa(MIX)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn">
-                                                            <img src="Photos/Home/info-flights.png" alt="Info">
-                                                        </button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                $statusFilter = $_GET['status'] ?? '';
+                                if ($statusFilter !== '') {
+                                    $arrivals = array_filter($arrivals, function ($flight) use ($statusFilter) {
+                                        return strtolower($flight['flight_status'] ?? '') === strtolower($statusFilter);
+                                    });
+                                }
+                                usort($arrivals, function ($a, $b) {
+                                    $timeA = strtotime($a['arrival']['estimated'] ?? $a['arrival']['scheduled'] ?? '');
+                                    $timeB = strtotime($b['arrival']['estimated'] ?? $b['arrival']['scheduled'] ?? '');
+                                    return $timeA <=> $timeB;
+                                });
+                                ?>
 
 
-                                <ul class="flights-box-arr" data-date="tomorrow">
-                                    <li>00:05</li>
-                                    <li>02/01/2025</li>
-                                    <li>Milan Bergamo (IT)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[1]'>$arrivalsfno[1]</span>"?> 
-                                    <li>On-Route</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: W4 5022", "details": "Departed at 10:00 PM,\nFrom: Terminal 1", "scheduled": "Scheduled arrival time: January 2, 2025 \nAt: 0:08", "countryFrom": "From: Italy , Milan Bergamo(BGY)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-
-                                <ul class="flights-box-arr" data-date="today">
-                                    <li>00:27</li>
-                                    <li>02/01/2025</li>
-                                    <li>Brindisi(IT)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[2]'>$arrivalsfno[2]</span>"?></li>
-                                    <li>On-Route</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: W4 5044", "details": "Departed at 10:30 PM,\nFrom: Terminal 4", "scheduled": "Scheduled arrival time: January 2, 2025 \nAt: 0:27", "countryFrom": "From: Italy, Brindisi(BDS)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-
-                                <ul class="flights-box-arr" data-date="today">
-                                    <li>00:30</li>
-                                    <li>02/01/2025</li>
-                                    <li>Bari(IT)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[3]'>$arrivalsfno[3]</span>"?></li>
-                                    <li>Cancelled</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: W4 5044", "details": "Departed at --:-- PM,\nFrom: Terminal --", "scheduled": "Scheduled arrival time: --:--", "countryFrom": "Status: Cancelled", "countryDestination": "Contact for more information."}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                        </li>
-                                        </a>
-                                    </div>
-                                </ul>
-
-
-                                <ul class="flights-box-arr" data-date="today">
-                                    <li>00:50</li>
-                                    <li>02/01/2025</li>
-                                    <li>Vienna/Vjene(IT)</li>
-                                    <li>AUSTRIAN AIRLINES AG</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[4]'>$arrivalsfno[4]</span>"?></li>
-                                    <li>Landed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: OS 849", "details": "Departed at 11:15 PM,\nFrom: Terminal 6", "scheduled": "Scheduled arrival time: January 2, 2025 \nAt: 0:50", "countryFrom": "From: Austria, Vienna/Vjene (VIE)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-arr" data-date="today">
-                                    <li>00:20</li>
-                                    <li>05/01/2025</li>
-                                    <li>Genoa(IT)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[5]'>$arrivalsfno[5]</span>"?></li>
-                                    <li>Landed</li>
-                                    <div id="btnli">
-                                        <li><a href="#"
-                                                data-details='{"title": "Flight Details: W4 5084", "details": "Departed at 11:00 PM,\nFrom: Terminal 5", "scheduled": "Scheduled arrival time: January 5, 2025 \nAt: 0:20", "countryFrom": "From: Italy , Genoa(GOA)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn">
-                                                            <img src="Photos/Home/info-flights.png" alt="Info">
-                                                        </button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-arr" data-date="tomorrow">
-                                    <li>02:45</li>
-                                    <li>05/01/2025</li>
-                                    <li>London Luton(GB)</li>
-                                    <li>Wizz Air UK</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[6]'>$arrivalsfno[6]</span>"?></li>
-                                    <li>Landed</li>
-                                    <div id="btnli">
-                                        <li><a href="#"
-                                                data-details='{"title": "Flight Details: W9 5006", "details": "Departed at 12:00 AM,\nFrom: Terminal 4", "scheduled": "Scheduled arrival time: January 5, 2025 \nAt: 2:45", "countryFrom": "From: United Kingdom , London Luton(LTN)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn">
-                                                            <img src="Photos/Home/info-flights.png" alt="Info">
-                                                        </button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-arr" data-date="today">
-                                    <li>07:25</li>
-                                    <li>05/01/2025</li>
-                                    <li>Bologna/Bolonje(IT)</li>
-                                    <li>Ryanair</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[7]'>$arrivalsfno[7]</span>"?></li>
-                                    <li>Delayed</li>
-                                    <div id="btnli">
-                                        <li><a href="#"
-                                                data-details='{"title": "Flight Details: FR 8398", "details": "Departed at 4:30 AM,\nFrom: Terminal 1", "scheduled": "Scheduled arrival time: January 5, 2025 \nAt: 7:25", "countryFrom": "From: Italy , Bologna/Bolonje(BLQ)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn">
-                                                            <img src="Photos/Home/info-flights.png" alt="Info">
-                                                        </button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-arr" data-date="tomorrow">
-                                    <li>08:55</li>
-                                    <li>05/01/2025</li>
-                                    <li>Zurich(CH)</li>
-                                    <li>SWISS International Airlines</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[8]'>$arrivalsfno[8]</span>"?></li>
-                                    <li>On-Route</li>
-                                    <div id="btnli">
-                                        <li><a href="#"
-                                                data-details='{"title": "Flight Details: LX 1442", "details": "Departed at 5:45 AM,\nFrom: Terminal 2", "scheduled": "Scheduled arrival time: January 5, 2025 \nAt: 8:25", "countryFrom": "From: Switzerland , Zurich (ZRH)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn">
-                                                            <img src="Photos/Home/info-flights.png" alt="Info">
-                                                        </button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-arr" data-date="tomorrow">
-                                    <li>10:30</li>
-                                    <li>05/01/2025</li>
-                                    <li>Duseldorf(DE)</li>
-                                    <li>EUROWINGS</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$arrivalsVal[9]'>$arrivalsfno[9]</span>"?></li>
-                                    <li>On-Route</li>
-                                    <div id="btnli">
-                                        <li><a href="#"
-                                                data-details='{"title": "Flight Details: EW 9916", "details": "Departed at 7:25 AM,\nFrom: Terminal 9", "scheduled": "Scheduled arrival time: January 5, 2025 \nAt: 10:30", "countryFrom": "From: Germany , Duseldorf(DUS)", "countryDestination": "To: Kosovo, Prishtina(PIA)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn">
-                                                            <img src="Photos/Home/info-flights.png" alt="Info">
-                                                        </button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                            </li>
-                        </ul>
+                                <?php foreach ($arrivals as $flight): ?>
+                                    <ul class="flights-box-arr"
+                                        data-status="<?= strtolower($flight['flight_status'] ?? '') ?>"
+                                        data-date="<?= getFlightDateType($flight['arrival']['scheduled']) ?>">
+                                        <li><?= formatFlightTime($flight['arrival']['scheduled']) ?></li>
+                                        <li><?= formatFlightDate($flight['arrival']['scheduled']) ?></li>
+                                        <li><?= htmlspecialchars($flight['departure']['airport'] ?? 'N/A') ?>
+                                            (<?= $flight['departure']['iata'] ?? '' ?>)</li>
+                                        <li><?= htmlspecialchars($flight['airline']['name'] ?? 'N/A') ?></li>
+                                        <li><?= $flight['flight']['iata'] ?? 'N/A' ?></li>
+                                        <li><?= translateFlightStatus($flight['flight_status'] ?? '') ?></li>
+                                        <div id="btnli">
+                                            <li>
+                                                <a href="#" data-details='<?= getFlightDetailsJson($flight) ?>'>
+                                                    <span class="linkdetails">
+                                                        <div id="linkbtn">
+                                                            <button class="view-details-btn">
+                                                                <img src="Photos/Home/info-flights.png" alt="Info">
+                                                            </button>
+                                                        </div>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -387,19 +261,21 @@ $greeter = new Greeting();
                                 </g>
                             </svg>
                         </div>
-                        <h2 id="title3">Departures</h2>
+                        <h2 id="title3">Nisjet</h2>
                     </div>
                 </div>
             </div>
 
             <div class="search" id="box2">
                 <div class="search" id="Date">
-                    <label style="margin-right: 5px;">Dita</label>
-                    <select id="selectdatedep">
-                        <option value="">All</option>
-                        <option value="today">Today</option>
-                        <option value="tomorrow">Tomorrow</option>
-                    </select>
+                    <form method="GET" id="filterForm">
+                        <select id="dep_status" onchange="filterDepartures()">
+                            <option value="">Të Gjitha</option>
+                            <option value="active">Të nisura</option>
+                            <option value="scheduled">Të planifikuara</option>
+                            <option value="other">Të tjera</option>
+                        </select>
+                    </form>
                 </div>
                 <div class="search">
                     <label style="margin-right: 5px;">Kerko</label>
@@ -414,12 +290,12 @@ $greeter = new Greeting();
                             <li>
                                 <div id="tabletitle">
                                     <ul>
-                                        <li>Time</li>
-                                        <li>Date</li>
-                                        <li>Origin</li>
+                                        <li>Koha</li>
+                                        <li>Data</li>
+                                        <li>Origjin</li>
                                         <li>Airline</li>
-                                        <li>Flight no.</li>
-                                        <li>Status</li>
+                                        <li>Nr. Fluturimi</li>
+                                        <li>Statusi</li>
                                         <div id="btnli">
                                             <li>
                                             </li>
@@ -428,255 +304,100 @@ $greeter = new Greeting();
                                 </div>
                             </li>
                             <li>
-<?php
-    $departuresfno = ["PC 284", "W9 5006", "OS 850" , "W4 5131", "W4 5101", "W4 5036", "W4 5137", "FR 8418", "W4 5131", "FR 6889"];
+                                <?php
+                                usort($departures, function ($a, $b) {
+                                    $now = time();
+                                    $timeA = strtotime($a['departure']['estimated'] ?? $a['departure']['scheduled'] ?? '');
+                                    $timeB = strtotime($b['departure']['estimated'] ?? $b['departure']['scheduled'] ?? '');
 
-    
-    $departuresVal = array();
+                                    if ($timeA === false && $timeB === false)
+                                        return 0;
+                                    if ($timeA === false)
+                                        return 1;
+                                    if ($timeB === false)
+                                        return -1;
 
-    foreach ($departuresfno as $flightno) {
-        $isValid = preg_match('/^[A-Z0-9]{2}\s?[0-9]{3,4}$/', $flightno);
-        $message = $isValid 
-            ? "Numri i fluturimit është valid." 
-            : "Numri i fluturimit nuk është valid.";
-    
-        array_push($departuresVal, $message);
-    };
+                                    $isFutureA = $timeA >= $now;
+                                    $isFutureB = $timeB >= $now;
 
+                                    if ($isFutureA && !$isFutureB)
+                                        return -1;
+                                    if (!$isFutureA && $isFutureB)
+                                        return 1;
+                                    return abs($timeA - $now) <=> abs($timeB - $now);
+                                });
+                                ?>
 
-?>
-                                <ul class="flights-box-dep" data-date="today">
-                                    <li>02:25</li>
-                                    <li>20/12/2024</li>
-                                    <li>Sabiha Gokcen Intl.</li>
-                                    <li>Pegasus Airlines</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[0]'>$departuresfno[0]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 6889", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 04 ", "scheduled": "Scheduled Departure at 09:55 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Austria , Vienna/Vjene(VIE)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                <?php
+                                $filteredDepartures = $departures;
 
+                                if (isset($_GET['dep_status']) && $_GET['dep_status'] !== '') {
+                                    $filter = $_GET['dep_status'];
+                                    $filteredDepartures = array_filter($departures, function ($flight) use ($filter) {
+                                        $status = strtolower($flight['flight_status'] ?? '');
 
-                                <ul class="flights-box-dep" data-date="tomorrow">
-                                    <li>04:00</li>
-                                    <li>20/12/2024</li>
-                                    <li>London Luton (GB)</li>
-                                    <li>Wizz Air UK</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[1]'>$departuresfno[1]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 6889", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 04 ", "scheduled": "Scheduled Departure at 09:55 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Austria , Vienna/Vjene(VIE)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                        if ($filter === 'other') {
+                                            return !in_array($status, ['active', 'scheduled']);
+                                        }
 
+                                        return $status === $filter;
+                                    });
 
-                                <ul class="flights-box-dep" data-date="today">
-                                    <li>06:00</li>
-                                    <li>20/12/2024</li>
-                                    <li>Cienna/Vjene (AT)</li>
-                                    <li>Austrian Airlines AG</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[2]'>$departuresfno[2]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 6889", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 04 ", "scheduled": "Scheduled Departure at 09:55 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Austria , Vienna/Vjene(VIE)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                    usort($filteredDepartures, function ($a, $b) {
+                                        $now = time();
+                                        $timeA = strtotime($a['departure']['estimated'] ?? $a['departure']['scheduled'] ?? '');
+                                        $timeB = strtotime($b['departure']['estimated'] ?? $b['departure']['scheduled'] ?? '');
 
+                                        if ($timeA === false && $timeB === false)
+                                            return 0;
+                                        if ($timeA === false)
+                                            return 1;
+                                        if ($timeB === false)
+                                            return -1;
 
-                                <ul class="flights-box-dep" data-date="today">
-                                    <li>06:00</li>
-                                    <li>20/12/2024</li>
-                                    <li>Brussels Charleroi(BE)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[3]'>$departuresfno[3]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 6889", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 04 ", "scheduled": "Scheduled Departure at 09:55 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Austria , Vienna/Vjene(VIE)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                        $isFutureA = $timeA >= $now;
+                                        $isFutureB = $timeB >= $now;
 
+                                        if ($isFutureA && !$isFutureB)
+                                            return -1;
+                                        if (!$isFutureA && $isFutureB)
+                                            return 1;
+                                        return abs($timeA - $now) <=> abs($timeB - $now);
+                                    });
+                                }
+                                ?>
 
-                                <ul class="flights-box-dep" data-date="tomorrow">
-                                    <li>06:05</li>
-                                    <li>20/12/2024</li>
-                                    <li>Dortmund(DE)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[4]'>$departuresfno[4]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 6889", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 04 ", "scheduled": "Scheduled Departure at 09:55 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Austria , Vienna/Vjene(VIE)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                <div id="departure-results">
+                                    <?php foreach ($filteredDepartures as $flight): ?>
 
-                                <ul class="flights-box-dep" data-date="today">
-                                    <li>06:50</li>
-                                    <li>05/01/2025</li>
-                                    <li>Treviso(IT)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[5]'>$departuresfno[5]</span>"?></li>
-                                    <li>Delayed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: W4 5046", "details": "Check-in From: Desk 20, \nCheck-in to: Desk 26, \nGate: 04 ", "scheduled": "Scheduled Departure at 06:50 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Italy , Treviso(TSF)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
+                                        <ul class="flights-box-dep"
+                                            data-status="<?= strtolower($flight['flight_status'] ?? '') ?>"
+                                            data-date="<?= getFlightDateType($flight['departure']['scheduled']) ?>">
+                                            <li><?= formatFlightTime($flight['departure']['scheduled']) ?></li>
+                                            <li><?= formatFlightDate($flight['departure']['scheduled']) ?></li>
+                                            <li><?= htmlspecialchars($flight['arrival']['airport'] ?? 'N/A') ?>
+                                                (<?= $flight['arrival']['iata'] ?? '' ?>)</li>
+                                            <li><?= htmlspecialchars($flight['airline']['name'] ?? 'N/A') ?></li>
+                                            <li><?= $flight['flight']['iata'] ?? 'N/A' ?></li>
+                                            <li><?= translateFlightStatus($flight['flight_status'] ?? '') ?></li>
+                                            <div id="btnli">
+                                                <li>
+                                                    <a href="#"
+                                                        data-details='<?= getFlightDetailsJson($flight, 'departure') ?>'>
+                                                        <span class="linkdetails">
+                                                            <div id="linkbtn">
+                                                                <button class="view-details-btn">
+                                                                    <img src="Photos/Home/info-flights.png" alt="Info">
+                                                                </button>
+                                                            </div>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </ul>
 
-                                <ul class="flights-box-dep" data-date="today">
-                                    <li>10:00</li>
-                                    <li>05/01/2025</li>
-                                    <li>Prague (CZ)</li>
-                                    <li>Wizz Air Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[6]'>$departuresfno[6]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: W4 5137", "details": "Check-in From: Desk 20, \nCheck-in to: Desk 25, \nGate: 14 ", "scheduled": "Scheduled Departure at 10:00 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Czech Republic , Prague(PRG)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-dep" data-date="today">
-                                    <li>18:40</li>
-                                    <li>05/01/2025</li>
-                                    <li>Stockholm Arlanda(ARN)</li>
-                                    <li>Ryanair</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[7]'>$departuresfno[7]</span>"?></li>
-                                    <li>Delayed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 8418", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 12 ", "scheduled": "Scheduled Departure at 06:40 PM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Sweden , Stockholm Arlanda (ARN)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-dep" data-date="tomorrow">
-                                    <li>06:00</li>
-                                    <li>05/01/2025</li>
-                                    <li>Brussels Charleroi(BE)</li>
-                                    <li>Wizz Arir Malta</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[8]'>$departuresfno[8]</span>"?></li>
-                                    <li>Departed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: W4 5131", "details": "Check-in From: Desk 20, \nCheck-in to: Desk 26, \nGate: 02 ", "scheduled": "Scheduled Departure at 06:00 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Belgium , Brussels Charleroi (CRL)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-                                <ul class="flights-box-dep" data-date="tomorrow">
-                                    <li>09:55</li>
-                                    <li>05/01/2025</li>
-                                    <li>Vienna/Vjene(AT)</li>
-                                    <li>Ryanair</li>
-                                    <li><?php echo "<span class='flight-number' data-tooltip='$departuresVal[9]'>$departuresfno[9]</span>"?></li>
-                                    <li>Gate Closed</li>
-                                    <div id="btnli">
-                                        <li>
-                                            <a href="#"
-                                                data-details='{"title": "Flight Details: FR 6889", "details": "Check-in From: Desk A, \nCheck-in to: Desk B, \nGate: 04 ", "scheduled": "Scheduled Departure at 09:55 AM", "countryFrom": "From: Kosovo, Prishtina(PIA)", "countryDestination": "To: Austria , Vienna/Vjene(VIE)"}'>
-                                                <span class="linkdetails">
-                                                    <div id="linkbtn">
-                                                        <button class="view-details-btn"><img
-                                                                src="Photos/Home/info-flights.png" alt="Info"></button>
-                                                    </div>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
-
-
-
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    <?php endforeach; ?>
+                                </div>
     </section>
 
     <br>
@@ -693,41 +414,39 @@ $greeter = new Greeting();
     </div>
 
     <div id="offers-box">
-            <div class="offers-partners-container">
-                <div id="cover-img-content">
-                    <img src="fotot/car-rental-2.jpg">
-                </div>
-                <div id="content-card">
-                    <h3>Merr Makinë me qira</h3>
-                    <div id="content-card-button-group">
-                    <p ><span>Çmimet më të mira</span> të makinave me qira! Shijoni udhëtimin tuaj me ne. udhëtoni me stil!</p>
-                    <a class="link" target="_blank" href="services.html#car-rentals-section">Kliko Ketu!</a>
-                    </div>
+        <div class="offers-partners-container">
+            <div id="cover-img-content">
+                <img src="fotot/car-rental-2.jpg">
+            </div>
+            <div id="content-card">
+                <h3>Merr Makinë me qira</h3>
+                <div id="content-card-button-group">
+                    <p><span>Çmimet më të mira</span> të makinave me qira! Shijoni udhëtimin tuaj me ne. udhëtoni me
+                        stil!</p>
+                    <a class="link" target="_blank" href="services.php#car-rentals-section">Kliko Ketu!</a>
                 </div>
             </div>
+        </div>
 
-            <div class="offers-partners-container">
-                <div id="cover-img-content">
-                    <img src="Photos/Home/newsletter-flights.jpeg">
-                </div>
-                <div id="content-card">
-                    <div id="content-card-button-group">
+        <div class="offers-partners-container">
+            <div id="cover-img-content">
+                <img src="Photos/Home/newsletter-flights.jpeg">
+            </div>
+            <div id="content-card">
+                <div id="content-card-button-group">
                     <h3>Regjistrohu në buletinin tonë!</h3>
-                    <p><span>Oferta pushimesh</span> të zgjedhura, lajmet më të fundit për udhëtimet, direkt në E-mail</p>
-                    <a class="link" target="_blank" href="services.html#newsletter">Kliko Ketu!</a>
-                    </div>
+                    <p><span>Oferta pushimesh</span> të zgjedhura, lajmet më të fundit për udhëtimet, direkt në E-mail
+                    </p>
+                    <a class="link abonohu-btn" target="_blank" href="about_us.php#newsletter">Kliko Ketu!</a>
+
+
                 </div>
             </div>
+        </div>
     </div>
 
-
-
-
-
-
-
     <div id="footer-placeholder">
-    
+
     </div>
 
     <div id="popup-overlay" style="display: none;"></div>
@@ -761,8 +480,8 @@ $greeter = new Greeting();
         });
 
 
-      
-            
+
+
     </script>
 
 </body>

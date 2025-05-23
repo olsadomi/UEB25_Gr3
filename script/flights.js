@@ -6,6 +6,9 @@ $(function(){
 
 $(document).ready(function () { 
     $(".view-details-btn").on("click", function (e) {
+        fetchFlights('arrivals');
+        fetchFlights('departures');
+    
         e.preventDefault();
  
         var flightDetails = $(this).closest("a").data("details");
@@ -170,6 +173,132 @@ let numratnew = numrat.filter((a, b) => {
 
 console.log(numratnew);
 
+function fetchFlights(type = 'arrivals') {
+    $.ajax({
+        url: 'api/flights.php',
+        type: 'GET',
+        data: { type: type },
+        success: function(flights) {
+            updateFlightTable(flights, type);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error fetching flights:", error);
+
+            if(type === 'arrivals') {
+                updateFlightTable(staticArrivals, 'arrivals');
+            } else {
+                updateFlightTable(staticDepartures, 'departures');
+            }
+        }
+    });
+}
+
+function updateFlightTable(flights, type) {
+    const container = type === 'arrivals' 
+        ? document.getElementById('flights-container1')
+        : document.getElementById('flights-container2');
+    
+    const header = container.querySelector('li:first-child');
+    container.innerHTML = '';
+    container.appendChild(header);
+    
+    flights.forEach(flight => {
+        const flightEl = document.createElement('li');
+        flightEl.className = `flights-box-${type === 'arrivals' ? 'arr' : 'dep'}`;
+        flightEl.setAttribute('data-date', getFlightDateType(flight));
+        
+        flightEl.innerHTML = `
+            <li>${formatTime(flight.arrival.scheduled)}</li>
+            <li>${formatDate(flight.arrival.scheduled)}</li>
+            <li>${flight.departure.airport} (${flight.departure.iata})</li>
+            <li>${flight.airline.name}</li>
+            <li>${flight.flight.iata}</li>
+            <li>${translateStatus(flight.flight_status)}</li>
+            <div id="btnli">
+                <li>
+                    <a href="#" data-details='${getFlightDetails(flight)}'>
+                        <span class="linkdetails">
+                            <div id="linkbtn">
+                                <button class="view-details-btn">
+                                    <img src="Photos/Home/info-flights.png" alt="Info">
+                                </button>
+                            </div>
+                        </span>
+                    </a>
+                </li>
+            </div>
+        `;
+        
+        container.appendChild(flightEl);
+    });
+    
+
+    $(".view-details-btn").off('click').on('click', showFlightDetails);
+}
+
+function formatTime(dateString) {
+    return new Date(dateString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+}
+
+function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString();
+}
+
+function translateStatus(status) {
+    const statusMap = {
+        'scheduled': 'Scheduled',
+        'active': 'In Air',
+        'landed': 'Landed',
+        'cancelled': 'Cancelled',
+        'diverted': 'Diverted'
+    };
+    return statusMap[status] || status;
+}
+
+function getFlightDetails(flight) {
+    return JSON.stringify({
+        title: `Flight Details: ${flight.flight.iata}`,
+        details: `Departed at ${formatTime(flight.departure.scheduled)},\nFrom: ${flight.departure.terminal || 'Terminal not specified'}`,
+        scheduled: `Scheduled arrival time: ${formatDate(flight.arrival.scheduled)} \nAt: ${formatTime(flight.arrival.scheduled)}`,
+        countryFrom: `From: ${flight.departure.airport} (${flight.departure.iata})`,
+        countryDestination: `To: Kosovo, Prishtina(PIA)`
+    });
+}
+
+
+function filterArrivals() {
+    const filter = document.getElementById('arr_status').value.toLowerCase();
+    const flights = document.querySelectorAll('.flights-box-arr');
+
+    flights.forEach(flight => {
+        const status = flight.dataset.status;
+
+        if (!filter) {
+            flight.style.display = '';
+        } else if (filter === 'other') {
+            flight.style.display = (status !== 'landed' && status !== 'scheduled') ? '' : 'none';
+        } else {
+            flight.style.display = (status === filter) ? '' : 'none';
+        }
+    });
+}
+
+function filterDepartures() {
+    const filter = document.getElementById('dep_status').value.toLowerCase();
+    const flights = document.querySelectorAll('.flights-box-dep');
+
+    flights.forEach(flight => {
+        const status = flight.dataset.status;
+
+        if (!filter) {
+            flight.style.display = '';
+        } else if (filter === 'other') {
+            flight.style.display = (status !== 'active' && status !== 'scheduled') ? '' : 'none';
+        } else {
+            flight.style.display = (status === filter) ? '' : 'none';
+        }
+    });
+}
 
 
  

@@ -51,7 +51,7 @@ $greeter = new Greeting();
                 disponueshëm për fluturimet e sotme dhe të nesërme. Për më shumë informacion, ju lutemi, kontaktoni
                 linjën tuaj ajrore.
             </p>
-            <button id="playbutton"><?php echo $airportName; ?></button>
+            <button id="playbutton" onclick="playAirportAudio()"><?php echo $airportName; ?></button>
             <audio id="audioPlayer" src="Airport Sound Effect.mp3"></audio>
         </div>
     </header>
@@ -695,13 +695,14 @@ $greeter = new Greeting();
     <div id="offers-box">
             <div class="offers-partners-container">
                 <div id="cover-img-content">
-                    <img src="car-rental-2.jpg">
+                    <img src="fotot/car-rental-2.jpg">
                 </div>
                 <div id="content-card">
                     <h3>Merr Makinë me qira</h3>
-                    <p>Çmimet më të mira të makinave me qira! Shijoni udhëtimin tuaj me ne.</p>
+                    <div id="content-card-button-group">
+                    <p ><span>Çmimet më të mira</span> të makinave me qira! Shijoni udhëtimin tuaj me ne. udhëtoni me stil!</p>
                     <a class="link" target="_blank" href="services.html#car-rentals-section">Kliko Ketu!</a>
-
+                    </div>
                 </div>
             </div>
 
@@ -710,13 +711,11 @@ $greeter = new Greeting();
                     <img src="Photos/Home/newsletter-flights.jpeg">
                 </div>
                 <div id="content-card">
+                    <div id="content-card-button-group">
                     <h3>Regjistrohu në buletinin tonë!</h3>
                     <p><span>Oferta pushimesh</span> të zgjedhura, lajmet më të fundit për udhëtimet, direkt në E-mail</p>
-                    <div id="newsletter-submit">
-                    <input type="email" id="email" name="email" placeholder="Enter your email..." required>
-                    <button type="submit" id="submitemail" style="font-size: 10px;">Regjistrohu</button>
+                    <a class="link" target="_blank" href="services.html#newsletter">Kliko Ketu!</a>
                     </div>
-                    <p id="mesazh"></p>
                 </div>
             </div>
     </div>
@@ -762,9 +761,7 @@ $greeter = new Greeting();
         });
 
 
-        document.getElementById('submitemail').addEventListener('click', validate);
-        messageElement.style.display = "none";  
-        messageElement.innerText = "";
+      
             
     </script>
 

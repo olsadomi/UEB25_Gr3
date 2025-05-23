@@ -121,30 +121,46 @@ function validate() {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const playbutton = document.getElementById("playbutton");
-    const audioPlayer = document.getElementById("audioPlayer");
 
-    if (playbutton && audioPlayer) {
-        playbutton.addEventListener('click', () => {
-            try {
-                audioPlayer.play()
-                    .then(() => {
-                        console.log("Audio is playing successfully.");
-                    })
-                    .catch(error => {
-                        console.error("Audio playback failed:", error);
-                        alert("Failed to play audio. Please check your browser settings.");
-                    });
-            } catch (error) {
-                console.error("An unexpected error occurred while trying to play audio:", error);
-                alert("Something went wrong while trying to play the audio.");
-            }
+
+
+function playAirportAudio() {
+    const playButton = document.getElementById("playbutton");
+    const audioPlayer = document.getElementById("audioPlayer");
+    const originalText = playButton.textContent;
+    
+    if (!audioPlayer._endedListenerAdded) {
+        audioPlayer.addEventListener('ended', () => {
+            playButton.textContent = originalText;
         });
-    } else {
-        console.error("Play button or audio player not found!");
+        audioPlayer._endedListenerAdded = true;
     }
-});
+
+    $.ajax({
+        url: 'play_audio.php',
+        type: 'POST',
+        data: {
+            action: 'play_audio',
+            airport: originalText 
+        },
+        success: function(response) {
+            audioPlayer.play()
+                .then(() => {
+                    playButton.textContent = "Playing...";
+                })
+                .catch(error => {
+                    console.error("Playback error:", error);
+                    playButton.textContent = originalText;
+                    alert("Audio playback failed");
+                });
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", error);
+            playButton.textContent = originalText;
+            alert("Request failed");
+        }
+    });
+}
 
 let numrat = [1, 2, 3, 4, 5];
 

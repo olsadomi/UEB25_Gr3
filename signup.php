@@ -39,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $checkStmt->execute();
         $checkStmt->store_result();
 
+        // nese e kishim vendos si query: $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+        //nga inputi query final mund te behet nga useri: SELECT * FROM users WHERE email='' OR 1=1 --' AND password=''
+        // e cila kthen true edhe ja lejon kycjen pa password user-it
+
         if ($checkStmt->num_rows > 0) {
             echo "<div class='message-container error'>Ky email është regjistruar më parë.</div>";
         } else {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
-    <link rel="stylesheet" href="/style/home.css">
+    <link rel="stylesheet" href="/UEB25_GR3/style/home.css">
     <title>Prishtina Airport</title>
 
     <!-- ICON LINK -->
@@ -30,24 +30,44 @@
             <audio id="easterAudio" src="MOV_0.mp3"></audio>
         </div>
 
+        <?php 
+            class Flashcard{
+                private $path;
+                private $text;
+                private $title;
+
+                function __construct($path, $title, $text){
+                    $this->path = $path;
+                    $this->title = $title;
+                    $this->text = $text;
+                }
+
+                function getPath(){
+                    return $this->path;
+                }
+                function getTitle(){
+                    return $this->title;
+                }
+                function getText(){
+                    return $this->text;
+                }
+            }
+
+            $flashcards = [
+                new Flashcard("/UEB25_GR3/Photos/Home/flash-airplane.png", "Pse ne?", "Ofrimi i shërbimit të shkëlqyer dhe një staf i trajnuar sigurojnë udhëtime të sigurta dhe komode. Zgjedhja jonë do t'ju bëjë të ndiheni të sigurt dhe të kënaqur gjatë çdo udhëtimi."),
+                new Flashcard("/UEB25_GR3/Photos/Home/flash-luggage.png", "Siguria?", "Siguria është prioriteti ynë kryesor. Përdorimi i teknologjive moderne dhe masave të rrepta na mundëson të sigurojmë udhëtime të sigurta dhe pa shqetësime për çdo udhëtar."),
+                new Flashcard("/UEB25_GR3/Photos/Home/flash-location.png", "Destinacionet?", "Ofrimi i fluturimeve për destinacione të ndryshme anembanë botës. Ne lidhim qytete të njohura dhe mundësojmë udhëtime të paharrueshme për çdo udhëtar.")
+            ];
+        ?>
+
         <section class="flash-cards">
-            <div class="flashcard" id="first-flashcard">
-                <img src="../Photos/Home/flash-airplane.png" alt="">
-                <h2>Pse ne?</h2>
-                <p>Ofrimi i shërbimit të shkëlqyer dhe një staf i trajnuar sigurojnë udhëtime të sigurta dhe komode. Zgjedhja jonë do t'ju bëjë të ndiheni të sigurt dhe të kënaqur gjatë çdo udhëtimi.</p>
-            </div>
-    
-            <div class="flashcard" id="second-flashcard">
-                <img src="../Photos/Home/flash-luggage.png" alt="">
-                <h2>Siguria?</h2>
-                <p>Siguria është prioriteti ynë kryesor. Përdorimi i teknologjive moderne dhe masave të rrepta na mundëson të sigurojmë udhëtime të sigurta dhe pa shqetësime për çdo udhëtar.</p>
-            </div>
-    
-            <div class="flashcard" id="third-flashcard">
-                <img src="../Photos/Home/flash-location.png" alt="">
-                <h2>Destinacionet?</h2>
-                <p>Ofrimi i fluturimeve për destinacione të ndryshme anembanë botës. Ne lidhim qytete të njohura dhe mundësojmë udhëtime të paharrueshme për çdo udhëtar.</p>
-            </div>
+            <?php foreach($flashcards as $flashcard): ?>
+                <div class="flashcard" id="first-flashcard">
+                    <img src="<?php echo $flashcard->getPath()?>" alt="">
+                    <h2><?php echo $flashcard->getTitle()?></h2>
+                    <p><?php echo $flashcard->getText() ?></p>
+                </div>
+            <?php endforeach; ?>
         </section>
     </header>
 
@@ -68,92 +88,71 @@
             </div>
 
             <div class="exp-photo-container airport active">
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-cafe.jpg);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-cafe.jpg);">
                     <p>Shijoni kafenë tuaj të preferuar në aeroport.</p>
                 </div>
 
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-shopping.webp);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-shopping.webp);">
                     <p>Dyqane me markat më të njohura ndërkombëtare.</p>
                 </div>
 
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-kidsplayzone.webp);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-kidsplayzone.webp);">
                     <p>Zona e lojërave për fëmijë për argëtim të sigurt.</p>
                 </div>
 
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-dutyfree.webp);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-dutyfree.webp);">
                     <p>Blini produkte pa taksa në dyqanet Duty Free.</p>
                 </div>
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-relax.webp);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-relax.webp);">
                     <p>Pushoni dhe relaksohuni para fluturimit tuaj.</p>
                 </div>
             </div>
 
             <div class="exp-photo-container city">
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-bibloteka.avif);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-bibloteka.avif);">
                     <p>Eksploroni arkitekturën unike dhe koleksionin e gjerë të librave.</p>
                 </div>
 
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-newborn.jpg);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-newborn.jpg);">
                     <p>Vend ikonik në Prishtinë që simbolizon pavarësinë e Kosovës.</p>
                 </div>
 
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-concert.jpg);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-concert.jpg);">
                     <p>Përjetoni jetën e natës me klube dhe ambiente me muzikë live.</p>
                 </div>
 
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-muzeu.jpg);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-muzeu.jpg);">
                     <p>Udhëtoni në kohë dhe mësoni për traditat dhe kulturën në Kosovë.</p>
                 </div>
-                <div class="exp-photo" style="background-image: url(../Photos/Home/exp-mall.jpg);">
+                <div class="exp-photo" style="background-image: url(/UEB25_GR3/Photos/Home/exp-mall.jpg);">
                     <p>Zbuloni Prishtina Mall për shopping dhe argëtim të shkëlqyer!</p>
                 </div>
             </div>
         </section>
 
+        <?php 
+            $partners = [
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-kfc.png", "name"=>"KFC Kosova"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-airprishtina.png", "name"=>"Air Prishtina"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-pizza.png", "name"=>"Sach Pizza"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-prishtinamall.png", "name"=>"Prishtina Mall"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-bank.png", "name"=>"Pro Credit Bank"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-sach.png", "name"=>"Sach Caffe"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-up.png", "name"=>"Universiteti i Prishtinës"],
+                ["img"=>"/UEB25_GR3/Photos/Home/logo-swiss.png", "name"=>"Swiss Diamond Hotel"]
+            ];
+        ?>
+
         <section id="partners">
             <h1 class="section-title">Partnerë tanë</h1>
-
             <div class="partners-container">
+            <?php foreach($partners as $partner):?>
                 <div class="partners-child">
                     <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-kfc.png" alt="">
-                    <p>KFC Kosova</p>
+                    <img src="<?php echo $partner["img"]; ?>" alt="">
+                    <p><?php echo $partner["name"];?></p>
                 </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-airprishtina.png" alt="">
-                    <p>Air Prishtina</p>
-                </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-pizza.png" alt="">
-                    <p>Sach Pizza</p>
-                </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-prishtinamall.png" alt="">
-                    <p>Prishtina Mall</p>
-                </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-bank.png" alt="">
-                    <p>Pro Credit Bank</p>
-                </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-sach.png" alt="">
-                    <p>Sach Caffe</p>
-                </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-up.png" alt="">
-                    <p>Universiteti i Prishtinës</p>
-                </div>
-                <div class="partners-child">
-                    <div class="blueshade"></div>
-                    <img src="../Photos/Home/logo-swiss.png" alt="">
-                    <p>Swiss Diamond Hotel</p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 
@@ -221,7 +220,7 @@
     
                 <div class="orient-video">
                     <video width="100%" height="auto" controls>
-                        <source src="../Photos/Home/Orientation video.mp4" type="video/mp4">
+                        <source src="/UEB25_GR3/Photos/Home/Orientation video.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -233,8 +232,6 @@
         <div id="footer-placeholder"></div>
     </footer>
 
-   
-    
-    <script src="/script/home.js"></script>
+    <script src="/UEB25_GR3/script/home.js"></script>
 </body>
 </html>

@@ -69,15 +69,35 @@
 
 
     <?php
-    $counter_file = 'counter.txt';
-    $count = file_exists($counter_file) ? (int) file_get_contents($counter_file) : 0;
-    $count++;
-    file_put_contents($counter_file, $count);
+    // $counter_file = 'counter.txt';
+    // $count = file_exists($counter_file) ? (int) file_get_contents($counter_file) : 0;
+    // $count++;
+    // file_put_contents($counter_file, $count);
+    
+    // if ($count % 5 == 0) {
+    //     $message = "RASTI SPECIAL! Ju jeni vizitori i $count-të! Faleminderit për vizitën!";
+    // } else {
+    //     $message = "Jeni vizitori i $count-të. Mirë se vini!";
+    // }
+    
+    // ZEVENDESIMI ME PERDORIMIN E SESSIONS
+    
+    session_start();
+    function visitsCounter()
+    {
+        if (!isset($_SESSION['services_visits'])) {
+            $_SESSION['services_visits'] = 0;
+        }
+        $_SESSION['services_visits']++;
+        return $_SESSION['services_visits'];
+    }
+
+    $count = visitsCounter();
 
     if ($count % 5 == 0) {
-        $message = "RASTI SPECIAL! Ju jeni vizitori i $count-të! Faleminderit për vizitën!";
+        $message = "RASTI SPECIAL! Po e vizitoni këtë faqe për herë të $count-të përgjatë kohëve të fundit 😄 Faleminderit për vizitën!";
     } else {
-        $message = "Jeni vizitori i $count-të. Mirë se vini!";
+        $message = "Po e vizitoni këtë faqe për herë të $count-të gjatë kësaj kohe. Po ju pëlqen vallë? 😄 Mirë se vini!";
     }
     ?>
 
@@ -304,50 +324,61 @@
             </div> -->
 
             <?php
-            
-            class Rentals {
+
+            class Rentals
+            {
                 private $brand;
                 private $description;
                 private $image;
 
-                public function __construct($brand, $description, $image){
+                public function __construct($brand, $description, $image)
+                {
                     $this->brand = $brand;
                     $this->description = $description;
                     $this->image = $image;
                 }
 
-                public function getBrand() {
+                public function getBrand()
+                {
                     return $this->brand;
                 }
 
-                public function setBrand($brand) {
+                public function setBrand($brand)
+                {
                     $this->brand = $brand;
                 }
 
-                public function getDescription() {
+                public function getDescription()
+                {
                     return $this->description;
                 }
 
-                public function setDescription($description) {
+                public function setDescription($description)
+                {
                     $this->description = $description;
                 }
 
-                public function getImage() {
+                public function getImage()
+                {
                     return $this->image;
                 }
 
-                public function setImage($image) {
+                public function setImage($image)
+                {
                     $this->image = $image;
                 }
 
-                public function __destruct() {
+                public function __destruct()
+                {
                     echo "<!-- Destruktori -->";
                 }
             }
 
-            class CarRental extends Rentals{
+            class CarRental extends Rentals
+            {
 
-                public function displayRental($index) {
+                public function displayRental($index)
+                {
                     echo "<div class='car-rental-brand'>
                         <h3><b>{$this->getBrand()}</b></h3>
                         <img src = '{$this->getImage()}' alt='{$this->getBrand()} car'>
@@ -366,10 +397,10 @@
             $carRentals[0]->setBrand("HERTZ");
             $carRentals[1]->setBrand("EUROPCAR");
 
-            foreach($carRentals as $index=>$rental) {
+            foreach ($carRentals as $index => $rental) {
                 $rental->displayRental($index);
             }
-            
+
 
             ?>
         </div>
@@ -493,6 +524,7 @@
         <p>Vlerësimi juaj: <span id="rating-value">0</span> yje</p>
     </section>
 
+    <script src="\UEB25_GR3\script\services.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -583,7 +615,7 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="sevices.js"></script>
+
 
 
 </body>

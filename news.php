@@ -8,6 +8,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="news.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <style>
+        .sort-buttons {
+            margin: 15px 0;
+            display: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-left: 20px;
+        }
+        .sort-buttons a {
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+        .sort-buttons a:hover {
+            background-color: #e0e0e0;
+        }
+        .sort-buttons a.active {
+            background-color:rgb(255, 196, 54);;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +52,8 @@
     <div class="latest-news-carousel">
         <h3>Lajmet e Fundit</h3>
         <div class="carousel">
-            <span class="carousel-item">Lajmi 1: Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve.</span>
+            <span class="carousel-item">Lajmi 1: Tollovi në Aeroportin e Prishtinës, shkak anulimet e
+            fluturimeve.</span>
             <span class="carousel-item">Lajmi 2: Event i ri në Aeroport për turistët!</span>
             <span class="carousel-item">Lajmi 3: Fluturime të reja për 2024.</span>
             <span class="carousel-item">Lajmi 4: Shërbimi i Self Check-in.</span>
@@ -51,168 +76,191 @@
         </div>
     </div>
 
-    <!--Postimet-->
-    <section class="postet">
-        <!--Posti 1-->
-        <div class="post-box risi">
-            <img src="fotot/foto1.webp" alt="" class="post-img">
-            <h2 class="kategoria">Risi</h2>
-            <a href="post1-details.php" class="post-titulli">Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)</a>
-            <span class="post-date">2 Jan 2025</span>
-            <p class="post-pershkrimi">
-                Në prag të sezonit dimëror, Aeroporti Ndërkombëtar i Prishtinës ka nisur një sërë përmirësimesh
-                për të garantuar një përvojë sa më të mirë për udhëtarët. Salla e pritjes ka kaluar në rinovim,
-                duke përfshirë shtimin e ulëseve dhe stacioneve për karikim pajisjesh elektronike.Një tjetër
-                investim i rëndësishëm ka qenë në sistemet e sigurisë, ku janë instaluar skanera të rinj të
-                teknologjisë së lartë që ofrojnë kontrolle më të shpejta dhe efikase. Për më tepër, stafi është
-                trajnuar për t'u përballur me rritjen e numrit të udhëtarëve gjatë sezonit të festave.
-            </p>
-        </div>
-        <!--Posti 2-->
-        <div class="post-box destinacionet">
-            <img src="fotot/foto2.jpg" alt="" class="post-img">
-            <h2 class="kategoria">Destinacionet</h2>
-            <a href="post2-details.php" class="post-titulli">Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat
-                Ndërkombëtare</a>
-            <span class="post-date">12 Nov 2022</span>
-            <p class="post-pershkrimi">
-                Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione
-                të reja, duke përfshirë Barcelonën, Stambollin dhe Abu Dhabin. Kjo lëvizje vjen si pjesë e
-                bashkëpunimeve të reja me linja ajrore ndërkombëtare, si Turkish Airlines dhe Wizz Air.
-                Pasagjerët tani do të kenë mundësi të zgjedhin më shumë fluturime direkte, duke ulur kohën
-                e pritjes dhe koston e udhëtimeve. Zëdhënësja e aeroportit deklaroi: "Ne jemi të përkushtuar
-                që të sjellim më shumë mundësi për qytetarët e Kosovës dhe të rrisim lidhjet tona me botën."
-            </p>
-        </div>
-        <!--Posti 3-->
-        <div class="post-box risi">
-            <img src="fotot/foto3.webp" alt="" class="post-img">
-            <h2 class="kategoria">Risi</h2>
-            <a href="post3-details.php" class="post-titulli">Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit
-                të Prishtinës</a>
-            <span class="post-date">1 Feb 2024</span>
-            <p class="post-pershkrimi">
-                Aeroporti Ndërkombëtar i Prishtinës ka nisur një projekt ambicioz të quajtur "Green Airport",
-                i cili synon të reduktojë ndotjen dhe të rrisë përdorimin e burimeve të qëndrueshme. Panelët
-                diellorë janë instaluar për të prodhuar energji elektrike, ndërsa sistemet e ndriçimit janë
-                zëvendësuar me LED për kursim energjie.Për më tepër, janë krijuar hapësira të reja të gjelbra,
-                duke përfshirë një kopsht në zonën e jashtme të aeroportit. Pasagjerët do të kenë mundësinë të
-                relaksohen në natyrë para fluturimeve. Ky projekt është një hap i rëndësishëm drejt përmbushjes
-                së objektivave për një mjedis më të pastër.
-            </p>
-        </div>
-        <!--Posti 4-->
-        <div class="post-box evente">
-            <img src="fotot/foto4.jpg" alt="" class="post-img">
-            <h2 class="kategoria">Evente</h2>
-            <a href="post4-details.php" class="post-titulli">Aeroporti i Prishtinës Organizoi Panairin e Turizmit -
-                Oportunitete të Rrethit Ndërkombëtar</a>
-            <span class="post-date">10 Dec 2024</span>
-            <p class="post-pershkrimi">
-                Aeroporti i Prishtinës ka hapur dyert për një ngjarje të jashtëzakonshme:
-                <b>Panairin e Turizmit Ndërkombëtar!</b> Ky event një-ditor i dedikuar promovimit të
-                destinacioneve të ndryshme turistike ka sjellë pjesëmarrës nga agjenci udhëtimesh,
-                operatorë turistikë, dhe kompani të tjera të industrisë së turizmit nga e gjithë bota.
-                Panairi ofron mundësi të shkëlqyera për pasagjerët dhe vizitorët të zbulojnë destinacione
-                të reja dhe mundësi udhëtimi, si dhe të përfitoni nga ofertat speciale dhe zbritjet që ofrohen
-                vetëm gjatë këtij eventi.<br>
-                <b>Qfare mund te prisni nga ky event?</b> <br>
-                Stenda informuese per destinacione te ndryshme turistike <br>
-                Këshilla për udhëtimet dhe planet e udhëtimit për vitin 2025 <br>
-                Mundësi për të fituar dhurata dhe vouchere udhëtimi <br>
-                Takime dhe biseda me ekspertët e industrisë së turizmit <br>
-                <b>Data e Eventit: </b> 15 Dhjetor 2024 <br>
-                <b>Ora: </b> 09:00 - 18:00 <br>
-                <b>Vendndodhja: </b> Salla e Eventeve, Aeroporti Ndërkombëtarë i Prishtinës <br>
-                Ky është një mundësi e shkëlqyer për të planifikuar udhëtimet tuaja të ardhshme dhe për të eksploruar
-                opsionet që industria e turizmit ka për të ofruar. Mos e humbisni këtë mundësi dhe bëhuni pjesë e këtij
-                eventi që do të ndikojë pozitivisht në udhëtimet tuaja!
-            </p>
-        </div>
+    <?php
+    class Post{
+        private $id;
+        private $title;
+        private $date;
+        private $category;
+        private $image;
+        private $description;
+        private $link;
 
-        <!--Posti 5-->
-        <div class="post-box risi">
-            <img src="fotot/foto5.webp" alt="" class="post-img">
-            <h2 class="kategoria">Risi</h2>
-            <a href="post5-details.php" class="post-titulli">Shërbimi i Self Check-in tani edhe në Aeroportin
-                Ndërkombëtar të Prishtinës "Adem Jashari"</a>
-            <span class="post-date">19 Dec 2024</span>
-            <p class="post-pershkrimi">
-                <b>Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"
-                    Sistemi i pranimit të udhëtarëve dhe valixheve mund të bëhet nga vetë udhëtarët përmes kioskave të
-                    "Self-Check-in"</b>
-                Pas hapjes së katër portave shtesë dhe duke shtuar hapësirat për procesimin e udhëtarëve tani Aeroporti
-                Ndërkombëtar
-                i Prishtinës ka lansuar edhe shërbimin e Self Check-in.<br>
-                ANP "Adem Jashari" LKIA nga muaji gusht ka ofruar sistemin e pranimit të udhëtarëve dhe valixheve që
-                mund të bëhet
-                nga vetë udhëtarët, sistem ky që është pjesë e teknologjisë që përdoret për të lehtësuar procedurat para
-                fluturimit
-                të udhëtareve. <br>
-                Tani aeroporti ka të instaluar 6 Self Check-in kioska dhe 10 Self Bag Drops për valixhe.
-                Udhëtarët duhet të përdorin këto paisje në pajtueshmëri me kohën e hapjes dhe mbylljes së
-                fluturimit ku për një fluturim mund të fillojnë procedurat e Self Check-in 3 orë para nisjes
-                së fluturimit dhe përfundojnë 40 min para orës së nisjes. <br>
-                <b>Dokumentet e nevojshme për përdorimin e Self Check-in:</b> <br>
-                Udhëtarët për të përdorur Kioskat për Self Check-in duhet të posedojnë Pasaportë.
-                Letërnjoftimi ende nuk përkrahet nga këto pajisje për të kryer pranimin e udhëtarit. <br>
-                Përjashtim nga kjo përbëjnë rastet kur udhëtarët kanë përfunduar check-in online me ID
-                kartelë. Në ato raste ata mund të përdorin edhe letërnjoftimin e tyre për të printuar
-                biletën e tyre në Kioskat për Self Check-in. Nga muaji Gusht kur edhe ANP ka vënë në
-                funksion Self Check-in, janë 26 mijë udhëtarë që kanë kryer procedurat nga vetë ata dhe
-                janë procesuar mbi 15 mijë valixhe nëpërmjet Bag drops.
-        </div>
-        <!--Posti 6-->
-        <div class="post-box destinacionet">
-            <img src="fotot/foto6.jpg" alt="" class="post-img">
-            <h2 class="kategoria">Destinacionet</h2>
-            <a href="post6-details.php" class="post-titulli">Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane:
-                Lidhje të Reja për Udhëtarët</a>
-            <span class="post-date">23 June 2021</span>
-            <p class="post-pershkrimi">
-                Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" vazhdon të jetë pika kryesore e lidhjes
-                ajrore për Kosovën, duke ofruar destinacione të shumta në Evropë dhe më gjerë. Me rritjen e
-                kërkesës për udhëtime, aeroporti ka zgjeruar gamën e fluturimeve, duke përfshirë:
-                <b>Lidhje të reja sezonale:</b> Fluturime për destinacione turistike si Bodrum, Antalya dhe Heraklion.
-                <br>
-                <b>Rritje të fluturimeve drejt metropoleve evropiane:</b> Përfshirë Vjenën, Zyrihun, dhe Frankfurtin, me
-                frekuencë
-                të shtuar për t'iu përshtatur udhëtarëve të biznesit dhe atyre turistikë.
-                <b>Fluturime të përkohshme:</b> Opsione për qytete si Düsseldorf dhe Stuttgart gjatë sezonit të verës.
-            </p>
-        </div>
-        <!--Posti 7-->
-        <div class="post-box evente">
-            <img src="fotot/foto7.webp" alt="" class="post-img">
-            <h2 class="kategoria">Evenete</h2>
-            <a href="post7-details.php" class="post-titulli">Aeroporti i Prishtinës Pret Forumin e Biznesit 2024:
-                Mundësi të Reja për Sipërmarrësit</a>
-            <span class="post-date">17 Nov 2024</span>
-            <p class="post-pershkrimi">
-                Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" është nikoqir i një eventi madhor për
-                bizneset dhe sipërmarrësit në rajon. <b>Forumi i Biznesit 2024</b>, që do të mbahet më
-                <b>20 Dhjetor 2024</b>, synon të mbledhë profesionistë nga industri të ndryshme për të
-                diskutuar mundësitë e reja të bashkëpunimit dhe inovacionet teknologjike në transport dhe turizëm.
-                <br>
-                <b>Aktivitetet kryesore përfshijnë:</b> <br>
-                <b>Panel diskutimi:</b> Të ftuar ekspertë ndërkombëtarë dhe vendas që do të ndajnë trendet më të fundit
-                në biznes dhe aviacion.
-                <b>Sesione rrjetëzimi:</b> Një mundësi për pjesëmarrësit të lidhin partneritete dhe të zgjerojnë rrjetin
-                e tyre profesional.
-                <b>Ekspozitë e inovacioneve:</b> Prezantime të teknologjive të reja që përmirësojnë përvojën e
-                udhëtarëve. <br>
-                <b>Data dhe Vendi:</b> <br>
-                <b>Data: </b> 20 Dhjetor 2024 <br>
-                <b>Ora: </b> 10:00 - 16:00 <br>
-                <b>Vendndodhja: </b> Terminali i Ri, Aeroporti Ndërkombëtar i Prishtinës <br>
-                <b>Pjesmarrja eshte falas</b>, jeni te mireseardhur.
-            </p>
-        </div>
+        public function __construct($id,$title,$date,$category,$image,$description,$link){
+            $this->id = $id;
+            $this->title = $title;
+            $this->date = $date;
+            $this->category = $category;
+            $this->image = $image;
+            $this->description = $description;
+            $this->link = $link;
+        }
+
+        public function getId(){return $this->id;}
+        public function getTitle(){return $this->title;}
+        public function getDate(){return $this->date;}
+        public function getCategory(){return $this->category;}
+        public function getImage(){return $this->image;}
+        public function getDescription(){return $this->description;}
+        public function getLink(){return $this->link;}
+    }
+
+    class PostManager{
+        private $posts = [];
+
+        public function addPost(Post $post){
+            return $this->posts[] = $post;
+        }
+
+        public function sortByTitle($ascending = true){
+            $titles=[];
+            foreach($this->posts as $index => $post){
+                $titles[$index] = $post->getTitle();
+            }
+
+            if($ascending){
+                asort($titles);
+            }
+            else{
+                arsort($titles);
+            }
+
+            $sorted = [];
+            foreach(array_keys($titles) as $index){
+                $sorted[] = $this->posts[$index];
+            }
+            $this->posts = $sorted;
+        }
+
+        public function sortByDate($newestFirst = true){
+            $dates = [];
+            foreach($this->posts as $index => $post){
+                $dates[$index] = strtotime($post->getDate());
+            }
+
+            if($newestFirst){
+                arsort($dates);
+            }
+            else{
+                asort($dates);
+            }
+
+            $sorted = [];
+            foreach(array_keys($dates) as $index){
+                $sorted[] = $this->posts[$index];
+            }
+            $this->posts = $sorted;
+        }
+
+        public function getAllPosts(){
+            return $this->posts;
+        }
+    }
+
+    $postManager = new PostManager();
+    $postManager->addPost(new Post(
+        1,
+        'Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)',
+        '2025-01-02',
+        'risi',
+        'fotot/foto1.webp',
+        'Në prag të sezonit dimëror, Aeroporti Ndërkombëtar i Prishtinës ka nisur një sërë përmirësimesh...',
+        'post1-details.php'));
+    $postManager->addPost(new Post(
+        2,
+        'Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare',
+        '2022-11-12',
+        'destinacionet',
+        'fotot/foto2.jpg',
+        'Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione të reja...',
+        'post2-details.php'));
+    $postManager->addPost(new Post(
+        3,
+        'Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës',
+        '2024-02-01',
+        'risi',
+        'fotot/foto3.webp',
+        'Aeroporti Ndërkombëtar i Prishtinës ka nisur një projekt ambicioz të quajtur "Green Airport"...',
+        'post3-details.php'));
+    $postManager->addPost(new Post(
+        4,
+        'Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar',
+        '2024-12-10',
+        'evente',
+        'fotot/foto4.jpg',
+        'Aeroporti i Prishtinës ka hapur dyert për një ngjarje të jashtëzakonshme...',
+        'post4-details.php'));
+    $postManager->addPost(new Post(
+        5,
+        'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"',
+        '2024-12-19',
+        'risi',
+        'fotot/foto5.webp',
+        'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës...',
+        'post5-details.php'));
+    $postManager->addPost(new Post(
+        6,
+        'Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët',
+        '2021-06-23',
+        'destinacionet',
+        'fotot/foto6.jpg',
+        'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" vazhdon të jetë pika kryesore...',
+        'post6-details.php'));
+    $postManager->addPost(new Post(
+        7,
+        'Aeroporti i Prishtinës Pret Forumin e Biznesit 2024: Mundësi të Reja për Sipërmarrësit',
+        '2024-11-17',
+        'evente',
+        'fotot/foto7.webp',
+        'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" është nikoqir i një eventi madhor...',
+        'post7-details.php'));
+
+    $sort_method = $_GET['sort'] ?? 'date_desc';
+
+    switch ($sort_method) {
+        case 'title_asc':
+            $postManager->sortByTitle(true);
+            break;
+
+        case 'title_desc':
+            $postManager->sortByTitle(false);
+            break;
+            
+        case 'date_asc':
+            $postManager->sortByDate(false);
+            break;
+            
+        case 'date_desc':
+        default:
+            $postManager->sortByDate(true);
+            break;
+    }
+    $posts = $postManager->getAllPosts();
+    ?>
+
+    <div class="sort-buttons">
+        <span>Rendit sipas:</span>
+        <a href="?sort=title_asc" class="<?= $sort_method === 'title_asc' ? 'active' : '' ?>">Titulli (A-Z)</a>
+        <a href="?sort=title_desc" class="<?= $sort_method === 'title_desc' ? 'active' : '' ?>">Titulli (Z-A)</a>
+        <a href="?sort=date_desc" class="<?= (!isset($_GET['sort']) || $sort_method === 'date_desc') ? 'active' : '' ?>">Data (më të rejat)</a>
+        <a href="?sort=date_asc" class="<?= $sort_method === 'date_asc' ? 'active' : '' ?>">Data (më të vjetrat)</a>
+    </div>
+
+    <section class="postet">
+        <?php foreach ($posts as $post): ?>
+            <div class="post-box <?= $post->getCategory() ?>">
+                <img src="<?= $post->getImage() ?>" alt="" class="post-img">
+                <h2 class="kategoria"><?= ucfirst($post->getCategory()) ?></h2>
+                <a href="<?= $post->getLink() ?>" class="post-titulli"><?= $post->getTitle() ?></a>
+                <span class="post-date"><?= date('d M Y', strtotime($post->getDate())) ?></span>
+                <p class="post-pershkrimi"><?= $post->getDescription() ?></p>
+            </div>
+        <?php endforeach; ?>
     </section>
 
     <!--Lidhja me me JS dhe me navbarin-->
-    <script src="news.js"></script>
     <div id="footer-placeholder"></div>
+    <script src="/UEB25_GR3/script/news.js"></script>
 </body>
 
 </html>

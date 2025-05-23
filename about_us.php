@@ -1,4 +1,8 @@
 <?php
+session_start();
+$loggedIn = isset($_SESSION['user_id']);
+
+
 $GLOBALS['siteName'] = "PIA";
 
 $airlines = [
@@ -11,17 +15,26 @@ $airlines = [
     "Virgin Atlantic Airlines"
 ];
 
-$email = "";
-$emailError = "";
-$successMsg = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST["nl-email"]);
-
-    if (!preg_match("/^[^0-9][a-zA-Z0-9\.\-\_]+@[a-zA-Z]+\.[a-z]+$/", $email)) {
-        $emailError = "Please enter a valid email address.";
+    if ($loggedIn) {
+        // User is logged in, use their email from session or database
+    $email = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : "";
     } else {
-        $successMsg = "You have successfully subscribed!";
+        // Check if the email was provided in the form
+        if (isset($_POST["nl-email"])) {
+            $email = trim($_POST["nl-email"]);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailError = "Email i pavlefshëm.";
+            }
+        } else {
+            $emailError = "Ju lutem vendosni një email.";
+        }
+    }
+
+    // If there's no error, save to DB (pseudo-code)
+    if (empty($emailError)) {
+        // Save $email to newsletter table
+        $successMsg = "Faleminderit që u abonove!";
     }
 }
 
@@ -296,20 +309,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-    <div id="overlay" style="display: none;"></div>
-    <div id="popupDialog" style="display: none;">
-        <button class="close-btn" onclick="closeFn()">&times;</button>
+<div id="overlay" style="display: none;"></div>
+<div id="popupDialog" style="display: none;">
+    <button class="close-btn" onclick="closeFn()">&times;</button>
 
-        <div class="newsletter-text">
-            <h2>Fluturime & Oferta - Të rejat nga Aeroporti</h2>
-            <p>Bëhu pjesë e komunitetit tonë! Abonohu në newsletter-in tonë për të marrë informacione ekskluzive mbi
-                ofertat speciale, shërbimet e aeroportit,
-                këshilla udhëtimi dhe shumë më tepër. Qëndro i informuar dhe bëje përvojën tënde në aeroport më të lehtë
-                dhe më të këndshme.</p>
+    <div class="newsletter-text">
+        <h2>Fluturime & Oferta - Të rejat nga Aeroporti</h2>
+        <p>Bëhu pjesë e komunitetit tonë! Abonohu në newsletter-in tonë për të marrë informacione ekskluzive mbi
+            ofertat speciale, shërbimet e aeroportit,
+            këshilla udhëtimi dhe shumë më tepër. Qëndro i informuar dhe bëje përvojën tënde në aeroport më të lehtë
+            dhe më të këndshme.</p>
+
+        <?php if ($loggedIn): ?>
+            <form method="post">
+                <button class="subscribe-btn" type="submit">Abonohu</button>
+            </form>
+        <?php else: ?>
             <form method="post">
                 <label for="nl-email">Enter your email:</label><br>
                 <input type="email" name="nl-email" placeholder="Enter email..."
-                    value="<?php echo htmlspecialchars($email); ?>" />
+                    value="<?php echo htmlspecialchars($email ?? ''); ?>" required />
                 <button class="subscribe-btn" type="submit">Abonohu</button>
                 <br>
                 <?php if (!empty($emailError)): ?>
@@ -318,8 +337,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span style="color: green;"><?php echo $successMsg; ?></span>
                 <?php endif; ?>
             </form>
-        </div>
+            <p>Je përdorues? <a href="login.php">Kyçu këtu</a>.</p>
+        <?php endif; ?>
     </div>
+</div>
+
+
 
 
 
@@ -330,15 +353,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/UEB25_GR3/script/about_us.js"></script>
 
-    <?php if (!empty($emailError)): ?>
-        <script>
-            alert("<?php echo $emailError; ?>");
-        </script>
-    <?php elseif (!empty($successMsg)): ?>
-        <script>
-            alert("<?php echo $successMsg; ?>");
-        </script>
-    <?php endif; ?>
     
 </body>
 

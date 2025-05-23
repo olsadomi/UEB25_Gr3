@@ -487,28 +487,28 @@
     <section id="photo-collage-section">
         <h2>Dyqanet</h2>
         <div class="gallery shops">
-            <img src="shop1.jpg" alt="Shop 1">
-            <img src="shop2.jpeg" alt="Shop 2">
-            <img src="shop3.webp" alt="Shop 3">
-            <img src="shop4.jpg" alt="Shop 4">
-            <img src="shop5.jpg" alt="Shop 5">
-            <img src="shop6.jpg" alt="Shop 6">
-            <img src="shop7.webp" alt="Shop 7">
-            <img src="shop8.jpg" alt="Shop 8">
-            <img src="shop9.jpg" alt="Shop 9">
+            <img src="fotot/shop1.jpg" alt="Shop 1">
+            <img src="fotot/shop2.jpeg" alt="Shop 2">
+            <img src="fotot/shop3.webp" alt="Shop 3">
+            <img src="fotot/shop4.jpg" alt="Shop 4">
+            <img src="fotot/shop5.jpg" alt="Shop 5">
+            <img src="fotot/shop6.jpg" alt="Shop 6">
+            <img src="fotot/shop7.webp" alt="Shop 7">
+            <img src="fotot/shop8.jpg" alt="Shop 8">
+            <img src="fotot/shop9.jpg" alt="Shop 9">
         </div>
 
         <h2>Restaurantet</h2>
         <div class="gallery restaurants">
-            <img src="restaurant1.webp" alt="Restaurant 1">
-            <img src="restaurant2.jpg" alt="Restaurant 2">
-            <img src="restaurant3.jpg" alt="Restaurant 3">
-            <img src="restaurant4.jpg" alt="Restaurant 4">
-            <img src="restaurant5.jpg" alt="Restaurant 5">
-            <img src="restaurant6.jpg" alt="Restaurant 6">
-            <img src="restaurant7.jpg" alt="Restaurant 7">
-            <img src="restaurant8.jpg" alt="Restaurant 8">
-            <img src="restaurant9.jpg" alt="Restaurant 9">
+            <img src="fotot/restaurant1.webp" alt="Restaurant 1">
+            <img src="fotot/restaurant2.jpg" alt="Restaurant 2">
+            <img src="fotot/restaurant3.jpg" alt="Restaurant 3">
+            <img src="fotot/restaurant4.jpg" alt="Restaurant 4">
+            <img src="fotot/restaurant5.jpg" alt="Restaurant 5">
+            <img src="fotot/restaurant6.jpg" alt="Restaurant 6">
+            <img src="fotot/restaurant7.jpg" alt="Restaurant 7">
+            <img src="fotot/restaurant8.jpg" alt="Restaurant 8">
+            <img src="fotot/restaurant9.jpg" alt="Restaurant 9">
         </div>
     </section>
 

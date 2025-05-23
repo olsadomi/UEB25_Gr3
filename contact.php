@@ -51,60 +51,65 @@
     </section>
 
     <?php
+    class CustomValidationException extends Exception
+    {
+    }
+    ;
+    $numberCount = null;
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $name = $_POST['name'];
-        $surname = $_POST['surname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $lloji = $_POST['lloji'] ?? '';
-        $mesazhi = $_POST['mesazhi'];
-        $contactMethod = $_POST['contact-method'];
+        try {
+            $errors = [];
 
-        $errors = [];
+            $name = $_POST['name'];
+            $surname = $_POST['surname'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $lloji = $_POST['lloji'] ?? '';
+            $mesazhi = $_POST['mesazhi'];
+            $contactMethod = $_POST['contact-method'];
 
-        if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $name)) {
-            $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
-        }
+            if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $name)) {
+                $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
+            }
 
+            if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $surname)) {
+                $errors[] = "Mbiemri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
+            }
 
-        if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $surname)) {
-            $errors[] = "Mbiemri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
-        }
+            if (!preg_match("/^\+?\(?\d{1,9}\)?[-\s]?\(?\d{2,3}\)?[-\s]?\d{3}[-\s]?\d{3,4}$/", $phone)) {
+                $errors[] = "Numri i telefonit nuk është i vlefshëm.";
+            }
 
-        if (!preg_match("/^\+?\(?\d{1,9}\)?[-\s]?\(?\d{2,3}\)?[-\s]?\d{3}[-\s]?\d{3,4}$/", $phone)) {
-            $errors[] = "Numri i telefonit nuk është i vlefshëm.";
-        }
+            $valid_types = ["sugjerim", "kerkese", "ankese", "tjeter"];
+            if (!in_array($lloji, $valid_types)) {
+                $errors[] = "Zgjedhni një lloj të vlefshëm të mesazhit.";
+            }
 
-        $valid_types = ["sugjerim", "kerkese", "ankese", "tjeter"];
-        if (!in_array($lloji, $valid_types)) {
-            $errors[] = "Zgjedhni një lloj të vlefshëm të mesazhit.";
-        }
+            $allowed_methods = ["Email", "Thirrje telefonike", "SMS"];
+            if (!in_array($contactMethod, $allowed_methods)) {
+                $errors[] = "Zgjedhni një mënyrë të vlefshme kontakti.";
+            }
 
-        $allowed_methods = ["Email", "Thirrje telefonike", "SMS"];
-        if (!in_array($contactMethod, $allowed_methods)) {
-            $errors[] = "Zgjedhni një mënyrë të vlefshme kontakti.";
-        }
-
-        $numberCount = 0;
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $mesazhi = $_POST['mesazhi'] ?? '';
+            if (!empty($errors)) {
+                throw new CustomValidationException(implode('|', $errors)); //
+            }
 
             preg_match_all('/\d/', $mesazhi, $matches);
             $numberCount = count($matches[0]);
-        }
 
-        if (!empty($errors)) {
+            echo "<div class='message-container success'><h3>Të dhënat janë valide!</h3>";
+        } catch (CustomValidationException $e) {
+            $errorList = explode('|', $e->getMessage());
             echo "<div class='message-container error'><h3>Gabime gjatë validimit:</h3><ul>";
-            foreach ($errors as $error) {
+            foreach ($errorList as $error) {
                 echo "<li>$error</li>";
             }
-            echo "</ul>";
-        } else {
-            echo "<div class='message-container success'><h3>Të dhënat janë valide!</h3></div>";
+            echo "</ul></div>";
         }
     }
     ?>
+
 
     <section id="contact-section">
         <div id="form-container">
@@ -148,10 +153,11 @@
                 <textarea placeholder="Shkruani mesazhin tuaj..." id="mesazhi" rows="3" cols="50" name="mesazhi"
                     oninput="countchar()"></textarea>
 
-                <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+                <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && $numberCount !== null): ?>
                     <p style="font-size: 12px;">Numra të gjetur në mesazh: <?= $numberCount ?></p>
                 <?php endif; ?>
-                
+
+
                 <p style="font-size: 12px;">Numri i karaktereve: <output id="charCount"></output></p>
 
                 <div class="menyra">

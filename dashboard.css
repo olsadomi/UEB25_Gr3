@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f3f4f6;
+    display: flex;
+    height: 100vh;
+}
+
+aside {
+    width: 220px;
+    background: linear-gradient(180deg, #0056ff, #002d99);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+aside h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 12px 0;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 250px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.content-section {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}

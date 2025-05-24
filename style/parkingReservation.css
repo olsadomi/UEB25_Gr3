@@ -1,0 +1,178 @@
+header{
+    min-height:28vw;
+    background-image: url("../Photos/Home/header-image2.jpg");
+    background-repeat: no-repeat;
+    background-position:top center;
+    background-size:cover;
+    box-sizing: border-box; 
+    padding: 0 8vw;
+    z-index: 1;
+    box-shadow: gray 0px 0px 8px 3px;
+    position: relative;
+    margin-bottom: 14vw;
+}
+
+h3{
+    font-weight: bold;
+    font-size: 4vw;
+    color: white;
+    position: relative;
+    top: 8vw;
+    text-decoration: underline var(--lightblue) 8px;
+}
+
+#parkingCalc{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    position: relative;
+    top: 13vw;
+}
+
+#parkingCalc .parking-container{
+    width: 95%;
+    background-image: linear-gradient(to left bottom, #0c356a, #0e4079, #104b88, #0f5798, #0c63a8, #3c72b5, #5882c1, #7192ce, #9cabda, #c1c5e6, #e2e1f2, #ffffff);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    padding: 2.8vw 30px;
+    box-shadow: lightgray 0 0 6px 5px;
+    transition: all ease-in-out 0.3s;
+}
+#parkingCalc .parking-container:hover{
+    box-shadow: var(--lightblue) 0 0 25px 5px;
+}
+.parking-container p{
+    color: var(--blue);
+    font-size: 1vw;
+}
+
+.parking-prices{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.parking-prices table{
+    width: 80%;
+    border-collapse: separate;
+    border-spacing: 10px;
+    border: 3px solid transparent; 
+    border-radius: 20px; 
+    padding: 0 20px;
+}
+    
+table tr td:first-child{
+    text-align: right;
+}
+table tr td:last-child{
+    text-align: left;
+}
+
+table td{
+    background-color: transparent;
+    border-bottom: var(--blue) 3px solid;
+    width: 50%;
+    padding: 7px 15px;
+    font-size: 1.2vw;
+}
+#parkingForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parking-calculator{
+    width: 35%;
+}
+.parking-calculator #sub-container{
+    width: 100%;
+    height: 10vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+}
+
+#sub-container input{
+    width: 12vw;
+    height: 2vw;
+    margin-bottom: 1.5vw;
+    border-radius: 10px;
+    border: none;
+}
+#sub-container label{
+    font-size: 1.2vw;
+    margin-bottom: 0.2vw;
+}
+.parking-calculator div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+.parking-calculator p{
+    font-weight: bold;
+    font-size: 2.2vw;
+    color: white;
+    width: 100%;
+    height: 3vw;
+    margin-bottom: 1vw;
+}
+
+#btn-parking{
+    width: 8vw;
+    height: 3vw;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: var(--blue);
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+#btn-parking:hover{
+    transform: scale(1.05);
+    background-color: var(--blue);
+    color: white;
+}
+
+
+.parkingButtons{
+    width: 100%;
+    height: auto;
+
+}
+#btn-paguaj{
+    width: 100%;
+    height: 4vw;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.8vw;
+    font-weight: bold;
+    color: var(--blue);
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+#btn-paguaj:hover{
+    transform: scale(1.05);
+    background-color: var(--blue);
+    color: white;
+}
+
+.parking-input{
+    transition: all 0.3s ease-in-out;
+}
+.parking-input.fieldNull{
+    box-shadow: red 0 0 7px 2px;
+}
+

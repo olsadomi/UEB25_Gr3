@@ -183,27 +183,31 @@
                 </div>
 
                 <div class="parking-calculator">
-                    <div id="sub-container">
-                        <div>
-                            <label for="Entry Date">Data hyrjes</label>
-                            <input type="date" class="parking-input"  id="data-hyrje" name="data-hyrje" value="">
-                            <label for="Exit Date" >Data daljes</label>
-                            <input type="date" class="parking-input" id="data-dalje" name="data-exit" value="">
-                        </div>
-                        <div>
-                            <label for="Koha">Koha hyrjes</label>
-                            <input type="time" class="parking-input" id="koha-hyrje" name="time-entry" value="">
-                            <label for="Koha">Koha daljes</label>
-                            <input type="time" class="parking-input" id="koha-dalje" name="time-exit" value="">
-                        </div>
-                    </div>
-                    
-                    <p id="showQmimi"></p>
-                    <div class="parkingButtons">
-                        <button type="submit" id="btn-parking">Llogarit</button>
-                        <button id="btn-rezervo">Rezervo</button>
-                    </div>
-                    
+                     
+                        <form id="parkingForm" action="parkingReservation.php" method="POST">
+                           <div id="sub-container">
+                                <div>
+                                    <label for="Entry Date">Data hyrjes</label>
+                                    <input type="date" class="parking-input"  id="data-hyrje" name="data-hyrje" value="">
+                                    <label for="Exit Date" >Data daljes</label>
+                                    <input type="date" class="parking-input" id="data-dalje" name="data-dalje" value="">
+                                </div>
+                                <div>
+                                    <label for="Koha">Koha hyrjes</label>
+                                    <input type="time" class="parking-input" id="koha-hyrje" name="koha-hyrje" value="">
+                                    <label for="Koha">Koha daljes</label>
+                                    <input type="time" class="parking-input" id="koha-dalje" name="koha-dalje" value="">
+                                    <input type="hidden" class="qmimi" name="qmimi" value="">
+                                </div>
+                            </div>
+                            <p id="showQmimi"></p>
+                            <div class="parkingButtons">
+                                <button type="button" id="btn-parking">Llogarit</button>
+                                <button type="submit" id="btn-rezervo">Rezervo</button>
+                            </div>
+                        
+                    </form>
+                 
                 </div>
             </div>
         </section>

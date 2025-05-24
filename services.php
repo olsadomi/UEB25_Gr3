@@ -83,16 +83,20 @@
     // ZEVENDESIMI ME PERDORIMIN E SESSIONS
     
     session_start();
-    function visitsCounter()
+    function visitsCounter(&$visits)
     {
-        if (!isset($_SESSION['services_visits'])) {
-            $_SESSION['services_visits'] = 0;
+        if (!isset($visits)) {
+            $visits = 0;
         }
-        $_SESSION['services_visits']++;
-        return $_SESSION['services_visits'];
+        $visits++;
+        return $visits;
     }
 
-    $count = visitsCounter();
+    $count = visitsCounter($_SESSION['services_visits']);
+
+    if ($count == 50) {
+    unset($_SESSION['services_visits']);  
+}
 
     if ($count % 5 == 0) {
         $message = "RASTI SPECIAL! Po e vizitoni këtë faqe për herë të $count-të përgjatë kohëve të fundit 😄 Faleminderit për vizitën!";
@@ -306,19 +310,19 @@
         <div id="car-rental-container">
             <!-- <div class="car-rental-brand">
                 <h3><b>Hertz</b></h3>
-                <img src="car-rental-1.jpg">
+                <img src="/fotot/car-rental-1.jpg">
                 <p><i>Shërbehu në Hertz - me mijëra lokacione në gjithë botën!</i></p>
                 <button onclick="showDetails(0)">Detajet</button>
             </div>
             <div class="car-rental-brand">
                 <h3><b>Europcar</b></h3>
-                <img src="car-rental-2.jpg">
+                <img src="/fotot/car-rental-2.jpg">
                 <p><i>Shërbime të mrekullueshme, makina të reja, çmime marramendëse!</i></p>
                 <button onclick="showDetails(1)">Detajet</button>
             </div>
             <div class="car-rental-brand">
                 <h3><b>AVIS</b></h3>
-                <img src="car-rental-3.jpg">
+                <img src="/fotot/car-rental-3.jpg">
                 <p><i>Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!</i></p>
                 <button onclick="showDetails(2)">Detajet</button>
             </div> -->
@@ -389,9 +393,9 @@
             }
 
             $carRentals = [
-                new CarRental("Hertz", "Shërbehu në Hertz - me mijëra lokacione në gjithë botën!", "car-rental-1.jpg"),
-                new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "car-rental-2.jpg"),
-                new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "car-rental-3.jpg")
+                new CarRental("Hertz", "Shërbehu në Hertz - me mijëra lokacione në gjithë botën!", "fotot/car-rental-1.jpg"),
+                new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "fotot/car-rental-2.jpg"),
+                new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "fotot/car-rental-3.jpg")
             ];
 
             $carRentals[0]->setBrand("HERTZ");

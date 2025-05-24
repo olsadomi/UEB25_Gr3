@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="contact_responsive.css">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
+    
     <style>
         .message-container {
             width: 100%;

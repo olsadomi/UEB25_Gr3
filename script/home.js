@@ -111,7 +111,7 @@ function dataGabim(){
 function dataSakt(qmimi){
     btnParking.style.transform = "translateY(20px)";
     btnRezervo.style.transform = "translateY(20px)";
- 
+
     showQmimi.classList.remove("wrong")
     showQmimi.classList.add("showQmimi");
     showQmimi.innerHTML = "Cmimi: " + qmimi + "€";

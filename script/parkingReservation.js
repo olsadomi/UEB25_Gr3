@@ -17,6 +17,29 @@ var qmimi=0;
 var isValid = false;
 
 btnPay.addEventListener("click", function(){
+    sendEmailAjax();
+    entryDate.value="";
+    exitDate.value="";
+    entryTime.value="";
+    exitTime.value="";
+    showQmimi.innerHTML="Totali: 0 €";
+    qmimi=0;
+})
+
+entryDate.addEventListener("change",function(){
+    updatePrice();
+})
+exitDate.addEventListener("change",function(){
+    updatePrice();
+})
+entryTime.addEventListener("change",function(){
+    updatePrice();
+})
+exitTime.addEventListener("change",function(){
+    updatePrice();
+})
+
+function updatePrice(){
     let entryDateTime = new Date(`${entryDate.value}T${entryTime.value}`);
     let exitDateTime = new Date(`${exitDate.value}T${exitTime.value}`);
 
@@ -52,7 +75,7 @@ btnPay.addEventListener("click", function(){
         }else{
             qmimi += 2;
         }
-        showQmimi.innerHTML = "Totali: " + qmimi + "€";
+        dataSakt(qmimi)
         isValid=true;
     }
     
@@ -69,22 +92,52 @@ btnPay.addEventListener("click", function(){
         }else if((diffMinutes>=15 && diffHours==0) || (diffMinutes>=15 && diffHours<2)){
             qmimi +=2;
         }
-        showQmimi.innerHTML = "Totali: " + qmimi + "€";
+        dataSakt(qmimi)
         isValid=true;
     }
-
-    if(isValid){
-        
-    }
-})
-
+}
 
 function dataGabim(){
     console.log("WRONG");
-
-    showQmimi.classList.remove("active")
-    showQmimi.classList.add("wrong");
+    showQmimi.style.fontSize= "1.5vw";
+    showQmimi.style.color= "red";
     showQmimi.innerHTML = "Data është vendosur gabim!"; 
     return;
 }
+
+function dataSakt(qmimi){
+      showQmimi.style.fontSize= "3vw";
+    showQmimi.style.color= "white";
+    showQmimi.innerHTML = "Totali: " + qmimi + " €";
+}
+
+  function sendEmailAjax() {
+        // Create FormData to send POST data
+        const formData = new FormData();
+        formData.append('AJAXdata-hyrje', entryDate.value);
+        formData.append('AJAXdata-dalje', exitDate.value);
+        formData.append('AJAXkoha-hyrje', entryTime.value);
+        formData.append('AJAXkoha-dalje', exitTime.value);
+        formData.append('AJAXqmimi', qmimi);
+
+        // Send POST request via fetch
+        fetch('parkingReservationAJAX.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // shows what PHP is returning
+            console.log("WORKING");
+            
+            if (data.success) {
+                alert('Email u dërgua me sukses!');
+            } else {
+                alert('Dështoi dërgimi i emailit.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 

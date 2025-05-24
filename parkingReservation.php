@@ -72,14 +72,6 @@
                         </div>
 
                         <p id="showQmimi">Totali: <?php echo isset($_POST['qmimi']) ? htmlspecialchars($_POST['qmimi']) : 'Totali: 0€'; ?> €</p>
-                        
-                        <?php
-                            function sendEmail(){
-                                
-                            }
-                        ?>
-
-                        
                         <button type="button" id="btn-paguaj">Paguaj</button>
                     </form>
                 </div>

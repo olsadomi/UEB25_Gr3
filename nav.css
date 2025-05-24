@@ -28,6 +28,16 @@ body{
     100% {background-color:none; box-shadow : none; color: var(--yellow); }
 }
 
+
+@keyframes btn-in {
+    0% {background-color:var(--yellow); }
+    100% {background-color:var(--blue); }
+}
+@keyframes btn-out {
+    0% {background-color:var(--blue);}
+    100% {background-color:var(--yellow);}
+}
+
 .nav-container{
     display:flex;
     flex-direction: row;
@@ -58,6 +68,12 @@ body{
     animation-fill-mode: forwards;
 }
 
+.nav-container:hover .btnLogin{
+    animation-name: btn-in;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
 .image{
     min-width: 23%;
     min-height: 55px;
@@ -81,7 +97,7 @@ body{
 }
 
 .linkat{
-    width: 55%;
+    width: 65%;
     height: 55px;
     display: flex;
     flex-direction: row;
@@ -94,6 +110,26 @@ body{
     font-size:1.2vw ;
     font-weight: 500;
     text-decoration: none;
+}
+
+.btnLogin{
+    width: 5vw;
+    height: 35px;
+    background-color: var(--yellow);
+    color: white;
+    font-size:1.2vw ;
+    font-weight: 500;
+    border-radius: 1vw;
+    border: none;
+    animation-name: btn-out;
+    animation-duration: 0.5s;
+}
+.btnLogin:hover{
+    cursor: pointer;
+}
+
+.btnLogin.scroll{
+    animation: btn-in 0.5s forwards;
 }
 
 .lines{

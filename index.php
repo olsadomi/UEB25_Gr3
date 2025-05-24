@@ -131,28 +131,20 @@
         </section>
 
         <?php 
-            $partners = [
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-kfc.png", "name"=>"KFC Kosova"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-airprishtina.png", "name"=>"Air Prishtina"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-pizza.png", "name"=>"Sach Pizza"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-prishtinamall.png", "name"=>"Prishtina Mall"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-bank.png", "name"=>"Pro Credit Bank"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-sach.png", "name"=>"Sach Caffe"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-up.png", "name"=>"Universiteti i Prishtinës"],
-                ["img"=>"/UEB25_GR3/Photos/Home/logo-swiss.png", "name"=>"Swiss Diamond Hotel"]
-            ];
+            include("db.php");
+            $query = mysqli_query($conn, "SELECT * FROM sponsors");
         ?>
 
         <section id="partners">
             <h1 class="section-title">Partnerë tanë</h1>
             <div class="partners-container">
-            <?php foreach($partners as $partner):?>
+            <?php while($row = mysqli_fetch_object($query)):?>
                 <div class="partners-child">
                     <div class="blueshade"></div>
-                    <img src="<?php echo $partner["img"]; ?>" alt="">
-                    <p><?php echo $partner["name"];?></p>
+                    <img src="<?php echo $row->image_path; ?>" alt="">
+                    <p><?php echo $row->name;?></p>
                 </div>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             </div>
         </section>
 
@@ -207,7 +199,11 @@
                     </div>
                     
                     <p id="showQmimi"></p>
-                    <button type="submit" id="btn-parking">Llogarit</button>
+                    <div class="parkingButtons">
+                        <button type="submit" id="btn-parking">Llogarit</button>
+                        <button id="btn-rezervo">Rezervo</button>
+                    </div>
+                    
                 </div>
             </div>
         </section>

@@ -486,7 +486,7 @@ table td{
     transform: translateY(15px);
 }
 #btn-parking{
-    width: 15vw;
+    width: 8vw;
     height: 3vw;
     border-radius: 10px;
     border: none;
@@ -494,9 +494,36 @@ table td{
     font-weight: bold;
     color: var(--blue);
     background-color: white;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 #btn-parking:hover{
+    transform: scale(1.05);
+    background-color: var(--blue);
+    color: white;
+}
+
+
+.parkingButtons{
+    display: flex !important;
+    flex-direction: row !important;
+    width: 75%;
+    height: auto;
+    justify-content: space-around;
+    align-items: center;
+}
+#btn-rezervo{
+    width: 8vw;
+    height: 3vw;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: var(--blue);
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+#btn-rezervo:hover{
     transform: scale(1.05);
     background-color: var(--blue);
     color: white;
@@ -506,7 +533,6 @@ table td{
     transition: all 0.3s ease-in-out;
 }
 .parking-input.fieldNull{
-
     box-shadow: red 0 0 7px 2px;
 }
 

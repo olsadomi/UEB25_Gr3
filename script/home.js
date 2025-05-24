@@ -29,6 +29,7 @@ var exitDate = document.querySelector("#data-dalje");
 var entryTime = document.querySelector("#koha-hyrje");
 var exitTime = document.querySelector("#koha-dalje");
 var btnParking = document.querySelector("#btn-parking");
+var btnRezervo = document.querySelector("#btn-rezervo");
 var showQmimi = document.querySelector("#showQmimi");
 
 var parkingInputs = document.querySelectorAll(".parking-input");
@@ -99,11 +100,13 @@ function dataGabim(){
     showQmimi.classList.add("wrong");
     showQmimi.innerHTML = "Data është vendosur gabim!"; 
     btnParking.style.transform = "translateY(20px)";
+    btnRezervo.style.transform = "translateY(20px)";
     return;
 }
 
 function dataSakt(qmimi){
     btnParking.style.transform = "translateY(20px)";
+    btnRezervo.style.transform = "translateY(20px)";
  
     showQmimi.classList.remove("wrong")
     showQmimi.classList.add("showQmimi");

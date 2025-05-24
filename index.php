@@ -27,7 +27,7 @@
         </div>
 
         <div class="easterEgg">
-            <audio id="easterAudio" src="MOV_0.mp3"></audio>
+            <audio id="easterAudio" src="audio/MOV_0.mp3"></audio>
         </div>
 
         <?php 

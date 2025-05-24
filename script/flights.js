@@ -1,6 +1,6 @@
 $(function(){
     $("#navbar-placeholder").load("/UEB25_GR3/nav.php");
-    $("#footer-placeholder").load("footer.html");
+    $("#footer-placeholder").load("footer.php");
 });
 
 
@@ -140,7 +140,7 @@ function playAirportAudio() {
     }
 
     $.ajax({
-        url: 'play_audio.php',
+        url: 'helpers/play_audio.php',
         type: 'POST',
         data: {
             action: 'play_audio',

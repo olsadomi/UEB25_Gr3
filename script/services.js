@@ -1,6 +1,6 @@
 $(function(){
     $("#navbar-placeholder").load("/UEB25_GR3/nav.php");
-    $("#footer-placeholder").load("footer.html");
+    $("#footer-placeholder").load("footer.php");
 });
 
 

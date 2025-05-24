@@ -389,9 +389,9 @@
             }
 
             $carRentals = [
-                new CarRental("Hertz", "Shërbehu në Hertz - me mijëra lokacione në gjithë botën!", "car-rental-1.jpg"),
-                new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "car-rental-2.jpg"),
-                new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "car-rental-3.jpg")
+                new CarRental("Hertz", "Shërbehu në Hertz - me mijëra lokacione në gjithë botën!", "fotot/car-rental-1.jpg"),
+                new CarRental("Europcar", "Shërbime të mrekullueshme, makina të reja, çmime marramendëse!", "fotot/car-rental-2.jpg"),
+                new CarRental("AVIS", "Përzgjedh nga larmishmëria e pafundme e makinave që ofrojmë!", "fotot/car-rental-3.jpg")
             ];
 
             $carRentals[0]->setBrand("HERTZ");
@@ -415,9 +415,9 @@
 
     <section id="transport-section">
         <div id="transport-container">
-            <div class="transport-circle"><a href="taxi.pdf" download="taxi.pdf" target="_blank">TAKSI<br> <span>Lexo më
+            <div class="transport-circle"><a href="misc/taxi.pdf" download="taxi.pdf" target="_blank">TAKSI<br> <span>Lexo më
                         shumë</span></a></div>
-            <div class="transport-circle"><a href="bus.pdf" download="bus.pdf" target="_blank">AUTOBUS <br><span>Lexo më
+            <div class="transport-circle"><a href="misc/bus.pdf" download="bus.pdf" target="_blank">AUTOBUS <br><span>Lexo më
                         shumë</span></a></div>
         </div>
     </section>

@@ -63,7 +63,7 @@ if (empty($departures)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nisjet dhe mbërritjet</title>
-    <link rel="stylesheet" href="flights.css">
+    <link rel="stylesheet" href="style/flights.css">
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="footer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -109,7 +109,7 @@ if (empty($departures)) {
                 linjën tuaj ajrore.
             </p>
             <button id="playbutton" onclick="playAirportAudio()"><?php echo $airportName; ?></button>
-            <audio id="audioPlayer" src="Airport Sound Effect.mp3"></audio>
+            <audio id="audioPlayer" src="audio/Airport Sound Effect.mp3"></audio>
         </div>
     </header>
 
@@ -476,7 +476,7 @@ if (empty($departures)) {
     <script>
         $(function () {
             $("#navbar-placeholder").load("/UEB25_GR3/nav.php");
-            $("#footer-placeholder").load("footer.html");
+            $("#footer-placeholder").load("footer.php");
         });
 
 

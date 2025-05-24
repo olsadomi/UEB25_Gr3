@@ -83,16 +83,16 @@
     // ZEVENDESIMI ME PERDORIMIN E SESSIONS
     
     session_start();
-    function visitsCounter()
+    function visitsCounter(&$visits)
     {
-        if (!isset($_SESSION['services_visits'])) {
-            $_SESSION['services_visits'] = 0;
+        if (!isset($visits)) {
+            $visits = 0;
         }
-        $_SESSION['services_visits']++;
-        return $_SESSION['services_visits'];
+        $visits++;
+        return $visits;
     }
 
-    $count = visitsCounter();
+    $count = visitsCounter($_SESSION['services_visits']);
 
     if ($count % 5 == 0) {
         $message = "RASTI SPECIAL! Po e vizitoni këtë faqe për herë të $count-të përgjatë kohëve të fundit 😄 Faleminderit për vizitën!";

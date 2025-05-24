@@ -15,14 +15,14 @@
         <nav>
             <a href="" onclick="showSection('dashboard')">Dashboard</a>
             <a href="#" onclick="showSection('news')">News</a>
-            <a href="#" onclick="showSection('user_contact')">User Contact</a>
+            <a href="#" onclick="loadContent('admin_contact.php')">User Contact</a>
             <a href="#" onclick="showSection('parking')">Parking</a>
             <a href="#" onclick="showSection('sponsor')">Sponsor</a>
         </nav>
     </aside>
 
     <div class="main">
-        <div class="topbar">            
+        <div class="topbar">
         </div>
 
         <div id="content-area">
@@ -32,17 +32,20 @@
     </div>
 
     <script>
-        function showSection(id) {
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            const selected = document.getElementById(id);
-            if (selected) {
-                selected.classList.add('active');
-            }
+        function loadContent(page) {
+            fetch(page)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("content-area").innerHTML = html;
+                })
+                .catch(err => {
+                    document.getElementById("content-area").innerHTML = "<p>Error loading content.</p>";
+                    console.error(err);
+                });
         }
     </script>
+
+
 </body>
 
 </html>

@@ -1,77 +1,49 @@
 <?php
-
 require_once "db.php";
 
 $sql = "SELECT * FROM contacts ORDER BY submitted_at DESC";
 $result = $conn->query($sql);
-
-
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin - Kontaktet</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <h1>Kontaktet e Pranuara</h1>
-    <table>
-        <thead>
+<!-- You can still link a CSS file, or move styles to dashboard.css -->
+<link rel="stylesheet" href="admin_contact.css">
+
+<h1>Kontaktet e Pranuara</h1>
+<table>
+  <thead>
     <tr>
-        <th>ID</th>
-        <th>Emri</th>
-        <th>Mbiemri</th>
-        <th>Email</th>
-        <th>Telefoni</th>
-        <th>Lloji</th>
-        <th>Mesazhi</th>
-        <th>Metoda e kontaktit</th>
-        <th>Data</th>
-        <th>Veprime</th> <!-- Kjo shton kolonën e butonit -->
+      <th>ID</th>
+      <th>Emri</th>
+      <th>Mbiemri</th>
+      <th>Email</th>
+      <th>Telefoni</th>
+      <th>Lloji</th>
+      <th>Mesazhi</th>
+      <th>Metoda e kontaktit</th>
+      <th>Data</th>
+      <th>Veprime</th>
     </tr>
-</thead>
-<tbody>
-    <?php
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                <td>{$row['id']}</td>
-                <td>{$row['name']}</td>
-                <td>{$row['surname']}</td>
-                <td>{$row['email']}</td>
-                <td>{$row['phone']}</td>
-                <td>{$row['message_type']}</td>
-                <td>{$row['message']}</td>
-                <td>{$row['contact_method']}</td>
-                <td>{$row['submitted_at']}</td>
-                <td><a href='reply.php?email=" . urlencode($row['email']) . "'>Përgjigju</a></td>
-            </tr>";
-        }
-    } else {
-        echo "<tr><td colspan='10'>Nuk ka të dhëna.</td></tr>";
-    }
-    ?>
-</tbody>
+  </thead>
+  <tbody>
+    <?php if ($result->num_rows > 0): ?>
+      <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+          <td><?= htmlspecialchars($row['id']) ?></td>
+          <td><?= htmlspecialchars($row['name']) ?></td>
+          <td><?= htmlspecialchars($row['surname']) ?></td>
+          <td><?= htmlspecialchars($row['email']) ?></td>
+          <td><?= htmlspecialchars($row['phone']) ?></td>
+          <td><?= htmlspecialchars($row['message_type']) ?></td>
+          <td><?= nl2br(htmlspecialchars($row['message'])) ?></td>
+          <td><?= htmlspecialchars($row['contact_method']) ?></td>
+          <td><?= htmlspecialchars($row['submitted_at']) ?></td>
+          <td><a href="reply.php?email=<?= urlencode($row['email']) ?>">Përgjigju</a></td>
+        </tr>
+      <?php endwhile; ?>
+    <?php else: ?>
+      <tr><td colspan="10">Nuk ka të dhëna.</td></tr>
+    <?php endif; ?>
+  </tbody>
+</table>
 
-    </table>
-</body>
-</html>
-
-<?php
-$conn->close();
-?>
+<?php $conn->close(); ?>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="contact_responsive.css">
     <link rel="icon" type="image/x-icon" href="logo-favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         .message-container {
             width: 100%;
@@ -49,67 +50,6 @@
     <section id="contact-header">
         <h1>Kontakti</h1>
     </section>
-
-    <?php
-    //custom exception
-    class CustomValidationException extends Exception
-    {
-    }
-    ;
-    $numberCount = null;
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        try {
-            $errors = [];
-
-            $name = $_POST['name'];
-            $surname = $_POST['surname'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $lloji = $_POST['lloji'] ?? '';
-            $mesazhi = $_POST['mesazhi'];
-            $contactMethod = $_POST['contact-method'];
-
-            if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $name)) {
-                $errors[] = "Emri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
-            }
-
-            if (!preg_match("/^[a-zA-ZëËçÇ]{2,20}$/u", $surname)) {
-                $errors[] = "Mbiemri nuk është i vlefshëm (vetëm shkronja, 2-20 karaktere).";
-            }
-
-            if (!preg_match("/^\+?\(?\d{1,9}\)?[-\s]?\(?\d{2,3}\)?[-\s]?\d{3}[-\s]?\d{3,4}$/", $phone)) {
-                $errors[] = "Numri i telefonit nuk është i vlefshëm.";
-            }
-
-            $valid_types = ["sugjerim", "kerkese", "ankese", "tjeter"];
-            if (!in_array($lloji, $valid_types)) {
-                $errors[] = "Zgjedhni një lloj të vlefshëm të mesazhit.";
-            }
-
-            $allowed_methods = ["Email", "Thirrje telefonike", "SMS"];
-            if (!in_array($contactMethod, $allowed_methods)) {
-                $errors[] = "Zgjedhni një mënyrë të vlefshme kontakti.";
-            }
-
-            if (!empty($errors)) {
-                throw new CustomValidationException(implode('|', $errors)); //
-            }
-
-            preg_match_all('/\d/', $mesazhi, $matches);
-            $numberCount = count($matches[0]);
-
-            echo "<div class='message-container success'><h3>Të dhënat janë valide!</h3>";
-        } catch (CustomValidationException $e) {
-            $errorList = explode('|', $e->getMessage());
-            echo "<div class='message-container error'><h3>Gabime gjatë validimit:</h3><ul>";
-            foreach ($errorList as $error) {
-                echo "<li>$error</li>";
-            }
-            echo "</ul></div>";
-        }
-    }
-    ?>
 
 
     <section id="contact-section">
@@ -329,6 +269,55 @@
     <div id="footer-placeholder"></div>
 
 
+    <script>
+    $(document).ready(function() {
+    $('#contact-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        $('#submit-btn').prop('disabled', true).html('Duke dërguar...');
+        $('.message-container').remove();
+        
+        var formData = $(this).serialize();
+        
+        $.ajax({
+            url: 'process_contact.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    var successMsg = '<div class="message-container success">' +
+                        '<h3>' + response.message + '</h3>';
+                    
+                    successMsg += '</div>';
+                    
+                    $('#form-container').prepend(successMsg);
+                    $('#contact-form')[0].reset();
+                    $('#charCount').text('0');
+                } else {
+                    var errorMsg = '<div class="message-container error"><h3>Gabime:</h3><ul>';
+                    $.each(response.errors, function(index, error) {
+                        errorMsg += '<li>' + error + '</li>';
+                    });
+                    errorMsg += '</ul></div>';
+                    $('#form-container').prepend(errorMsg);
+                }
+            },
+            error: function(xhr) {
+                var errorMsg = '<div class="message-container error"><h3>Gabim në server:</h3><p>' + 
+                    xhr.responseText + '</p></div>';
+                $('#form-container').prepend(errorMsg);
+            },
+            complete: function() {
+                $('#submit-btn').prop('disabled', false).html('Dërgo');
+                $('html, body').animate({
+                    scrollTop: $('.message-container').offset().top - 100
+                }, 500);
+            }
+        });
+    });
+});
+    </script>
 </body>
 
 </html>

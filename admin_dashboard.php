@@ -14,7 +14,7 @@
         <h1>Prishtina Airport</h1>
         <nav>
             <a href="" onclick="showSection('dashboard')">Dashboard</a>
-            <a href="#" onclick="showSection('news')">News</a>
+            <a href="#" onclick="loadContent('news-admin.php')">News</a>
             <a href="#" onclick="loadContent('admin_contact.php')">User Contact</a>
             <a href="#" onclick="showSection('parking')">Parking</a>
             <a href="#" onclick="showSection('sponsor')">Sponsor</a>

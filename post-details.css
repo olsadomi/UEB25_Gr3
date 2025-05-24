@@ -25,30 +25,7 @@ a{
     border-radius: 15px;
     overflow: hidden;
 }
-.post1-image {
-    background: url(fotot/foto1.webp);
-}
-.post2-image {
-    background: url(fotot/foto2.jpg);
-}
-.post3-image {
-    background: url(fotot/foto3.webp);
-}
-.post4-image {
-    background: url(fotot/foto4.jpg);
-}
-.post5-image {
-    background: url(fotot/foto5.webp);
-}
-.post6-image {
-    background: url(fotot/foto6.jpg);
-}
-.post7-image {
-    background: url(fotot/foto7.webp);
-}
-
-.post1-image, .post2-image, .post3-image, .post4-image,
-.post5-image, .post6-image, .post7-image{
+.post-image{
     width: 100%;
     height: 80vh;
     background-repeat: no-repeat;

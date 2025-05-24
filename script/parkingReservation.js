@@ -3,40 +3,20 @@ $(function(){
     $("#footer-placeholder").load("footer.html");
 });
 
-var airport_container = document.querySelector(".airport");
-var city_container = document.querySelector(".city");
-var btnAirport= document.querySelector("#plane");
-var btnCity= document.querySelector("#city");
-
-btnAirport.addEventListener("click", function(){
-    console.log("OK");
-    city_container.classList.remove("active");
-    airport_container.classList.add("active")
-    btnAirport.classList.add("active")
-    btnCity.classList.remove("active")
-})
-
-btnCity.addEventListener("click", function(){
-    console.log("OK");
-    city_container.classList.add("active");
-    airport_container.classList.remove("active")
-    btnCity.classList.add("active")
-    btnAirport.classList.remove("active")
-})
- 
+var btnPay = document.getElementById("btn-paguaj");
 var entryDate = document.querySelector("#data-hyrje");
 var exitDate = document.querySelector("#data-dalje");
 var entryTime = document.querySelector("#koha-hyrje");
 var exitTime = document.querySelector("#koha-dalje");
-var btnParking = document.querySelector("#btn-parking");
-var btnRezervo = document.querySelector("#btn-rezervo");
 var showQmimi = document.querySelector("#showQmimi");
+
+
 
 var parkingInputs = document.querySelectorAll(".parking-input");
 var qmimi=0;
 var isValid = false;
 
-btnParking.addEventListener("click", function(){
+btnPay.addEventListener("click", function(){
     let entryDateTime = new Date(`${entryDate.value}T${entryTime.value}`);
     let exitDateTime = new Date(`${exitDate.value}T${exitTime.value}`);
 
@@ -44,10 +24,8 @@ btnParking.addEventListener("click", function(){
         if(parkingInputs[i].value==""){
             console.log(i);
             parkingInputs[i].classList.add("fieldNull")
-            showQmimi.style.display = "none";
         }else{
             parkingInputs[i].classList.remove("fieldNull")
-            showQmimi.style.display = "block";
         }
     }
 
@@ -74,7 +52,7 @@ btnParking.addEventListener("click", function(){
         }else{
             qmimi += 2;
         }
-        dataSakt(qmimi);
+        showQmimi.innerHTML = "Totali: " + qmimi + "€";
         isValid=true;
     }
     
@@ -91,47 +69,22 @@ btnParking.addEventListener("click", function(){
         }else if((diffMinutes>=15 && diffHours==0) || (diffMinutes>=15 && diffHours<2)){
             qmimi +=2;
         }
-        dataSakt(qmimi);
+        showQmimi.innerHTML = "Totali: " + qmimi + "€";
         isValid=true;
+    }
+
+    if(isValid){
+        
     }
 })
 
 
 function dataGabim(){
     console.log("WRONG");
- 
+
     showQmimi.classList.remove("active")
     showQmimi.classList.add("wrong");
     showQmimi.innerHTML = "Data është vendosur gabim!"; 
-    btnParking.style.transform = "translateY(20px)";
-    btnRezervo.style.transform = "translateY(20px)";
     return;
 }
-
-function dataSakt(qmimi){
-    btnParking.style.transform = "translateY(20px)";
-    btnRezervo.style.transform = "translateY(20px)";
- 
-    showQmimi.classList.remove("wrong")
-    showQmimi.classList.add("showQmimi");
-    showQmimi.innerHTML = "Cmimi: " + qmimi + "€";
-}
-
-const easterDiv = document.querySelector(".easterEgg");
-const easterAudio = document.querySelector("#easterAudio");
-
-easterDiv.addEventListener("click", function(){
-    easterAudio.currentTime = 0;
-    easterAudio.play();
-})
-
-var form = document.getElementById("parkingForm");
-
-form.addEventListener("submit", function(event){
-    if(!isValid){
-        event.preventDefault();
-    }else{
-        document.querySelector(".qmimi").value=qmimi;
-    }
-})
 

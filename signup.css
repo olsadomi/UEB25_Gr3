@@ -9,7 +9,6 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
 .container {
   background: #fff;
   padding: 40px;
@@ -24,11 +23,6 @@ body {
   transform: scale(1.01);
 }
 
-.signup-form h2 {
-  text-align: center;
-  color: #0174be;
-  margin-bottom: 24px;
-}
 
 .signup-form label {
   display: block;

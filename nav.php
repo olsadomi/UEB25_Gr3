@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/UEB25_GR3/style/nav.css">
+    <link rel="stylesheet" href="/UEB25_GR3/nav.css">
 </head>
 <body>
     <nav>
@@ -19,9 +19,11 @@
                 <a href="/UEB25_GR3/services.php">Shërbimet</a>
                 <a href="/UEB25_GR3/news.php">Lajme</a>
                 <a href="/UEB25_GR3/about_us.php">Rreth Nesh</a>
-                <a href="/UEB25_GR3/contact.php">Kontakt</a>
+                <a href="/UEB25_GR3/contact.php" style="margin-right: 2vw;">Kontakt</a>
+                <button class="btnLogin">Login</button>
             </div>
 
+            
         </div>
     </nav>
 

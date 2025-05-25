@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Merr të dhënat për formën
 $stmt = $conn->prepare("SELECT * FROM news WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();

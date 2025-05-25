@@ -53,20 +53,25 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="sq">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login</title> 
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <div class="login-container">
         <h2>Kyçu</h2>
-        <?php if (!empty($error)) echo "<div class='error'>$error</div>"; ?>
+        <?php if (!empty($error))
+            echo "<div class='error'>$error</div>"; ?>
         <form method="post" action="login.php">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Fjalëkalimi" required>
+            <a id="signupLink" href="signup.php">Nuk ke llogari? Regjistrohu</a>
             <input type="submit" value="Kyçu">
         </form>
     </div>
 </body>
+
 </html>

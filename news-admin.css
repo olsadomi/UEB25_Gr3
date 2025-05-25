@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-#content-area {
+#content-area{
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
     box-sizing: border-box;
@@ -59,7 +59,7 @@ input[type="file"] {
     border-radius: 8px;
     transition: border 0.2s ease;
     font-size: 14px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 textarea {

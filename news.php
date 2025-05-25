@@ -17,6 +17,7 @@
             flex-wrap: wrap;
             margin-left: 20px;
         }
+
         .sort-buttons a {
             padding: 8px 15px;
             border-radius: 4px;
@@ -24,11 +25,14 @@
             color: #333;
             font-size: 14px;
         }
+
         .sort-buttons a:hover {
             background-color: #e0e0e0;
         }
+
         .sort-buttons a.active {
-            background-color:rgb(255, 196, 54);;
+            background-color: rgb(255, 196, 54);
+            ;
             color: white;
         }
     </style>
@@ -52,11 +56,20 @@
     <div class="latest-news-carousel">
         <h3>Lajmet e Fundit</h3>
         <div class="carousel">
-            <span class="carousel-item">Lajmi 1: Tollovi në Aeroportin e Prishtinës, shkak anulimet e
-            fluturimeve.</span>
-            <span class="carousel-item">Lajmi 2: Event i ri në Aeroport për turistët!</span>
-            <span class="carousel-item">Lajmi 3: Fluturime të reja për 2024.</span>
-            <span class="carousel-item">Lajmi 4: Shërbimi i Self Check-in.</span>
+            <?php
+            require 'db.php';
+
+            $stmt = $conn->prepare("SELECT id, title FROM news ORDER BY created_at DESC LIMIT 4");
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_assoc()):
+                ?>
+                <span class="carousel-item">
+                    <?php echo htmlspecialchars($row['title']); ?>
+                </span>
+            <?php endwhile; ?>
+            <?php $stmt->close(); ?>
         </div>
     </div>
 
@@ -77,7 +90,8 @@
     </div>
 
     <?php
-    class Post{
+    class Post
+    {
         private $id;
         private $title;
         private $date;
@@ -86,7 +100,8 @@
         private $description;
         private $link;
 
-        public function __construct($id,$title,$date,$category,$image,$description,$link){
+        public function __construct($id, $title, $date, $category, $image, $description, $link)
+        {
             $this->id = $id;
             $this->title = $title;
             $this->date = $date;
@@ -96,63 +111,87 @@
             $this->link = $link;
         }
 
-        public function getId(){return $this->id;}
-        public function getTitle(){return $this->title;}
-        public function getDate(){return $this->date;}
-        public function getCategory(){return $this->category;}
-        public function getImage(){return $this->image;}
-        public function getDescription(){return $this->description;}
-        public function getLink(){return $this->link;}
+        public function getId()
+        {
+            return $this->id;
+        }
+        public function getTitle()
+        {
+            return $this->title;
+        }
+        public function getDate()
+        {
+            return $this->date;
+        }
+        public function getCategory()
+        {
+            return $this->category;
+        }
+        public function getImage()
+        {
+            return $this->image;
+        }
+        public function getDescription()
+        {
+            return $this->description;
+        }
+        public function getLink()
+        {
+            return $this->link;
+        }
     }
 
-    class PostManager{
+    class PostManager
+    {
         private $posts = [];
 
-        public function addPost(Post $post){
+        public function addPost(Post $post)
+        {
             return $this->posts[] = $post;
         }
 
-        public function sortByTitle($ascending = true){
-            $titles=[];
-            foreach($this->posts as $index => $post){
+        public function sortByTitle($ascending = true)
+        {
+            $titles = [];
+            foreach ($this->posts as $index => $post) {
                 $titles[$index] = $post->getTitle();
             }
 
-            if($ascending){
+            if ($ascending) {
                 asort($titles);
-            }
-            else{
+            } else {
                 arsort($titles);
             }
 
             $sorted = [];
-            foreach(array_keys($titles) as $index){
+            foreach (array_keys($titles) as $index) {
                 $sorted[] = $this->posts[$index];
             }
             $this->posts = $sorted;
         }
 
-        public function sortByDate($newestFirst = true){
+        public function sortByDate($newestFirst = true)
+        {
             $dates = [];
-            foreach($this->posts as $index => $post){
+            foreach ($this->posts as $index => $post) {
                 $dates[$index] = strtotime($post->getDate());
             }
 
-            if($newestFirst){
+            if ($newestFirst) {
                 arsort($dates);
-            }
-            else{
+            } else {
                 asort($dates);
             }
 
             $sorted = [];
-            foreach(array_keys($dates) as $index){
+            foreach (array_keys($dates) as $index) {
                 $sorted[] = $this->posts[$index];
             }
             $this->posts = $sorted;
         }
 
-        public function getAllPosts(){
+        public function getAllPosts()
+        {
             return $this->posts;
         }
     }
@@ -162,7 +201,7 @@
     $postManager = new PostManager();
     $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC");
 
-    while($row = $result->fetch_assoc()){
+    while ($row = $result->fetch_assoc()) {
         $postManager->addPost(new Post(
             $row['id'],
             $row['title'],
@@ -170,7 +209,7 @@
             $row['category'],
             $row['image_path'],
             substr($row['content'], 0, 120) . "...",
-            'post-details.php?id='. $row['id']
+            'post-details.php?id=' . $row['id']
         ));
     }
 
@@ -184,11 +223,11 @@
         case 'title_desc':
             $postManager->sortByTitle(false);
             break;
-            
+
         case 'date_asc':
             $postManager->sortByDate(false);
             break;
-            
+
         case 'date_desc':
         default:
             $postManager->sortByDate(true);
@@ -201,7 +240,9 @@
         <span>Rendit sipas:</span>
         <a href="?sort=title_asc" class="<?= $sort_method === 'title_asc' ? 'active' : '' ?>">Titulli (A-Z)</a>
         <a href="?sort=title_desc" class="<?= $sort_method === 'title_desc' ? 'active' : '' ?>">Titulli (Z-A)</a>
-        <a href="?sort=date_desc" class="<?= (!isset($_GET['sort']) || $sort_method === 'date_desc') ? 'active' : '' ?>">Data (më të rejat)</a>
+        <a href="?sort=date_desc"
+            class="<?= (!isset($_GET['sort']) || $sort_method === 'date_desc') ? 'active' : '' ?>">Data (më të
+            rejat)</a>
         <a href="?sort=date_asc" class="<?= $sort_method === 'date_asc' ? 'active' : '' ?>">Data (më të vjetrat)</a>
     </div>
 

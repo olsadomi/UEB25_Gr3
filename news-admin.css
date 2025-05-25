@@ -131,6 +131,7 @@ table th {
     border-radius: 5px;
     color: white;
     margin-right: 5px;
+    display: flex;
 }
 
 .actions .edit {

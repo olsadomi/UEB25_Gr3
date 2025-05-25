@@ -95,21 +95,22 @@ function showDetails(index) {
     
     try {
         const formData = new FormData(form);
-        console.log('Form data:', Object.fromEntries(formData.entries())); // Log form data
+        console.log('Form data:', Object.fromEntries(formData.entries())); 
         
+        //fetch fajllin per format e makinave me qira
         const response = await fetch('process_rental_requests.php', {
             method: 'POST',
             body: formData
         });
         
-        console.log('Response status:', response.status); // Log status
+        console.log('Response status:', response.status); 
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const result = await response.json();
-        console.log('Full response:', result); // Log full response
+        console.log('Full response:', result); 
         
         if (result.success) {
             alert(result.message);
@@ -130,7 +131,6 @@ function showDetails(index) {
     tab.style.display = "flex";
 }
 
-// Helper to get the brand name based on index
 function getBrandName(index) {
     return details[index].brand;
 }

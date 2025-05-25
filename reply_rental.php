@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="to" value="<?= htmlspecialchars($email); ?>" readonly>
             
             <label>Subjekti:</label>
-            <input type="text" name="subject" value="Përgjigje ndaj kërkesës suaj për makinë <?= !empty($car_brand) ? ' - ' . htmlspecialchars($car_brand) : '' ?>" required>
+            <input type="text" name="subject" value="Pergjigje ndaj kerkeses suaj per makine <?= !empty($car_brand) ? ' - ' . htmlspecialchars($car_brand) : '' ?>" required>
             
             <label>Mesazhi:</label>
             <textarea name="message" required></textarea>

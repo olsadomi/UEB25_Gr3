@@ -30,7 +30,7 @@ $currentAdmin = $_SESSION['user_name'];
             <a href="#" onclick="loadContent('admin_contact.php')">Menaxhimi i Kontaktit</a>
             <a href="#" onclick="loadContent('admin_newsletter.php')">Menaxhimi i Newsletter</a>
             <a href="#" onclick="loadContent('admin_rental_requests.php')">Menaxhimi i Makinave me Qira</a>
-            <a href="#" onclick="showSection('sponsor')">Menaxhimi i Sponsoreve</a>
+            <a href="#" onclick="loadContent('admin_sponsors.php')">Menaxhimi i Sponsoreve</a>
             <a href="logout.php">Dalje</a>
         </nav>
     </aside>

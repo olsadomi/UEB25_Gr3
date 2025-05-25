@@ -157,63 +157,22 @@
         }
     }
 
+    require 'db.php';
+
     $postManager = new PostManager();
-    $postManager->addPost(new Post(
-        1,
-        'Tollovi në Aeroportin e Prishtinës, shkak anulimet e fluturimeve (VIDEO)',
-        '2025-01-02',
-        'risi',
-        'fotot/foto1.webp',
-        'Në prag të sezonit dimëror, Aeroporti Ndërkombëtar i Prishtinës ka nisur një sërë përmirësimesh...',
-        'post1-details.php'));
-    $postManager->addPost(new Post(
-        2,
-        'Destinacione të Reja për 2024: Aeroporti Shton Disa Linjat Ndërkombëtare',
-        '2022-11-12',
-        'destinacionet',
-        'fotot/foto2.jpg',
-        'Nga fillimi i vitit 2024, Aeroporti i Prishtinës do të ofrojë fluturime për destinacione të reja...',
-        'post2-details.php'));
-    $postManager->addPost(new Post(
-        3,
-        'Projekti i Ri "Green Airport" Ndryshon Pamjen e Aeroportit të Prishtinës',
-        '2024-02-01',
-        'risi',
-        'fotot/foto3.webp',
-        'Aeroporti Ndërkombëtar i Prishtinës ka nisur një projekt ambicioz të quajtur "Green Airport"...',
-        'post3-details.php'));
-    $postManager->addPost(new Post(
-        4,
-        'Aeroporti i Prishtinës Organizoi Panairin e Turizmit - Oportunitete të Rrethit Ndërkombëtar',
-        '2024-12-10',
-        'evente',
-        'fotot/foto4.jpg',
-        'Aeroporti i Prishtinës ka hapur dyert për një ngjarje të jashtëzakonshme...',
-        'post4-details.php'));
-    $postManager->addPost(new Post(
-        5,
-        'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës "Adem Jashari"',
-        '2024-12-19',
-        'risi',
-        'fotot/foto5.webp',
-        'Shërbimi i Self Check-in tani edhe në Aeroportin Ndërkombëtar të Prishtinës...',
-        'post5-details.php'));
-    $postManager->addPost(new Post(
-        6,
-        'Aeroporti i Prishtinës Zgjeron Destinacionet Evropiane: Lidhje të Reja për Udhëtarët',
-        '2021-06-23',
-        'destinacionet',
-        'fotot/foto6.jpg',
-        'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" vazhdon të jetë pika kryesore...',
-        'post6-details.php'));
-    $postManager->addPost(new Post(
-        7,
-        'Aeroporti i Prishtinës Pret Forumin e Biznesit 2024: Mundësi të Reja për Sipërmarrësit',
-        '2024-11-17',
-        'evente',
-        'fotot/foto7.webp',
-        'Aeroporti Ndërkombëtar i Prishtinës "Adem Jashari" është nikoqir i një eventi madhor...',
-        'post7-details.php'));
+    $result = $conn->query("SELECT * FROM news ORDER BY created_at DESC");
+
+    while($row = $result->fetch_assoc()){
+        $postManager->addPost(new Post(
+            $row['id'],
+            $row['title'],
+            $row['created_at'],
+            $row['category'],
+            $row['image_path'],
+            substr($row['content'], 0, 120) . "...",
+            'post-details.php?id='. $row['id']
+        ));
+    }
 
     $sort_method = $_GET['sort'] ?? 'date_desc';
 

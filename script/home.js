@@ -33,7 +33,8 @@ var btnRezervo = document.querySelector("#btn-rezervo");
 var showQmimi = document.querySelector("#showQmimi");
 
 var parkingInputs = document.querySelectorAll(".parking-input");
-
+var qmimi=0;
+var isValid = false;
 
 btnParking.addEventListener("click", function(){
     let entryDateTime = new Date(`${entryDate.value}T${entryTime.value}`);
@@ -52,6 +53,7 @@ btnParking.addEventListener("click", function(){
 
     if(entryDateTime >= exitDateTime){
         dataGabim();
+        isValid=false;
         return;
     }
 
@@ -60,7 +62,7 @@ btnParking.addEventListener("click", function(){
     let diffHours = Math.floor((diff/ (1000 * 60 * 60)) % 24);
     let diffDays = Math.floor(diff / (1000 * 60 * 60 * 24)); 
    
-    let qmimi =0;
+    qmimi =0;
     if(diffDays>0){
         qmimi =diffDays*8;
         if(diffHours >=12){
@@ -73,6 +75,7 @@ btnParking.addEventListener("click", function(){
             qmimi += 2;
         }
         dataSakt(qmimi);
+        isValid=true;
     }
     
     if(diffDays==0){
@@ -89,6 +92,7 @@ btnParking.addEventListener("click", function(){
             qmimi +=2;
         }
         dataSakt(qmimi);
+        isValid=true;
     }
 })
 
@@ -107,7 +111,7 @@ function dataGabim(){
 function dataSakt(qmimi){
     btnParking.style.transform = "translateY(20px)";
     btnRezervo.style.transform = "translateY(20px)";
- 
+
     showQmimi.classList.remove("wrong")
     showQmimi.classList.add("showQmimi");
     showQmimi.innerHTML = "Cmimi: " + qmimi + "€";
@@ -121,4 +125,13 @@ easterDiv.addEventListener("click", function(){
     easterAudio.play();
 })
 
+var form = document.getElementById("parkingForm");
+
+form.addEventListener("submit", function(event){
+    if(!isValid){
+        event.preventDefault();
+    }else{
+        document.querySelector(".qmimi").value=qmimi;
+    }
+})
 

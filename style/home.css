@@ -430,6 +430,13 @@ table td{
     padding: 7px 15px;
     font-size: 1.2vw;
 }
+#parkingForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .parking-calculator{
@@ -437,9 +444,10 @@ table td{
     height: 15vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
+
 .parking-calculator #sub-container{
     width: 100%;
     height: 10vw;

@@ -1,15 +1,5 @@
 <?php
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "airport";
-
-$conn = mysqli_connect($host, $username, $password, $database);
-
-if (!$conn) {
-    die("Lidhja me DB dështoi: " . mysqli_connect_error());
-}
-
+require_once "db.php";
 $sql = "CREATE TABLE IF NOT EXISTS contacts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),

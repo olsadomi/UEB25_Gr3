@@ -1,4 +1,6 @@
 <?php 
+    session_start();
+    include("db.php");
     require 'PHPMailer-master/src/PHPMailer.php';
     require 'PHPMailer-master/src/SMTP.php';
     require 'PHPMailer-master/src/Exception.php';
@@ -7,6 +9,7 @@
     use PHPMailer\PHPMailer\Exception;
 
 function sendEmail($dataHyrjes, $dataDaljes, $kohaHyrjes, $kohaDaljes,$qmimi){   
+    global $conn;
     $mail = new PHPMailer(true);
 
     try {
@@ -19,9 +22,22 @@ function sendEmail($dataHyrjes, $dataDaljes, $kohaHyrjes, $kohaDaljes,$qmimi){
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
-        //Recipients
+        $email = 'default@example.com';
+        $name = 'Prishtina Airport User';
+
+        //Derguesi dhe marresi
+        if(isset($_SESSION['user_id'])){
+           $stmt = $conn->prepare("SELECT name, email from users WHERE id =?");
+           $stmt->bind_param("i",$_SESSION['user_id']);
+           $stmt->execute();
+
+           $stmt->bind_result($name, $email);
+           $stmt->fetch();
+           $stmt->close();
+        }
+        
         $mail->setFrom('harold.robel49@ethereal.email', 'Prishtina Airport');
-        $mail->addAddress('kokital592@dlbazi.com', 'Receiver Name');
+        $mail->addAddress($email, $name);
 
         //Content
         $mail->isHTML(true);

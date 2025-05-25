@@ -287,35 +287,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 
+   <div id="overlay" style="display: none;"></div>
 
+<div id="popupDialog" style="display: none;">
+    <button class="close-btn" onclick="closeFn()">&times;</button>
 
+    <div class="newsletter-text">
+        <h2>Fluturime & Oferta - Të rejat nga Aeroporti</h2>
+        <p>
+            Bëhu pjesë e komunitetit tonë! Abonohu në newsletter-in tonë për të marrë informacione ekskluzive mbi
+            ofertat speciale, shërbimet e aeroportit,
+            këshilla udhëtimi dhe shumë më tepër. Qëndro i informuar dhe bëje përvojën tënde në aeroport më të lehtë
+            dhe më të këndshme.
+        </p>
 
+        <form id="newsletter-form">
+            <label for="nl-email">Enter your email:</label><br>
+            <input type="email" name="email" id="nl-email" placeholder="Enter email..." required />
+            <button class="subscribe-btn" type="submit">Abonohu</button>
+        </form>
 
-
-    <div id="overlay" style="display: none;"></div>
-    <div id="popupDialog" style="display: none;">
-        <button class="close-btn" onclick="closeFn()">&times;</button>
-
-        <div class="newsletter-text">
-            <h2>Fluturime & Oferta - Të rejat nga Aeroporti</h2>
-            <p>Bëhu pjesë e komunitetit tonë! Abonohu në newsletter-in tonë për të marrë informacione ekskluzive mbi
-                ofertat speciale, shërbimet e aeroportit,
-                këshilla udhëtimi dhe shumë më tepër. Qëndro i informuar dhe bëje përvojën tënde në aeroport më të lehtë
-                dhe më të këndshme.</p>
-            <form method="post">
-                <label for="nl-email">Enter your email:</label><br>
-                <input type="email" name="nl-email" placeholder="Enter email..."
-                    value="<?php echo htmlspecialchars($email); ?>" />
-                <button class="subscribe-btn" type="submit">Abonohu</button>
-                <br>
-                <?php if (!empty($emailError)): ?>
-                    <span style="color: red;"><?php echo $emailError; ?></span>
-                <?php elseif (!empty($successMsg)): ?>
-                    <span style="color: green;"><?php echo $successMsg; ?></span>
-                <?php endif; ?>
-            </form>
-        </div>
+        <div id="newsletter-message" style="margin-top: 10px; font-weight: bold;"></div>
     </div>
+</div>
+
+<script>
+document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const emailInput = document.getElementById('nl-email');
+    const messageDiv = document.getElementById('newsletter-message');
+
+    fetch('process-newsletter.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `email=${encodeURIComponent(emailInput.value)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        messageDiv.textContent = data.message;
+        messageDiv.style.color = data.success ? 'green' : 'red';
+
+        if (data.success) {
+            emailInput.value = '';
+        }
+    })
+    .catch(error => {
+        messageDiv.textContent = 'Gabim gjatë dërgimit.';
+        messageDiv.style.color = 'red';
+    });
+});
+</script>
 
 
 
@@ -335,7 +358,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             alert("<?php echo $successMsg; ?>");
         </script>
     <?php endif; ?>
-    
+
 </body>
 
 </html>

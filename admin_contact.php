@@ -5,7 +5,6 @@ $sql = "SELECT * FROM contacts ORDER BY submitted_at DESC";
 $result = $conn->query($sql);
 ?>
 
-<!-- You can still link a CSS file, or move styles to dashboard.css -->
 <link rel="stylesheet" href="admin_contact.css">
 
 <h1>Kontaktet e Pranuara</h1>

@@ -5,7 +5,7 @@ $sql = "SELECT * FROM newsletter_subscribers ORDER BY subscribed_at DESC";
 $result = $conn->query($sql);
 ?>
 
-<link rel="stylesheet" href="admin_newsletter.css">
+<link rel="stylesheet" href="admin_newsletter.css?v=12345">
 
 <h1>Abonimet në Newsletter</h1>
 

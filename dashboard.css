@@ -8,7 +8,7 @@ body {
 
 aside {
     width: 220px;
-    background: linear-gradient(180deg, #0056ff, #002d99);
+    background: #0c356a;
     color: white;
     padding: 20px;
     display: flex;
@@ -18,6 +18,12 @@ aside {
 aside h1 {
     font-size: 24px;
     margin-bottom: 30px;
+}
+
+#dashboardTitle,
+#adminiKycur {
+    color: #ffc436;
+
 }
 
 nav a {

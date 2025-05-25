@@ -16,14 +16,14 @@ $currentAdmin = $_SESSION['user_name'];
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Airport Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard.css?v=12345">
 </head>
 
 <body>
 
     <aside>
-        <h1>Prishtina Airport</h1>
-        <p>Admini i kyqur: <strong><?php echo htmlspecialchars($currentAdmin); ?></strong></p>
+        <h1 id="dashboardTitle">Prishtina Airport</h1>
+        <p id="adminiKycur">Admini i kyqur: <strong><?php echo htmlspecialchars($currentAdmin); ?></strong></p>
         <nav>
             <a href="" onclick="showSection('dashboard')">Dashboard</a>
             <a href="#" onclick="loadContent('news-admin.php')">News</a>
@@ -40,7 +40,7 @@ $currentAdmin = $_SESSION['user_name'];
 
         <div id="content-area">
             <h2>Dashboard</h2>
-            <p>Welcome to the Dashboard!</p>
+            <p>Mire se erdhet ne faqen e Adminit!</p>
         </div>
     </div>
 

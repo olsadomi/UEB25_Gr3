@@ -77,7 +77,4 @@ Në fazën e dytë të projektit **"Airport Website"**, kemi avancuar funksional
 
 Kjo fazë e dytë ka bërë që faqja e aeroportit të jetë shumë më interaktive, dinamike dhe e përshtatur për nevojat e përdoruesve të ndryshëm.
 
----
-
-🎯 Për më shumë informacion ose për kontribut, kontaktoni ekipin tonë!
 

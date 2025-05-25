@@ -6,7 +6,7 @@ function getFlights($type = 'arrivals') {
     $endpoint = 'http://api.aviationstack.com/v1/flights';
     
     $params = [
-        'access_key' => "AVIATIONSTACK_API_KEY",
+        'access_key' => AVIATIONSTACK_API_KEY,
         'limit' => 20
     ];
 

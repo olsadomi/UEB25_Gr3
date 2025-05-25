@@ -25,29 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Përgjigju Kontaktes</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { max-width: 600px; margin: 0 auto; }
-        label { display: block; margin-top: 10px; }
-        input[type="email"], input[type="text"], textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        textarea { height: 150px; }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        input[type="submit"]:hover { background-color: #45a049; }
-    </style>
+    <link rel="stylesheet" href="reply.css">
 </head>
 <body>
     <h2>Dërgo Email Përgjigje</h2>

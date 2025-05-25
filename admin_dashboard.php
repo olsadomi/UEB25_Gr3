@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin'){
+    header("Location: login.php");
+    exit();
+}
+
+$currentAdmin = $_SESSION['user_name'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,12 +23,14 @@
 
     <aside>
         <h1>Prishtina Airport</h1>
+        <p>Admini i kyqur: <strong><?php echo htmlspecialchars($currentAdmin); ?></strong></p>
         <nav>
             <a href="" onclick="showSection('dashboard')">Dashboard</a>
             <a href="#" onclick="loadContent('news-admin.php')">News</a>
             <a href="#" onclick="loadContent('admin_contact.php')">User Contact</a>
             <a href="#" onclick="loadContent('admin_newsletter.php')">Newsletter</a>
             <a href="#" onclick="showSection('sponsor')">Sponsor</a>
+            <a href="logout.php">Ckycu</a>
         </nav>
     </aside>
 

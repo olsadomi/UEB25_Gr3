@@ -132,19 +132,6 @@
         <h2>Kontakti specifik</h2>
 
         <details>
-            <summary>Kontakto përmes llogarisë personale</summary>
-            <form id="personal-acc-form" onsubmit="return validateLogin()">
-                <label for="username">Emri i llogarise</label>
-                <input type="text" id="username" name="username" required> <br>
-
-                <label for="password">Fjalëkalimi</label>
-                <input type="password" id="password" name="password" required> <br>
-
-                <button type="submit"><b>Kyçu</b></button>
-            </form>
-        </details>
-
-        <details>
             <summary>Zyra e informacionit</summary>
             <div class="contact-item">
                 <p>Numri i telefonit: +38343111222</p>

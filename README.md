@@ -2,11 +2,11 @@
 Projekti WEB I - Airport Website - HTML, CSS, JavaScript, JQuery
 
 Punuan:
-Olsa Domi
-Rreze Ejupi
-Olti Krasniqi
-Bleron Baftiu
-Valmir Mustafa
+- Olsa Domi
+- Rreze Ejupi
+- Olti Krasniqi
+- Bleron Baftiu
+- Valmir Mustafa
 
 Webfaqja e Aeroportit permban 6 nenfaqe:
   - Ballina

@@ -17,7 +17,6 @@
             <a href="#" onclick="loadContent('news-admin.php')">News</a>
             <a href="#" onclick="loadContent('admin_contact.php')">User Contact</a>
             <a href="#" onclick="loadContent('admin_newsletter.php')">Newsletter</a>
-            <a href="#" onclick="showSection('sponsor')">Sponsor</a>
         </nav>
     </aside>
 

@@ -8,6 +8,7 @@ $result = $conn->query($sql);
 <link rel="stylesheet" href="admin_newsletter.css">
 
 <h1>Abonimet në Newsletter</h1>
+
 <table>
   <thead>
     <tr>
@@ -30,3 +31,16 @@ $result = $conn->query($sql);
 </table>
 
 <?php $conn->close(); ?>
+
+<hr>
+
+<h2>Dërgo Newsletter</h2>
+<form method="POST" action="send_newsletter.php" class="newsletter-form">
+  <label for="subject">Subjekti:</label><br>
+  <input type="text" id="subject" name="subject" required><br><br>
+
+  <label for="message">Përmbajtja e mesazhit (HTML lejohet):</label><br>
+  <textarea id="message" name="message" rows="10" required></textarea><br><br>
+
+  <button type="submit">Dërgo Newsletter</button>
+</form>

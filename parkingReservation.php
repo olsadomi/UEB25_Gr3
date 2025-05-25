@@ -71,7 +71,7 @@
                             </div>
                         </div>
 
-                        <p id="showQmimi">Totali: <?php echo isset($_POST['qmimi']) ? htmlspecialchars($_POST['qmimi']) : 'Totali: 0€'; ?> €</p>
+                        <p id="showQmimi">Totali: <?php echo isset($_POST['qmimi']) ? htmlspecialchars($_POST['qmimi']): '0'; ?> €</p>
                         <button type="button" id="btn-paguaj">Paguaj</button>
                     </form>
                 </div>

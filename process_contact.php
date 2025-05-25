@@ -1,16 +1,5 @@
 <?php
-header('Content-Type: application/json');
-
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "airport";
-
-$conn = mysqli_connect($host, $username, $password, $database);
-
-if (!$conn) {
-    die(json_encode(['success' => false, 'message' => 'Lidhja me DB dështoi: ' . mysqli_connect_error()]));
-}
+require_once "db.php";
 
 
 class CustomValidationException extends Exception {}

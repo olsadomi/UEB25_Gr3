@@ -8,7 +8,7 @@ if(isset($_GET['id'])){
     $stmt->bind_param("i" , $id);
 
     if($stmt->execute()){
-        header("Location: news-admin.php?message=deleted");
+        header("Location: admin_dashboard.php");
         exit();
     } else {
         echo "Gabim gjate fshirjes se lajmit.";

@@ -7,17 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "airport";
-
-$conn = mysqli_connect($host, $username, $password, $database);
-
-if (!$conn) {
-    error_log('Database connection error: ' . mysqli_connect_error());
-    die(json_encode(['success' => false, 'message' => 'Lidhja me DB dështoi']));
-}
+require_once "db.php";
 
 error_log('Received POST data: ' . print_r($_POST, true));
 

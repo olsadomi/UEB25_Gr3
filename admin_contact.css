@@ -42,18 +42,17 @@
     background-color: #f1f1f1;
 }
 
-/* Column specific styles */
-.contacts-table td:nth-child(1) { /* ID column */
+.contacts-table td:nth-child(1) { 
     width: 50px;
     text-align: center;
 }
 
-.contacts-table td:nth-child(4) { /* Email column */
+.contacts-table td:nth-child(4) { 
     min-width: 180px;
     word-wrap: nowrap;
 }
 
-.contacts-table td:nth-child(7) { /* Message column */
+.contacts-table td:nth-child(7) { 
     max-width: 250px;
     max-height: 100px;
     overflow-y: auto;
@@ -61,7 +60,7 @@
     display: block;
 }
 
-.contacts-table td:nth-child(9) { /* Date column */
+.contacts-table td:nth-child(9) { 
     white-space: nowrap;
     width: 120px;
 }

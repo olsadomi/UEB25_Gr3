@@ -1,4 +1,5 @@
 <?php
+
 global $airportName;
 $airportName = "Prishtina International Airport";
 
@@ -7,10 +8,27 @@ require_once __DIR__ . '/helpers/flight_helpers.php';
 require_once __DIR__ . '/helpers/cache_helpers.php';
 
 
-initCache();
+try {
+    initCache();
+} catch (Exception $e) {
+    error_log("Cache initialization failed: " . $e->getMessage());
+ 
+}
 
-$arrivals = getFlightsWithCache('arrivals');
-$departures = getFlightsWithCache('departures');
+
+try {
+    $arrivals = getFlightsWithCache('arrivals');
+} catch (Exception $e) {
+    error_log("Arrivals data retrieval failed: " . $e->getMessage());
+    $arrivals = [];
+}
+
+try {
+    $departures = getFlightsWithCache('departures');
+} catch (Exception $e) {
+    error_log("Departures data retrieval failed: " . $e->getMessage());
+    $departures = [];
+}
 
 if (empty($arrivals)) {
     $arrivals = [
@@ -31,6 +49,7 @@ if (empty($arrivals)) {
             'terminal' => 'T1'
         ]
     ];
+    error_log("Using fallback arrivals data - no arrivals data available");
 }
 
 if (empty($departures)) {
@@ -52,6 +71,7 @@ if (empty($departures)) {
             'terminal' => 'T2'
         ]
     ];
+    error_log("Using fallback departures data - no departures data available");
 }
 ?>
 
@@ -63,7 +83,7 @@ if (empty($departures)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nisjet dhe mbërritjet</title>
-    <link rel="stylesheet" href="flights.css">
+    <link rel="stylesheet" href="style/flights.css">
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="footer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -109,7 +129,7 @@ if (empty($departures)) {
                 linjën tuaj ajrore.
             </p>
             <button id="playbutton" onclick="playAirportAudio()"><?php echo $airportName; ?></button>
-            <audio id="audioPlayer" src="Airport Sound Effect.mp3"></audio>
+            <audio id="audioPlayer" src="audio/Airport Sound Effect.mp3"></audio>
         </div>
     </header>
 
@@ -476,7 +496,7 @@ if (empty($departures)) {
     <script>
         $(function () {
             $("#navbar-placeholder").load("/UEB25_GR3/nav.php");
-            $("#footer-placeholder").load("footer.html");
+            $("#footer-placeholder").load("footer.php");
         });
 
 

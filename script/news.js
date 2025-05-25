@@ -1,6 +1,6 @@
 $(function(){
     $("#navbar-placeholder").load("/UEB25_GR3/nav.php");
-    $("#footer-placeholder").load("footer.html");
+    $("#footer-placeholder").load("footer.php");
 })
 
 $(document).ready(function(){
@@ -38,12 +38,7 @@ $(document).ready(function() {
 window.onload = function(){
     const subscribe = confirm("Deshironi te abonoheni ne newsletter?");
     if(subscribe){
-        const email = prompt("Ju lutem shenoni emailin tuaj per t'u abonuar: ");
-        if(!isValidEmail(email)){
-            alert("Nuk u regjistrua asnje email. Nuk u abonuat ne newsletter.")
-        }else{
-            alert("Faleminderit qe u abonuat! Nje konfirmim do t'ju dergohet ne: " + email);
-        }
+        window.location.href="about_us.php#newsletter";
     }
 };
 

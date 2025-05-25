@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="post-details.css">
-    <script src="post-details.js"></script>
+    <script src="script/post-details.js"></script>
 </head>
 
 <body>
@@ -92,8 +92,8 @@
 
     <script>
         $(function () {
-            $("#navbar-placeholder").load("nav.html");
-            $("#footer-placeholder").load("footer.html");
+            $("#navbar-placeholder").load("nav.php");
+            $("#footer-placeholder").load("footer.php");
         })
     </script>
     <div id="footer-placeholder"></div>

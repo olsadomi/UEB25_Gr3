@@ -1,5 +1,6 @@
 <?php
 require 'db.php';
+session_start();
 
 if (!isset($_GET['id'])) {
     echo "Lajmi nuk u gjet";
@@ -7,6 +8,16 @@ if (!isset($_GET['id'])) {
 }
 
 $news_id = intval($_GET['id']);
+
+$viewed = isset($_COOKIE['viewed_posts']) ? json_decode($_COOKIE['viewed_posts'], true) : [];
+
+if(isset($viewed[$news_id])){
+    $viewed[$news_id]++;
+} else {
+    $viewed[$news_id] = 1;
+}
+
+setcookie('viewed_posts', json_encode($viewed), time() + 3600, "/");
 
 $stmt = $conn->prepare("SELECT n.title, n.content, n.image_path, n.category, n.created_at, u.name as author
                                 FROM news n
@@ -57,13 +68,6 @@ $row = $result->fetch_assoc();
                 <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
             </div>
 
-            <div class="comments-section">
-                <h3>Komente</h3>
-                <textarea placeholder="Shkruani komentin tuaj..."></textarea>
-                <br>
-                <button>Dergo</button>
-            </div>
-
             <div class="end-post">
                 <div class="kategoria-post"><?php echo htmlspecialchars($row['category']); ?></div>
                 <div class="share-section">
@@ -79,16 +83,30 @@ $row = $result->fetch_assoc();
 
         <?php
             $other_stmt = $conn->prepare("SELECT id, title, image_path, created_at FROM news
-                                        WHERE id != ? ORDER BY RAND() LIMIT 3");
+                                        WHERE id != ?");
             $other_stmt->bind_param("i", $news_id);
             $other_stmt->execute();
             $other_result = $other_stmt->get_result();
+
+            $all_news = [];
+
+            while($r= $other_result->fetch_assoc()){
+                $all_news[] = $r;
+            }
+            
+            usort($all_news, function($a, $b) use ($viewed){
+                $viewsA = $viewed[$a['id']] ?? 0;
+                $viewsB = $viewed[$b['id']] ?? 0;
+                return $viewsB <=> $viewsA;
+            });
+
+            $recommended = array_slice($all_news, 0 ,3);
         ?>
 
         <div class="other-posts">
             <h3>Lajme tjera</h3>
             <div class="post-grid">
-                <?php while($other = $other_result->fetch_assoc()):?>
+                <?php foreach($recommended as $other):?>
                 <div class="post-item">
                     <img src="<?php echo htmlspecialchars($other['image_path']); ?>" alt="Post Image">
                     <div class="grid-content">
@@ -98,7 +116,7 @@ $row = $result->fetch_assoc();
                         <p><?php echo date("d M Y", strtotime($other['created_at'])); ?></p>
                     </div>
                 </div>
-               <?php endwhile; ?>
+               <?php endforeach; ?>
             </div>
         </div>
     </section>

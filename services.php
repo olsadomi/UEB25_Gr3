@@ -419,9 +419,9 @@
 
     <section id="transport-section">
         <div id="transport-container">
-            <div class="transport-circle"><a href="taxi.pdf" download="taxi.pdf" target="_blank">TAKSI<br> <span>Lexo më
+            <div class="transport-circle"><a href="misc/taxi.pdf" download="taxi.pdf" target="_blank">TAKSI<br> <span>Lexo më
                         shumë</span></a></div>
-            <div class="transport-circle"><a href="bus.pdf" download="bus.pdf" target="_blank">AUTOBUS <br><span>Lexo më
+            <div class="transport-circle"><a href="misc/bus.pdf" download="bus.pdf" target="_blank">AUTOBUS <br><span>Lexo më
                         shumë</span></a></div>
         </div>
     </section>

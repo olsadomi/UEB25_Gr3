@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($role === 'admin') {
                 header("Location: admin_dashboard.php");
             } else {
-                header("Location: index.php");
+                header("Location: parkingReservation.php");
             }
             exit();
         } else {

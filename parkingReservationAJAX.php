@@ -8,13 +8,12 @@
     $PkohaDaljes = isset($_POST['AJAXkoha-dalje']) ? $_POST['AJAXkoha-dalje'] : null;
     $Pcmimi = isset($_POST['AJAXqmimi']) ? $_POST['AJAXqmimi'] : null;
     
-    if(!$Pcmimi==null){
+    if($Pcmimi!=null && isset($_SESSION['user_id'])){
         $result = sendEmail($PdataHyrjes, $PdataDaljes, $PkohaHyrjes, $PkohaDaljes, $Pcmimi);
         echo json_encode(['success' => $result]);
         exit;
     }else{
         echo json_encode(['success' => false, 'error' => 'null values']);
         exit;
-    }
-                           
+    }                   
 ?>

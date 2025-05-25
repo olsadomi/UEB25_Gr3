@@ -47,18 +47,18 @@
             background-color: #f1f1f1;
         }
         
-        /* Column specific styles */
-        .rental-table td:nth-child(1) { /* ID column */
+
+        .rental-table td:nth-child(1) {
             width: 50px;
             text-align: center;
         }
         
-        .rental-table td:nth-child(3) { /* Email column */
+        .rental-table td:nth-child(3) {
             min-width: 180px;
             white-space: nowrap;
         }
         
-        .rental-table td:nth-child(4) { /* Request text column */
+        .rental-table td:nth-child(4) { 
             max-width: 250px;
             max-height: 100px;
             overflow-y: auto;
@@ -66,7 +66,7 @@
             display: block;
         }
         
-        .rental-table td:nth-child(5) { /* Date column */
+        .rental-table td:nth-child(5) { 
             white-space: nowrap;
             width: 120px;
         }
@@ -92,7 +92,6 @@
             padding: 20px;
         }
         
-        /* Make email links more visible */
         .rental-table a[href^="mailto:"] {
             color: #0c356a;
             text-decoration: none;

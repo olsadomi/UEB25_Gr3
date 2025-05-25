@@ -18,7 +18,7 @@ if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
     $stmt->bind_param("ssssi", $title, $content, $category, $target_file, $created_by);
 
     if ($stmt->execute()) {
-        header("Location: news.php?success=1");
+        header("Location: admin_dashboard.php#");
         exit();
     } else {
         echo "Gabim gjate futjes se lajmit: " . $stmt->error;

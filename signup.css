@@ -38,6 +38,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   transition: border-color 0.2s ease-in-out;
+  box-sizing: border-box;
 }
 
 .signup-form input:focus {
@@ -56,6 +57,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-weight: 700;
+  box-sizing: border-box;
 }
 
 .signup-form button:hover {

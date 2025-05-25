@@ -22,7 +22,7 @@ $sql = "CREATE TABLE IF NOT EXISTS news (
 ) ENGINE=InnoDB";
 
 if (mysqli_query($conn, $sql)) {
-    echo "Tabela 'users' u krijua me sukses!";
+    echo "Tabela 'news' u krijua me sukses!";
 } else {
     echo "Gabim gjatë krijimit të tabelës: " . mysqli_error($conn);
 }

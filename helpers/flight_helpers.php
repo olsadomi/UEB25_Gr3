@@ -153,18 +153,3 @@ function getFlightDetailsJson($flight, $type = 'arrival') {
         return htmlspecialchars(json_encode($defaultDetails), ENT_QUOTES, 'UTF-8');
     }
 }
-
-function logHelperError($functionName, $message, $context = []) {
-    $logMessage = sprintf(
-        "[%s] Helper Error in %s: %s",
-        date('Y-m-d H:i:s'),
-        $functionName,
-        $message
-    );
-    
-    if (!empty($context)) {
-        $logMessage .= " | Context: " . json_encode($context);
-    }
-    
-    error_log($logMessage);
-}

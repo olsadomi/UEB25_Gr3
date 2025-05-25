@@ -10,20 +10,23 @@ var entryTime = document.querySelector("#koha-hyrje");
 var exitTime = document.querySelector("#koha-dalje");
 var showQmimi = document.querySelector("#showQmimi");
 
-
-
 var parkingInputs = document.querySelectorAll(".parking-input");
 var qmimi=0;
 var isValid = false;
 
 btnPay.addEventListener("click", function(){
-    sendEmailAjax();
-    entryDate.value="";
-    exitDate.value="";
-    entryTime.value="";
-    exitTime.value="";
-    showQmimi.innerHTML="Totali: 0 €";
-    qmimi=0;
+    if(btnLogin.innerHTML=="Login"){
+        alert("Nuk jeni te kyçur ne llogari!")
+    }else{
+        sendEmailAjax();
+        entryDate.value="";
+        exitDate.value="";
+        entryTime.value="";
+        exitTime.value="";
+        showQmimi.innerHTML="Totali: 0 €";
+        qmimi=0;
+    }
+   
 })
 
 entryDate.addEventListener("change",function(){
@@ -111,6 +114,26 @@ function dataSakt(qmimi){
     showQmimi.innerHTML = "Totali: " + qmimi + " €";
 }
 
+// Logout when clicking a navbar link
+$(document).on('click', '#navbar-placeholder a', function(event){
+    event.preventDefault();
+    const href = $(this).attr('href');
+    fetch('logout.php', { method: 'POST' }).finally(() => {
+        window.location.href = href;
+    });
+});
+
+$(document).on('click', '#navbar-placeholder .image', function(event){
+    event.preventDefault();
+    const redirectUrl = '/index.php'; 
+
+    fetch('logout.php', { method: 'POST' })
+        .finally(() => {
+            window.location.href = redirectUrl;
+        });
+});
+
+
   function sendEmailAjax() {
         // Create FormData to send POST data
         const formData = new FormData();
@@ -126,10 +149,7 @@ function dataSakt(qmimi){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {
-            // shows what PHP is returning
-            console.log("WORKING");
-            
+        .then(data => {            
             if (data.success) {
                 alert('Email u dërgua me sukses!');
             } else {

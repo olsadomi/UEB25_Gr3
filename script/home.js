@@ -97,9 +97,7 @@ btnParking.addEventListener("click", function(){
 })
 
 
-function dataGabim(){
-    console.log("WRONG");
- 
+function dataGabim(){ 
     showQmimi.classList.remove("active")
     showQmimi.classList.add("wrong");
     showQmimi.innerHTML = "Data është vendosur gabim!"; 

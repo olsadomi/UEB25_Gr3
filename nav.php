@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="/UEB25_GR3/nav.css">
 </head>
 <body>
+    <?php 
+        session_start();
+        $loginBtnStatus ="";
+        if(isset($_SESSION['user_id'])){
+            $loginBtnStatus = "Logout";
+        }else{
+            $loginBtnStatus = "Login";
+        }
+    ?>
     <nav>
         <div class="nav-container"> 
             <div class="image">
@@ -20,7 +29,7 @@
                 <a href="/UEB25_GR3/news.php">Lajme</a>
                 <a href="/UEB25_GR3/about_us.php">Rreth Nesh</a>
                 <a href="/UEB25_GR3/contact.php" style="margin-right: 2vw;">Kontakt</a>
-                <button class="btnLogin">Login</button>
+                <button class="btnLogin"><?php echo $loginBtnStatus ?></button>
             </div>
 
             

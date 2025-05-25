@@ -1,10 +1,24 @@
 <?php
 require_once 'db.php';
-require_once 'reply_sender.php';
+require_once 'reply_sender_rental.php';
+
 
 if (isset($_GET['email'])) {
     $email = filter_var($_GET['email'], FILTER_SANITIZE_EMAIL);
-    $request_id = isset($_GET['request_id']) ? intval($_GET['request_id']) : 0;
+    $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    
+    // Get car brand from database if id exists
+    $car_brand = '';
+    if ($id > 0) {
+        $stmt = $conn->prepare("SELECT car_brand FROM rental_requests WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            $car_brand = $row['car_brand'];
+        }
+        $stmt->close();
+    }
 } else {
     die("Email i pasaktë.");
 }
@@ -13,13 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = filter_var($_POST['to'], FILTER_SANITIZE_EMAIL);
     $subject = filter_var($_POST['subject'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $message = filter_var($_POST['message'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $request_id = isset($_POST['request_id']) ? intval($_POST['request_id']) : 0;
+    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    $car_brand = isset($_POST['car_brand']) ? $_POST['car_brand'] : '';
 
-    if (sendContactReply($to, $subject, $message)) {
-        
-        if ($request_id > 0) {
+    if (sendRentalReply($to, $subject, $message, $car_brand)) {
+        // Mark as replied in database
+        if ($id > 0) {
             $stmt = $conn->prepare("UPDATE rental_requests SET replied_at = NOW() WHERE id = ?");
-            $stmt->bind_param("i", $request_id);
+            $stmt->bind_param("i", $id);
             $stmt->execute();
             $stmt->close();
         }
@@ -35,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Përgjigju Kërkesës për Makinë</title>
+    <title>Menaxhimi i Kërkesave për Makinë</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -102,22 +117,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .back-link:hover {
             text-decoration: underline;
         }
+        
+        .car-brand-info {
+            background-color: #e9f7ef;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <h2>Dërgo Email Përgjigje</h2>
+    <h2>Dërgo Përgjigje</h2>
     
     <?php if (isset($success_message)) echo $success_message; ?>
     <?php if (isset($error_message)) echo $error_message; ?>
     
+    <?php if (!empty($car_brand)): ?>
+        <div class="car-brand-info">
+            <strong>Kërkesa për:</strong> <?= htmlspecialchars($car_brand) ?>
+        </div>
+    <?php endif; ?>
+    
     <form method="post">
-        <input type="hidden" name="request_id" value="<?= $request_id ?>">
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="car_brand" value="<?= htmlspecialchars($car_brand) ?>">
         
         <label>Për:</label>
         <input type="email" name="to" value="<?= htmlspecialchars($email); ?>" readonly>
         
         <label>Subjekti:</label>
-        <input type="text" name="subject" value="Përgjigje ndaj kërkesës suaj për makinë" required>
+        <input type="text" name="subject" value="Pergjigje ndaj kerkeses suaj per makine. <?= !empty($car_brand) ? ' - ' . htmlspecialchars($car_brand) : '' ?>" required>
         
         <label>Mesazhi:</label>
         <textarea name="message" required></textarea>

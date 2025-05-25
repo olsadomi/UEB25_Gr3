@@ -1,4 +1,5 @@
 <?php
+
 global $airportName;
 $airportName = "Prishtina International Airport";
 
@@ -7,10 +8,27 @@ require_once __DIR__ . '/helpers/flight_helpers.php';
 require_once __DIR__ . '/helpers/cache_helpers.php';
 
 
-initCache();
+try {
+    initCache();
+} catch (Exception $e) {
+    error_log("Cache initialization failed: " . $e->getMessage());
+ 
+}
 
-$arrivals = getFlightsWithCache('arrivals');
-$departures = getFlightsWithCache('departures');
+
+try {
+    $arrivals = getFlightsWithCache('arrivals');
+} catch (Exception $e) {
+    error_log("Arrivals data retrieval failed: " . $e->getMessage());
+    $arrivals = [];
+}
+
+try {
+    $departures = getFlightsWithCache('departures');
+} catch (Exception $e) {
+    error_log("Departures data retrieval failed: " . $e->getMessage());
+    $departures = [];
+}
 
 if (empty($arrivals)) {
     $arrivals = [
@@ -31,6 +49,7 @@ if (empty($arrivals)) {
             'terminal' => 'T1'
         ]
     ];
+    error_log("Using fallback arrivals data - no arrivals data available");
 }
 
 if (empty($departures)) {
@@ -52,6 +71,7 @@ if (empty($departures)) {
             'terminal' => 'T2'
         ]
     ];
+    error_log("Using fallback departures data - no departures data available");
 }
 ?>
 

@@ -1,0 +1,22 @@
+[2025-05-25 18:29:18] User Notice: Test E_USER_NOTICE in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 42
+[2025-05-25 18:29:18] User Warning: Test E_USER_WARNING in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 43
+[2025-05-25 18:29:19] User Notice: Test E_USER_NOTICE in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 42
+[2025-05-25 18:29:19] User Warning: Test E_USER_WARNING in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 43
+[2025-05-25 18:29:19] User Notice: Test E_USER_NOTICE in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 42
+[2025-05-25 18:29:19] User Warning: Test E_USER_WARNING in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 43
+[2025-05-25 18:29:20] User Notice: Test E_USER_NOTICE in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 42
+[2025-05-25 18:29:20] User Warning: Test E_USER_WARNING in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 43
+[2025-05-25 18:40:02] Warning: Undefined array key "departure" in C:\xampp\htdocs\ueb25_gr3\flights.php on line 395
+[2025-05-25 18:40:02] Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\ueb25_gr3\flights.php on line 395
+[2025-05-25 18:40:02] Warning: Undefined array key "departure" in C:\xampp\htdocs\ueb25_gr3\flights.php on line 396
+[2025-05-25 18:40:02] Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\ueb25_gr3\flights.php on line 396
+[2025-05-25 18:40:02] Warning: Undefined array key "departure" in C:\xampp\htdocs\ueb25_gr3\flights.php on line 397
+[2025-05-25 18:40:02] Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\ueb25_gr3\flights.php on line 397
+[2025-05-25 18:40:02] Warning: Undefined array key "departure" in C:\xampp\htdocs\ueb25_gr3\flights.php on line 395
+[2025-05-25 18:40:02] Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\ueb25_gr3\flights.php on line 395
+[2025-05-25 18:40:02] Warning: Undefined array key "departure" in C:\xampp\htdocs\ueb25_gr3\flights.php on line 396
+[2025-05-25 18:40:02] Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\ueb25_gr3\flights.php on line 396
+[2025-05-25 18:40:02] Warning: Undefined array key "departure" in C:\xampp\htdocs\ueb25_gr3\flights.php on line 397
+[2025-05-25 18:40:02] Warning: Trying to access array offset on value of type null in C:\xampp\htdocs\ueb25_gr3\flights.php on line 397
+[2025-05-25 18:44:31] User Notice: Test E_USER_NOTICE in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 39
+[2025-05-25 18:44:31] User Warning: Test E_USER_WARNING in C:\xampp\htdocs\ueb25_gr3\test_helpers.php on line 40

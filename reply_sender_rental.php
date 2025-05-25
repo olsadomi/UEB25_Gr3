@@ -10,7 +10,6 @@ function sendRentalReply($to, $subject, $message, $carBrand, $fromEmail = 'harol
     $mail = new PHPMailer(true);
 
     try {
-        // Server settings
         $mail->isSMTP();
         $mail->Host       = 'smtp.ethereal.email';
         $mail->SMTPAuth   = true;

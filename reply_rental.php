@@ -7,7 +7,6 @@ if (isset($_GET['email'])) {
     $email = filter_var($_GET['email'], FILTER_SANITIZE_EMAIL);
     $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     
-    // Get car brand from database if id exists
     $car_brand = '';
     if ($id > 0) {
         $stmt = $conn->prepare("SELECT car_brand FROM rental_requests WHERE id = ?");

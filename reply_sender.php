@@ -10,7 +10,7 @@ function sendContactReply($to, $subject, $message, $fromEmail = 'harold.robel49@
     $mail = new PHPMailer(true);
 
     try {
-        //Server settings
+
         $mail->isSMTP();
         $mail->Host       = 'smtp.ethereal.email';
         $mail->SMTPAuth   = true;
@@ -19,13 +19,10 @@ function sendContactReply($to, $subject, $message, $fromEmail = 'harold.robel49@
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
-        //Recipients
         $mail->setFrom($fromEmail, $fromName);
-        $mail->addAddress($to); // Përdorim adresën e marrë si parameter
-
-        //Content
+        $mail->addAddress($to); 
         $mail->isHTML(true);
-        $mail->Subject = $subject; // Përdorim subjektin e marrë si parameter
+        $mail->Subject = $subject; 
         $mail->Body    = "Faleminderit per kontaktimin.<br><br>"
                        . "<i>" . nl2br(htmlspecialchars($message)) . "</i>";
 

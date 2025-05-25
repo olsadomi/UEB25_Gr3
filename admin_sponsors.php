@@ -13,6 +13,40 @@
         $sql = "SELECT * FROM sponsors;";
         $result = $conn->query($sql);
 ?>
+<?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['emri'])) {
+        $emri = $_POST['emri'];
+        if (isset($_FILES['image-path']) && $_FILES['image-path']['error'] == 0) {
+            $uploadDir = 'Photos/';
+            $fileName = basename($_FILES['image-path']['name']);
+            $targetPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($_FILES['image-path']['tmp_name'], $targetPath)) {
+                $stmt = $conn->prepare("INSERT INTO sponsors (name, image_path) VALUES (?, ?)");
+                $stmt->bind_param("ss", $emri, $targetPath);
+                $stmt->execute();
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            } else {
+                echo "Failed to move uploaded file.";
+            }
+        }
+    }
+?>
+<?php
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        if(isset($_POST['delete_id'])){
+            $stmt = $conn->prepare("DELETE FROM sponsors WHERE id=?");
+            $stmt -> bind_param("i",$_POST['delete_id']);
+            if ($stmt->execute()) {
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            } else {
+                echo "<script>alert('Gabim gjatë fshirjes së sponsorit.');</script>";
+            }
+        }
+    }
+?>
 
 <div class="sponsors-container">
     <h1>Menaxhimi i sponsorve</h1>
@@ -62,29 +96,6 @@
     </div>
 </div>
 
-    <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $emri = $_POST['emri'];
-            if (isset($_FILES['image-path']) && $_FILES['image-path']['error'] == 0) {
-                $uploadDir = 'Photos/';
-                $fileName = basename($_FILES['image-path']['name']);
-                $targetPath = $uploadDir . $fileName;
-
-                if (move_uploaded_file($_FILES['image-path']['tmp_name'], $targetPath)) {
-                    $stmt = $conn->prepare("INSERT INTO sponsors (name, image_path) VALUES (?, ?)");
-                    $stmt->bind_param("ss", $emri, $targetPath);
-                    $stmt->execute();
-                    header("Location: " . $_SERVER['PHP_SELF']);
-                    exit;
-                } else {
-                    echo "Failed to move uploaded file.";
-                }
-            }
-        }
-    ?>
-
-
-
 <script>
     let shtoBtn = document.querySelector("#shtoBtn");
     let shtoContainer = document.querySelector(".shtoContainer");
@@ -126,21 +137,6 @@
     }
     });
 </script>
-
-<?php
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        if(isset($_POST['delete_id'])){
-            $stmt = $conn->prepare("DELETE FROM sponsors WHERE id=?");
-            $stmt -> bind_param("i",$_POST['delete_id']);
-            if ($stmt->execute()) {
-                header("Location: " . $_SERVER['PHP_SELF']);
-                exit;
-            } else {
-                echo "<script>alert('Gabim gjatë fshirjes së sponsorit.');</script>";
-            }
-        }
-    }
-?>
 
 <?php $conn->close(); ?>
 </body>

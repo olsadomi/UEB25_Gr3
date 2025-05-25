@@ -1,0 +1,104 @@
+.rental-requests-container {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rental-requests-container h1 {
+            color: #0c356a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .rental-table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rental-table th {
+            background-color: #0c356a;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+        }
+        
+        .rental-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: top;
+            font-size: 13px;
+        }
+        
+        .rental-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .rental-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        /* Column specific styles */
+        .rental-table td:nth-child(1) { /* ID column */
+            width: 50px;
+            text-align: center;
+        }
+        
+        .rental-table td:nth-child(3) { /* Email column */
+            min-width: 180px;
+            white-space: nowrap;
+        }
+        
+        .rental-table td:nth-child(4) { /* Request text column */
+            max-width: 250px;
+            max-height: 100px;
+            overflow-y: auto;
+            word-wrap: break-word;
+            display: block;
+        }
+        
+        .rental-table td:nth-child(5) { /* Date column */
+            white-space: nowrap;
+            width: 120px;
+        }
+        
+        .reply-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #ffc436;
+            color: #0c356a;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .reply-btn:hover {
+            background-color: #e0ac30;
+        }
+        
+        .no-data {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+        
+        /* Make email links more visible */
+        .rental-table a[href^="mailto:"] {
+            color: #0c356a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .rental-table a[href^="mailto:"]:hover {
+            text-decoration: underline;
+        }

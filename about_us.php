@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="pjesa-1">
         <div class="background-image">
-            <img src="background-aboutus.png" alt="About Us Background">
+            <img src="Photos/Home/background-aboutus.png" alt="About Us Background">
         </div>
         <div class="titulli-aboutus">
             <h3>Rreth Nesh</h3>
@@ -64,11 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="pjesa-2">
         <div class="pjesa-2-foto">
-            <img src="aboutus-foto2.png">
+            <img src="Photos/Home/aboutus-foto2.png">
         </div>
         <div class="pjesa-2-2">
             <div class="learn-more">
-                <img src="meso-me-shume.png" alt="LEARN MORE">
+                <img src="Photos/Home/meso-me-shume.png" alt="LEARN MORE">
             </div>
             <div class="learn-more-text">
                 <p>Ne jemi krenarë që jemi më shumë se thjesht një qendër kalimtare — aeroporti
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="stats-cards ">
                 <div class="stats-card1 flip3D">
-                    <div class="front-x"><img src="card-1-aboutus.png"></div>
+                    <div class="front-x"><img src="Photos/Home/card-1-aboutus.png"></div>
                     <div class="back-x">
                         <p>Me mbi 3.4 milionë pasagjerë të shërbyer në vitin 2023, Aeroporti ka përjetuar
                             një rritje të ndjeshme të numrit të udhëtarëve,
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="stats-card flip3D">
-                    <div class="front-x"><img src="card-2-aboutus.png"></div>
+                    <div class="front-x"><img src="Photos/Home/card-2-aboutus.png"></div>
                     <div class="back-x">
                         <p>Aeroporti ofron fluturime drejt 28 destinacioneve në 14 shtete,
                             duke lidhur Kosovën me qytetet kryesore të Evropës dhe të Lindjes së Mesme.
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
                 <div class="stats-card flip3D">
-                    <div class="front-x"><img src="card-3-aboutus.png"></div>
+                    <div class="front-x"><img src="Photos/Home/card-3-aboutus.png"></div>
                     <div class="back-x">
                         <p>Me një terminal modern dhe infrastrukturë të avancuar,
                             Aeroporti është projektuar për të akomoduar deri në 5 milionë pasagjerë çdo vit.
@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="visit-kosova-banner">
         <div class="visit-kosova-banner-foto">
-            <img src="kosova-banner.png">
+            <img src="Photos/Home/kosova-banner.png">
         </div>
         <div class="visit-kosova-banner-text">
             <p>ZBULO BUKURINË E KOSOVËS</p>
@@ -147,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul class="card-list swiper-wrapper">
                 <li class="card-item swiper-slide">
                     <a href="https://www.austrian.com/xk/en/homepage" class="card-link" target="_blank">
-                        <img src="austrian-airlines.jpg" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/austrian-airlines.jpg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">Austrian Airlines</p>
                         <h2 class="card-title">Fluturoni me elegancën dhe traditën e Austrian Airlines.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li class="card-item swiper-slide">
                     <a href="https://www.ryanair.com/ie/en" class="card-link" target="_blank">
-                        <img src="ryanair.jpg" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/ryanair.jpg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">Ryanair Airlines</p>
                         <h2 class="card-title">Bileta të përballueshme për çdo aventurë me Ryanair.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li class="card-item swiper-slide">
                     <a href="https://www.swiss.com/xx/en/homepage" class="card-link" target="_blank">
-                        <img src="swiss-airlines.jpg" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/swiss-airlines.jpg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">Swiss Airlines</p>
                         <h2 class="card-title">Përjetoni cilësinë zvicerane në çdo fluturim me Swiss.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -171,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li class="card-item swiper-slide">
                     <a href="https://wwws.airfrance.fr/en" class="card-link" target="_blank">
-                        <img src="airFrance-airlines.jpg" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/airFrance-airlines.jpg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">Air France Airlines</p>
                         <h2 class="card-title">Udhëtoni me stil dhe rehati me Air France.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -179,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li class="card-item swiper-slide">
                     <a href="https://www.lufthansa.com/xx/en/homepage" class="card-link" target="_blank">
-                        <img src="lufthansa-airlines.jpeg" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/lufthansa-airlines.jpeg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">Lufthansa Airlines</p>
                         <h2 class="card-title">Siguri dhe shërbim premium me Lufthansa.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li class="card-item swiper-slide">
                     <a href="https://www.britishairways.com/travel/home/public/en_us/" class="card-link"
                         target="_blank">
-                        <img src="british-airways.jpg" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/british-airways.jpg" alt="Austrian Airlines" class="card-image">
                         <p class="badge">British Airways</p>
                         <h2 class="card-title">Eksperiencë unike udhëtimi me British Airways.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
                 <li class="card-item swiper-slide">
                     <a href="https://www.virginatlantic.com/en-xk" class="card-link" target="_blank">
-                        <img src="virginAtlantic-airlines.png" alt="Austrian Airlines" class="card-image">
+                        <img src="Photos/Home/virginAtlantic-airlines.png" alt="Austrian Airlines" class="card-image">
                         <p class="badge">Virgin Atlantic Airlines</p>
                         <h2 class="card-title">Udhëtoni me stil dhe inovacion me Virgin Atlantic.</h2>
                         <button class="card-button material-symbols-outlined">arrow_forward</button>
@@ -273,7 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="faq-icon">
-                <img src="FAQs-amico.png">
+                <img src="Photos/Home/FAQs-amico.png">
             </div>
 
         </div>

@@ -6,7 +6,7 @@ function getFlights($type = 'arrivals') {
     $endpoint = 'http://api.aviationstack.com/v1/flights';
     
     $params = [
-        'access_key' => AVIATIONSTACK_API_KEY,
+        'access_key' => "AVIATIONSTACK_API_KEY",
         'limit' => 20
     ];
 
@@ -15,25 +15,45 @@ function getFlights($type = 'arrivals') {
     $url = $endpoint . '?' . http_build_query($params);
     
     try {
-        $response = file_get_contents($url);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        
+        $response = curl_exec($ch);
+        
         if ($response === false) {
-            throw new Exception("API request failed");
+            $errorMsg = "API request failed: " . curl_error($ch);
+            curl_close($ch);
+            throw new Exception($errorMsg);
         }
         
+        curl_close($ch);
+        
         $data = json_decode($response, true);
+        
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception("JSON decode error: " . json_last_error_msg());
+        }
         
         if (isset($data['error'])) {
             throw new Exception($data['error']['info'] ?? 'API error');
         }
         
+        if (!isset($data['data'])) {
+            throw new Exception("Invalid API response structure");
+        }
+        
         return $data['data'] ?? [];
     } catch (Exception $e) {
-        error_log("API Error: " . $e->getMessage());
+    
+        error_log("Flight API Error: " . $e->getMessage());
         
         $cacheFile = ($type === 'arrivals') ? ARRIVALS_CACHE_FILE : DEPARTURES_CACHE_FILE;
         $cachedData = getCachedData($cacheFile);
         
         return $cachedData !== false ? $cachedData : [];
     }
-}
+}{}
 ?>

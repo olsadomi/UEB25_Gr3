@@ -38,19 +38,11 @@ function error_handler($errno, $errstr, $errfile, $errline) {
         $errfile,
         $errline
     );
-    
-
-    if (!empty($errcontext)) {
-        $logMessage .= "Context: " . json_encode($errcontext, JSON_PRETTY_PRINT) . "\n";
-    }
-    
-
     $logFile = $logDir . 'error_log_' . date('Y-m-d') . '.txt';
-    
 
-    file_put_contents($logFile, $logMessage, FILE_APPEND);
-    
 
+    @file_put_contents($logFile, $logMessage, FILE_APPEND);
+    
     return true;
 }
 
@@ -61,4 +53,9 @@ function register_error_handler() {
     error_reporting(E_ALL);
     ini_set('display_errors', '0');
     ini_set('log_errors', '1');    
+
+    error_reporting(E_ALL);
+    ini_set('display_errors', '0');
+    ini_set('log_errors', '1');
+    return true;
 }

@@ -11,7 +11,7 @@ $news_id = intval($_GET['id']);
 
 $viewed = isset($_COOKIE['viewed_posts']) ? json_decode($_COOKIE['viewed_posts'], true) : [];
 
-if(isset($viewed[$news_id])){
+if (isset($viewed[$news_id])) {
     $viewed[$news_id]++;
 } else {
     $viewed[$news_id] = 1;
@@ -82,41 +82,41 @@ $row = $result->fetch_assoc();
         </div>
 
         <?php
-            $other_stmt = $conn->prepare("SELECT id, title, image_path, created_at FROM news
+        $other_stmt = $conn->prepare("SELECT id, title, image_path, created_at FROM news
                                         WHERE id != ?");
-            $other_stmt->bind_param("i", $news_id);
-            $other_stmt->execute();
-            $other_result = $other_stmt->get_result();
+        $other_stmt->bind_param("i", $news_id);
+        $other_stmt->execute();
+        $other_result = $other_stmt->get_result();
 
-            $all_news = [];
+        $all_news = [];
 
-            while($r= $other_result->fetch_assoc()){
-                $all_news[] = $r;
-            }
-            
-            usort($all_news, function($a, $b) use ($viewed){
-                $viewsA = $viewed[$a['id']] ?? 0;
-                $viewsB = $viewed[$b['id']] ?? 0;
-                return $viewsB <=> $viewsA;
-            });
+        while ($r = $other_result->fetch_assoc()) {
+            $all_news[] = $r;
+        }
 
-            $recommended = array_slice($all_news, 0 ,3);
+        usort($all_news, function ($a, $b) use ($viewed) {
+            $viewsA = $viewed[$a['id']] ?? 0;
+            $viewsB = $viewed[$b['id']] ?? 0;
+            return $viewsB <=> $viewsA;
+        });
+
+        $recommended = array_slice($all_news, 0, 3);
         ?>
 
         <div class="other-posts">
             <h3>Lajme tjera</h3>
             <div class="post-grid">
-                <?php foreach($recommended as $other):?>
-                <div class="post-item">
-                    <img src="<?php echo htmlspecialchars($other['image_path']); ?>" alt="Post Image">
-                    <div class="grid-content">
-                        <a href="post-details.php?id=<?php echo $other['id']; ?>">
-                            <h4><?php echo htmlspecialchars($other['title']); ?></h4>
-                        </a>
-                        <p><?php echo date("d M Y", strtotime($other['created_at'])); ?></p>
+                <?php foreach ($recommended as $other): ?>
+                    <div class="post-item">
+                        <img src="<?php echo htmlspecialchars($other['image_path']); ?>" alt="Post Image">
+                        <div class="grid-content">
+                            <a href="post-details.php?id=<?php echo $other['id']; ?>">
+                                <h4><?php echo htmlspecialchars($other['title']); ?></h4>
+                            </a>
+                            <p><?php echo date("d M Y", strtotime($other['created_at'])); ?></p>
+                        </div>
                     </div>
-                </div>
-               <?php endforeach; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -129,7 +129,7 @@ $row = $result->fetch_assoc();
     </script>
 
     <div id="footer-placeholder"></div>
-
+    <script src="/UEB25_GR3/script/home.js"></script>
 </body>
 
 </html>

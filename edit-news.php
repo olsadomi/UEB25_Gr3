@@ -2,9 +2,9 @@
 require 'db.php';
 session_start();
 
-if(!isset($_GET['id'])){
-    header("Location: news-admin.php");
-    exit();
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+    header('Location: login.php');
+    exit;
 }
 
 $id = intval($_GET['id']);
